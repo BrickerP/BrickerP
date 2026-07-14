@@ -4,6 +4,12 @@ Backend / AI Platform Engineer focused on agent infrastructure, tool-using chat 
 
 San Francisco Bay Area. US permanent resident; no sponsorship required. Open to AI Agent, Applied AI, Backend Platform, and Developer Tools roles.
 
+**🌐 Homepage → [brickerp.github.io](https://brickerp.github.io/)**
+
+[![Beijing Infinite Loop](beijing-loop-preview.png)](https://brickerp.github.io/beijing-loop/)
+
+*Backdrop of my homepage: [Beijing Infinite Loop](https://brickerp.github.io/beijing-loop/) — a generative-art tracer of Beijing's ring roads and central axis with a seamless infinite fractal zoom (p5.js + TypeScript). Artistic visualization, not for navigation.*
+
 ## What I Build
 
 - Agent workflows with typed tool contracts, scoped tool registries, structured outputs, and eval/QA gates.
