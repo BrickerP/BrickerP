@@ -6,9 +6,9 @@ San Francisco Bay Area. US permanent resident; no sponsorship required. Open to 
 
 **🌐 Homepage → [brickerp.github.io](https://brickerp.github.io/)**
 
-[![Beijing Infinite Loop](beijing-loop-preview.png)](https://brickerp.github.io/beijing-loop/)
+[![BEIJING / 北京 — ENDLESS SECOND RING](endless-second-ring-preview.png)](https://brickerp.github.io/)
 
-*Backdrop of my homepage: [Beijing Infinite Loop](https://brickerp.github.io/beijing-loop/) — a generative-art tracer of Beijing's ring roads and central axis with a seamless infinite fractal zoom (p5.js + TypeScript). Artistic visualization, not for navigation.*
+*Backdrop of my homepage: [BEIJING / 北京 — ENDLESS SECOND RING](https://brickerp.github.io/) — an artistic first-person Beijing night drive at driver-eye height, looping a seamless 16-second closed journey (Three.js + TypeScript). Artistic composition, not for navigation.*
 
 ## What I Build
 
