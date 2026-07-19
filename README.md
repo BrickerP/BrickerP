@@ -6,7 +6,9 @@ San Francisco Bay Area. US permanent resident; no sponsorship required. Open to 
 
 **🌐 Homepage → [brickerp.github.io](https://brickerp.github.io/)**
 
-[![BEIJING / 北京 — ENDLESS SECOND RING](endless-second-ring-preview.png)](https://brickerp.github.io/)
+**📄 Resume → [Current resume (PDF)](Yupeng_Lu_Resume.pdf)**
+
+[![BEIJING / 北京 — ENDLESS SECOND RING](social-preview.png)](https://brickerp.github.io/)
 
 *Backdrop of my homepage: [BEIJING / 北京 — ENDLESS SECOND RING](https://brickerp.github.io/) — an artistic first-person Beijing night drive at driver-eye height, looping a seamless 48-second closed journey across twelve authored passages (Three.js + TypeScript). Artistic composition, not for navigation.*
 
