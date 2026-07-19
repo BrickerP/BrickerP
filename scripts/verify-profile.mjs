@@ -10,8 +10,8 @@ const verifyExternalUrls = process.argv.includes('--external');
 const approvedPreviewSha256 = '8bf12f39278a1d01c30743664bcc735b3c60977071db9979136a79b5a44ff067';
 const approvedResumeSha256 = '3a4ceeebef174745fa8117dafee31d5741eb63f23891b60f47e1c94ad9eeff7e';
 const approvedActions = new Set([
-  'actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10',
-  'actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020',
+  'actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0',
+  'actions/setup-node@820762786026740c76f36085b0efc47a31fe5020',
 ]);
 
 assert.match(readme, /\]\(social-preview\.png\)/, 'README must embed the current social preview');
