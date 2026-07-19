@@ -2,37 +2,34 @@
 %‚„œ”
 1 0 obj
 <<
-/Producer (ReportLab PDF Library \055 \050opensource\051)
-/Author (Yupeng Lu)
-/CreationDate (D\07220260709190331\05308\04700\047)
-/Creator (\050unspecified\051)
-/Keywords (AI Agent Engineer\054 AI Agent Infrastructure\054 MCP\054 Model Context Protocol\054 tool\055use\054 developer tools\054 OpenAI Apps\054 structured tool outputs\054 evals\054 release gates\054 trace evidence\054 report synthesis\054 Report Voice Platform\054 streaming TTS\054 TypeScript\054 Python\054 NestJS\054 FastAPI\054 AWS\054 SSE\054 WebSocket\054 LiveKit\054 OAuth\054 Stripe\054 Quant\054 IBKR)
-/ModDate (D\07220260709190331\05308\04700\047)
-/Subject (Resume \055 AI Agent Engineer)
-/Title (Yupeng Lu \055 AI Agent Engineer)
-/Trapped (\057False)
+/Type /Catalog
+/Pages 2 0 R
+/StructTreeRoot 22 0 R
+/MarkInfo <<
+/Marked true
+>>
+/Lang (en\055US)
+/ViewerPreferences <<
+/DisplayDocTitle true
+>>
+/Metadata 120 0 R
+/Outlines 124 0 R
 >>
 endobj
 2 0 obj
 <<
 /Type /Pages
 /Count 2
-/Kids [ 4 0 R 18 0 R ]
+/Kids [ 3 0 R 17 0 R ]
 >>
 endobj
 3 0 obj
 <<
-/Type /Catalog
-/Pages 2 0 R
->>
-endobj
-4 0 obj
-<<
-/Annots [ 5 0 R 6 0 R 7 0 R 8 0 R 9 0 R 10 0 R 11 0 R 12 0 R 13 0 R ]
-/Contents 14 0 R
+/Annots [ 4 0 R 5 0 R 6 0 R 7 0 R 8 0 R 9 0 R 10 0 R 11 0 R 12 0 R ]
+/Contents 69 0 R
 /MediaBox [ 0 0 612 792 ]
 /Resources <<
-/Font 15 0 R
+/Font 14 0 R
 /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >>
 /Rotate 0
@@ -40,9 +37,11 @@ endobj
 >>
 /Type /Page
 /Parent 2 0 R
+/StructParents 0
+/Tabs /S
 >>
 endobj
-5 0 obj
+4 0 obj
 <<
 /A <<
 /S /URI
@@ -53,9 +52,11 @@ endobj
 /Rect [ 191.0696 714.02 270.9894 724.34 ]
 /Subtype /Link
 /Type /Annot
+/StructParent 2
+/Contents (Email Yupeng Lu at yplmicro\100gmail\056com)
 >>
 endobj
-6 0 obj
+5 0 obj
 <<
 /A <<
 /S /URI
@@ -66,9 +67,11 @@ endobj
 /Rect [ 278.007 714.02 420.9304 724.34 ]
 /Subtype /Link
 /Type /Annot
+/StructParent 3
+/Contents (Yupeng Lu on LinkedIn)
 >>
 endobj
-7 0 obj
+6 0 obj
 <<
 /A <<
 /S /URI
@@ -79,9 +82,11 @@ endobj
 /Rect [ 216.2289 703.62 293.1731 713.94 ]
 /Subtype /Link
 /Type /Annot
+/StructParent 4
+/Contents (Yupeng Lu\047s GitHub profile)
 >>
 endobj
-8 0 obj
+7 0 obj
 <<
 /A <<
 /S /URI
@@ -92,9 +97,11 @@ endobj
 /Rect [ 348.9355 703.62 427.3159 713.94 ]
 /Subtype /Link
 /Type /Annot
+/StructParent 5
+/Contents (Cookiy AI on GitHub)
 >>
 endobj
-9 0 obj
+8 0 obj
 <<
 /A <<
 /S /URI
@@ -105,9 +112,11 @@ endobj
 /Rect [ 49.3034 594.26 152.7222 605.54 ]
 /Subtype /Link
 /Type /Annot
+/StructParent 6
+/Contents (Public user\055research skill on GitHub)
 >>
 endobj
-10 0 obj
+9 0 obj
 <<
 /A <<
 /S /URI
@@ -118,9 +127,11 @@ endobj
 /Rect [ 49.3034 569.56 138.6316 580.84 ]
 /Subtype /Link
 /Type /Annot
+/StructParent 7
+/Contents (Cookiy CLI source on GitHub)
 >>
 endobj
-11 0 obj
+10 0 obj
 <<
 /A <<
 /S /URI
@@ -131,9 +142,11 @@ endobj
 /Rect [ 146.4712 569.56 220.139 580.84 ]
 /Subtype /Link
 /Type /Annot
+/StructParent 8
+/Contents (cookiy\055cli package on npm)
 >>
 endobj
-12 0 obj
+11 0 obj
 <<
 /A <<
 /S /URI
@@ -144,9 +157,11 @@ endobj
 /Rect [ 49.3034 544.86 108.3354 556.14 ]
 /Subtype /Link
 /Type /Annot
+/StructParent 9
+/Contents (cookiy\055mcp package on npm)
 >>
 endobj
-13 0 obj
+12 0 obj
 <<
 /A <<
 /S /URI
@@ -157,9 +172,11 @@ endobj
 /Rect [ 129.241 544.86 196.639 556.14 ]
 /Subtype /Link
 /Type /Annot
+/StructParent 10
+/Contents (Cookiy AI developer portal)
 >>
 endobj
-14 0 obj
+13 0 obj
 <<
 /Length 8702
 >>
@@ -367,37 +384,39 @@ Q
 
 endstream
 endobj
-15 0 obj
+14 0 obj
 <<
-/F1 16 0 R
-/F2 17 0 R
+/F1 15 0 R
+/F2 16 0 R
 >>
 endobj
-16 0 obj
+15 0 obj
 <<
 /BaseFont /Helvetica
 /Encoding /WinAnsiEncoding
 /Name /F1
 /Subtype /Type1
 /Type /Font
+/ToUnicode 121 0 R
 >>
 endobj
-17 0 obj
+16 0 obj
 <<
 /BaseFont /Helvetica-Bold
 /Encoding /WinAnsiEncoding
 /Name /F2
 /Subtype /Type1
 /Type /Font
+/ToUnicode 121 0 R
 >>
 endobj
-18 0 obj
+17 0 obj
 <<
-/Annots [ 19 0 R 20 0 R ]
-/Contents 21 0 R
+/Annots [ 18 0 R 19 0 R ]
+/Contents 107 0 R
 /MediaBox [ 0 0 612 792 ]
 /Resources <<
-/Font 15 0 R
+/Font 14 0 R
 /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >>
 /Rotate 0
@@ -405,9 +424,11 @@ endobj
 >>
 /Type /Page
 /Parent 2 0 R
+/StructParents 1
+/Tabs /S
 >>
 endobj
-19 0 obj
+18 0 obj
 <<
 /A <<
 /S /URI
@@ -418,9 +439,11 @@ endobj
 /Rect [ 239.6332 712.66 295.018 723.94 ]
 /Subtype /Link
 /Type /Annot
+/StructParent 11
+/Contents (GetDateLove website)
 >>
 endobj
-20 0 obj
+19 0 obj
 <<
 /A <<
 /S /URI
@@ -431,9 +454,11 @@ endobj
 /Rect [ 164.7448 499.66 225.873 510.94 ]
 /Subtype /Link
 /Type /Annot
+/StructParent 12
+/Contents (Quant trading research dashboard)
 >>
 endobj
-21 0 obj
+20 0 obj
 <<
 /Filter [ /ASCII85Decode /FlateDecode ]
 /Length 2357
@@ -442,36 +467,2744 @@ stream
 Gatm<>C5,7&UjDWR&AN;-/N`dp.:S;`*"Hg/@kWdOe@Ap,e*h&8,i5&pC'L4Ncl@"XX/Im#_M!&1G`YJ%Oo1PXH.?rFKltg3i"I(77q"GldOjZXqiD"T7kJ5Ic(Zi2!PUbE?C8"%\<t;b=#Z-Mk%Z2)tTj(F[YELLfXuLY?B9;r6kajBs(D/,`JP"@\jD\%J^][SaM4h1HMLE7s@a_2#j5f='GNc;1-4S:Ioe!YLaoeHM*&RcXui5aO!"]ODO16)qLlq/]N-`/XI.T;',d&MLp<fkmtAUQ6sRCB$tj93ba3\7PBjTW&KOXabrX)?p#cS3#_O<+l0mt.4@;CpOZ6q!h^YS:eoC<PRkdYF[ksIgc]8WAp:ap2[$bkn(GAg:3=ZQ\5\rfN6W]Z[;[D+Q(gf[6E5!n"Jr]HV<Q]3(KML1B\4sWp/RfV&l*<)3teNFKBud,V(,L[@m1BJ/kmnqX8CSAO],8U7Ta<-5\4I2M^5Tm3#"""d]uc=,JYF-8g><^>!MhT=CQX69*^[AXkq-FmYdne/F7'..U<$O@4Pa>O*N=;)NKU0H/kk%ZEG,V?RUCmoq)-M#a6#1STa7l[VN<oCS7'ID%Y[\;5m0U+gN][.O6-g\OeEF0kW,F$ok/X`JBJuBYN&o9"4GggmULl05O!,XT_.G+F$#D6msaf%=Dc'$KK:rmFrlE2\TFLMg.mod0LJ?Pq!%\mfd6+#oQ3=oG3,(3DokU?7*hk^P_Y\+;?^f=.:crbRRo':+!:dJ#9>P)*._;926=hVIZOVW0hYn.`3MH>:E7YV@Ra:l9nOIoj_!FBO2&;#l@X.-2@M-NN[Yb,qa?<.#n7((6>K"1qiFWQc*e<D;M7;S?im;]P,tn:iGD(hC`8D`ASl2fM-anK:np9Zf;V%%apU0cjO,"qFrU*Cn@CATd$/)/$RHsN<Xf1BZD+<`-*K5@rgS:N$!3(3_Y5,)397<VjX]NCSM8rJu;`u[SKAperC07:KU1=;(p%u]t^)nqk[./JQP9m4%N(-Iuq\?s34n0n:L1L#bb?_0puFJMWJ/D&.(lVL7#7q9IP6iQdD?V/:f_!S;PJueFAS?_52+t\,t6dN9Eq]U<_CFCaR)g_E,3A'J<_`/b[$;i./*!aj'L5n*cbjaWg$G%/1ZHau_SH;9Eh(J=S`'-^N-F")_@*8Xdh1/%($$OVdr!-2C1[$:bIKP1m(@FY^Gu0A$XI7kL7rm_2B(_18BmhQ@nq9!^%b?$$7u!`7YK+^mUXclWJEl&=X?P\6q@?.[G3)`fkd*BWeaX(h3dCb27HL0^:cM:td``81sY>l8nD9DFedZk70a,<ohXr*Efnqk(:!/;M6=KX.!sG??+&G.lDB,d#@I/qn5;9/elrc3Cht$m7AQWXP4p.oPW#nl4A?QD.?c##_pp_YHYZ<=V;8a65*[[jmS&I+e'oR?g<0MU*n.33\CC8ueM@<@0fJqUG#shbEQ1)H.=HD6H*Z"N@<TMMhS5)5hAg)8'i_'.?]W/XY7M:(mXlC__`Z>Os+#@(K!>?Y7.7MBudX3EFWcmMPa7(H;`%=a^hpGrHN.59e7]SQ-]])Wg$79.5;r*aLglX63[_3l(6tm:KNI#F:i*QoQBAL4f:7I>IMIhNLpc**rqHC87ss*dOO\Wjdua?9%AJQ]8Xdh;!bFJ_(9VqgkO1p(d%CP(2-HmRub->C9Cgg*j"f.T:6^Y._*A,Q*X38%g4kB%+KA#:VF;maUMMBo9HeRhp7@58BSimV7c3M;H2PJp_$OW>/L.lO$tE3kGY]Fri_rhpA(IZRVq(fkG\SfBKu3$+:@P4"hm1hj.JGmeMIH.Psl$hK;8*gq8iP`/dbel6P+TZoA-SUhe5:r[9mN`BRX!5#gN5.U'o<?0Ftc'\_HZf^"*]f`PM(6S_s0mAf"bL52jY];j9][)7Xe&%[kf/')R[!i^S]!SPH\e=W>'0cRhm2[4t,Tr+bD()o(tT<J+-'ql28.>3`9JQhVf)h?8_boLmNVd*`8VHIGZWF_7e$ti+F<mY`jOf0!Sc1D[V@J)"YICR&J90e7r//C%-p4OGd\&^R_"L$j%dhVS(Uo^\/HROU2LRuElLA6_kpjDG:BZFArhV(gCmJ[Q7H?K$;SLe[H5.A9!V+HH[T5a\f$0^:Fe`t*%F&^E"K.$l1(B*>e6$Q5<T2((J2!W/rLB=F_@So;#oZ<SLoEfOhF1<u;Ki!IO5j7,#(T.]Dnbm8j4`</pZ*SWq*d2=;O;(WaQ^->"c^uI@Z`HW;VrMp5$\S.aEKsN@S7F.'Rp5%mD7[_FYbT#XD17qr"cD9p>+p/?)rg<7^$m?ic.6+BBsHi=bkZW87IbRp[n)o3E-1YhjRkYM~>
 endstream
 endobj
+21 0 obj
+<<
+/Producer (ReportLab PDF Library \055 \050opensource\051)
+/Author (Yupeng Lu)
+/CreationDate (D\07220260709190331\05308\04700\047)
+/Creator (Accessible tagged resume candidate)
+/Keywords (AI Agent Engineer\054 AI Agent Infrastructure\054 MCP\054 Model Context Protocol\054 tool\055use\054 developer tools\054 OpenAI Apps\054 structured tool outputs\054 evals\054 release gates\054 trace evidence\054 report synthesis\054 Report Voice Platform\054 streaming TTS\054 TypeScript\054 Python\054 NestJS\054 FastAPI\054 AWS\054 SSE\054 WebSocket\054 LiveKit\054 OAuth\054 Stripe\054 Quant\054 IBKR)
+/ModDate (D\07220260709190331\05308\04700\047)
+/Subject (Resume \055 AI Agent Engineer)
+/Title (Yupeng Lu \055 AI Agent Engineer)
+/Trapped (\057False)
+>>
+endobj
+22 0 obj
+<<
+/Type /StructTreeRoot
+/K [ 23 0 R ]
+/ParentTree 119 0 R
+/ParentTreeNextKey 13
+>>
+endobj
+23 0 obj
+<<
+/Type /StructElem
+/S /Document
+/P 22 0 R
+/K [ 24 0 R 25 0 R 26 0 R 27 0 R 28 0 R 31 0 R 40 0 R 100 0 R ]
+>>
+endobj
+24 0 obj
+<<
+/Type /StructElem
+/S /H1
+/P 23 0 R
+/Pg 3 0 R
+/K [ <<
+/Type /MCR
+/Pg 3 0 R
+/MCID 0
+>> ]
+>>
+endobj
+25 0 obj
+<<
+/Type /StructElem
+/S /P
+/P 23 0 R
+/Pg 3 0 R
+/K [ <<
+/Type /MCR
+/Pg 3 0 R
+/MCID 1
+>> ]
+>>
+endobj
+26 0 obj
+<<
+/Type /StructElem
+/S /P
+/P 23 0 R
+/Pg 3 0 R
+/K [ <<
+/Type /MCR
+/Pg 3 0 R
+/MCID 2
+>> 108 0 R 109 0 R 110 0 R 111 0 R ]
+>>
+endobj
+27 0 obj
+<<
+/Type /StructElem
+/S /P
+/P 23 0 R
+/Pg 3 0 R
+/K [ <<
+/Type /MCR
+/Pg 3 0 R
+/MCID 3
+>> ]
+>>
+endobj
+28 0 obj
+<<
+/Type /StructElem
+/S /Sect
+/P 23 0 R
+/K [ 29 0 R 30 0 R ]
+>>
+endobj
+29 0 obj
+<<
+/Type /StructElem
+/S /H2
+/P 28 0 R
+/Pg 3 0 R
+/K [ <<
+/Type /MCR
+/Pg 3 0 R
+/MCID 4
+>> ]
+>>
+endobj
+30 0 obj
+<<
+/Type /StructElem
+/S /P
+/P 28 0 R
+/Pg 3 0 R
+/K [ <<
+/Type /MCR
+/Pg 3 0 R
+/MCID 5
+>> ]
+>>
+endobj
+31 0 obj
+<<
+/Type /StructElem
+/S /Sect
+/P 23 0 R
+/K [ 32 0 R 33 0 R ]
+>>
+endobj
+32 0 obj
+<<
+/Type /StructElem
+/S /H2
+/P 31 0 R
+/Pg 3 0 R
+/K [ <<
+/Type /MCR
+/Pg 3 0 R
+/MCID 6
+>> ]
+>>
+endobj
+33 0 obj
+<<
+/Type /StructElem
+/S /L
+/P 31 0 R
+/ListNumbering /None
+/K [ 34 0 R 36 0 R 38 0 R ]
+>>
+endobj
+34 0 obj
+<<
+/Type /StructElem
+/S /LI
+/P 33 0 R
+/K [ 35 0 R ]
+>>
+endobj
+35 0 obj
+<<
+/Type /StructElem
+/S /LBody
+/P 34 0 R
+/Pg 3 0 R
+/K [ <<
+/Type /MCR
+/Pg 3 0 R
+/MCID 7
+>> 112 0 R ]
+>>
+endobj
+36 0 obj
+<<
+/Type /StructElem
+/S /LI
+/P 33 0 R
+/K [ 37 0 R ]
+>>
+endobj
+37 0 obj
+<<
+/Type /StructElem
+/S /LBody
+/P 36 0 R
+/Pg 3 0 R
+/K [ <<
+/Type /MCR
+/Pg 3 0 R
+/MCID 8
+>> 113 0 R 114 0 R ]
+>>
+endobj
+38 0 obj
+<<
+/Type /StructElem
+/S /LI
+/P 33 0 R
+/K [ 39 0 R ]
+>>
+endobj
+39 0 obj
+<<
+/Type /StructElem
+/S /LBody
+/P 38 0 R
+/Pg 3 0 R
+/K [ <<
+/Type /MCR
+/Pg 3 0 R
+/MCID 9
+>> 115 0 R 116 0 R ]
+>>
+endobj
+40 0 obj
+<<
+/Type /StructElem
+/S /Sect
+/P 23 0 R
+/K [ 41 0 R 42 0 R 70 0 R 83 0 R 94 0 R ]
+>>
+endobj
+41 0 obj
+<<
+/Type /StructElem
+/S /H2
+/P 40 0 R
+/Pg 3 0 R
+/K [ <<
+/Type /MCR
+/Pg 3 0 R
+/MCID 10
+>> ]
+>>
+endobj
+42 0 obj
+<<
+/Type /StructElem
+/S /Sect
+/P 40 0 R
+/K [ 43 0 R 44 0 R 45 0 R 46 0 R ]
+>>
+endobj
+43 0 obj
+<<
+/Type /StructElem
+/S /H3
+/P 42 0 R
+/Pg 3 0 R
+/K [ <<
+/Type /MCR
+/Pg 3 0 R
+/MCID 11
+>> ]
+>>
+endobj
+44 0 obj
+<<
+/Type /StructElem
+/S /P
+/P 42 0 R
+/Pg 3 0 R
+/K [ <<
+/Type /MCR
+/Pg 3 0 R
+/MCID 12
+>> ]
+>>
+endobj
+45 0 obj
+<<
+/Type /StructElem
+/S /P
+/P 42 0 R
+/Pg 3 0 R
+/K [ <<
+/Type /MCR
+/Pg 3 0 R
+/MCID 13
+>> ]
+>>
+endobj
+46 0 obj
+<<
+/Type /StructElem
+/S /L
+/P 42 0 R
+/ListNumbering /None
+/K [ 47 0 R 49 0 R 51 0 R 53 0 R 55 0 R 57 0 R 59 0 R 61 0 R 63 0 R 65 0 R 67 0 R ]
+>>
+endobj
+47 0 obj
+<<
+/Type /StructElem
+/S /LI
+/P 46 0 R
+/K [ 48 0 R ]
+>>
+endobj
+48 0 obj
+<<
+/Type /StructElem
+/S /LBody
+/P 47 0 R
+/Pg 3 0 R
+/K [ <<
+/Type /MCR
+/Pg 3 0 R
+/MCID 14
+>> ]
+>>
+endobj
+49 0 obj
+<<
+/Type /StructElem
+/S /LI
+/P 46 0 R
+/K [ 50 0 R ]
+>>
+endobj
+50 0 obj
+<<
+/Type /StructElem
+/S /LBody
+/P 49 0 R
+/Pg 3 0 R
+/K [ <<
+/Type /MCR
+/Pg 3 0 R
+/MCID 15
+>> ]
+>>
+endobj
+51 0 obj
+<<
+/Type /StructElem
+/S /LI
+/P 46 0 R
+/K [ 52 0 R ]
+>>
+endobj
+52 0 obj
+<<
+/Type /StructElem
+/S /LBody
+/P 51 0 R
+/Pg 3 0 R
+/K [ <<
+/Type /MCR
+/Pg 3 0 R
+/MCID 16
+>> ]
+>>
+endobj
+53 0 obj
+<<
+/Type /StructElem
+/S /LI
+/P 46 0 R
+/K [ 54 0 R ]
+>>
+endobj
+54 0 obj
+<<
+/Type /StructElem
+/S /LBody
+/P 53 0 R
+/Pg 3 0 R
+/K [ <<
+/Type /MCR
+/Pg 3 0 R
+/MCID 17
+>> ]
+>>
+endobj
+55 0 obj
+<<
+/Type /StructElem
+/S /LI
+/P 46 0 R
+/K [ 56 0 R ]
+>>
+endobj
+56 0 obj
+<<
+/Type /StructElem
+/S /LBody
+/P 55 0 R
+/Pg 3 0 R
+/K [ <<
+/Type /MCR
+/Pg 3 0 R
+/MCID 18
+>> ]
+>>
+endobj
+57 0 obj
+<<
+/Type /StructElem
+/S /LI
+/P 46 0 R
+/K [ 58 0 R ]
+>>
+endobj
+58 0 obj
+<<
+/Type /StructElem
+/S /LBody
+/P 57 0 R
+/Pg 3 0 R
+/K [ <<
+/Type /MCR
+/Pg 3 0 R
+/MCID 19
+>> ]
+>>
+endobj
+59 0 obj
+<<
+/Type /StructElem
+/S /LI
+/P 46 0 R
+/K [ 60 0 R ]
+>>
+endobj
+60 0 obj
+<<
+/Type /StructElem
+/S /LBody
+/P 59 0 R
+/Pg 3 0 R
+/K [ <<
+/Type /MCR
+/Pg 3 0 R
+/MCID 20
+>> ]
+>>
+endobj
+61 0 obj
+<<
+/Type /StructElem
+/S /LI
+/P 46 0 R
+/K [ 62 0 R ]
+>>
+endobj
+62 0 obj
+<<
+/Type /StructElem
+/S /LBody
+/P 61 0 R
+/Pg 3 0 R
+/K [ <<
+/Type /MCR
+/Pg 3 0 R
+/MCID 21
+>> ]
+>>
+endobj
+63 0 obj
+<<
+/Type /StructElem
+/S /LI
+/P 46 0 R
+/K [ 64 0 R ]
+>>
+endobj
+64 0 obj
+<<
+/Type /StructElem
+/S /LBody
+/P 63 0 R
+/Pg 3 0 R
+/K [ <<
+/Type /MCR
+/Pg 3 0 R
+/MCID 22
+>> ]
+>>
+endobj
+65 0 obj
+<<
+/Type /StructElem
+/S /LI
+/P 46 0 R
+/K [ 66 0 R ]
+>>
+endobj
+66 0 obj
+<<
+/Type /StructElem
+/S /LBody
+/P 65 0 R
+/Pg 3 0 R
+/K [ <<
+/Type /MCR
+/Pg 3 0 R
+/MCID 23
+>> ]
+>>
+endobj
+67 0 obj
+<<
+/Type /StructElem
+/S /LI
+/P 46 0 R
+/K [ 68 0 R ]
+>>
+endobj
+68 0 obj
+<<
+/Type /StructElem
+/S /LBody
+/P 67 0 R
+/Pg 3 0 R
+/K [ <<
+/Type /MCR
+/Pg 3 0 R
+/MCID 24
+>> ]
+>>
+endobj
+69 0 obj
+<<
+/Length 10357
+>>
+stream
+/Artifact BMC
+1 0 0 1 0 0 cm
+BT
+/F1 12 Tf
+14.4 TL
+ET
+EMC
+/H1 <<
+/MCID 0
+>> BDC
+q
+1 0 0 1 40.56 735.64 cm
+q
+0 0 0 rg
+BT
+1 0 0 1 0 4 Tm
+/F2 19 Tf
+23 TL
+216.3535 0 Td
+(Yupeng Lu) Tj
+T*
+-216.3535 0 Td
+ET
+Q
+Q
+EMC
+/P <<
+/MCID 1
+>> BDC
+q
+1 0 0 1 40.56 724.34 cm
+q
+0.266667 0.266667 0.266667 rg
+BT
+1 0 0 1 0 1.9 Tm
+/F1 8.9 Tf
+10.8 TL
+165.3551 0 Td
+(US Permanent Resident \174 No sponsorship required) Tj
+T*
+-165.3551 0 Td
+ET
+Q
+Q
+EMC
+/P <<
+/MCID 2
+>> BDC
+q
+1 0 0 1 40.56 703.54 cm
+q
+0.023529 0.270588 0.678431 RG
+n
+150.5096 11.125 m
+230.4294 11.125 l
+S
+n
+237.447 11.125 m
+380.3704 11.125 l
+S
+n
+171.3517 0.725 m
+260.7401 0.725 l
+S
+n
+334.6743 0.725 m
+411.6185 0.725 l
+S
+BT
+1 0 0 1 0 12.2 Tm
+150.5096 0 Td
+10.4 TL
+/F1 8.6 Tf
+0.023529 0.270588 0.678431 rg
+(yplmicro\100gmail\056com) Tj
+0.266667 0.266667 0.266667 rg
+( \174 ) Tj
+0.023529 0.270588 0.678431 rg
+(linkedin\056com\057in\057yupeng\055lu\055845a0b411) Tj
+0.266667 0.266667 0.266667 rg
+T*
+-6.3855 0 Td
+(GitHub\072 ) Tj
+0.023529 0.270588 0.678431 rg
+(github\056com\057BrickerP) Tj
+0.266667 0.266667 0.266667 rg
+( \174 Public work\072 ) Tj
+0.023529 0.270588 0.678431 rg
+(github\056com\057cookiy\055ai) Tj
+T*
+-119.2615 0 Td
+ET
+Q
+Q
+EMC
+/P <<
+/MCID 3
+>> BDC
+q
+1 0 0 1 40.56 685.14 cm
+q
+0.133333 0.133333 0.133333 rg
+BT
+1 0 0 1 0 2.2 Tm
+/F2 11.2 Tf
+13.4 TL
+216.8992 0 Td
+(AI Agent Engineer) Tj
+T*
+-216.8992 0 Td
+ET
+Q
+Q
+EMC
+/H2 <<
+/MCID 4
+>> BDC
+q
+1 0 0 1 40.56 665.74 cm
+q
+0.066667 0.066667 0.066667 rg
+BT
+1 0 0 1 0 2 Tm
+/F2 10.4 Tf
+12.4 TL
+(SUMMARY) Tj
+T*
+ET
+Q
+Q
+EMC
+/Artifact BMC
+q
+1 0 0 1 40.56 664.24 cm
+q
+0.5 w
+1 J
+0.6 0.6 0.6 RG
+n
+0 0 m
+530.88 0 l
+S
+Q
+Q
+EMC
+/P <<
+/MCID 5
+>> BDC
+q
+1 0 0 1 40.56 627.44 cm
+q
+0 0 0 rg
+BT
+1 0 0 1 0 25.4 Tm
+/F1 9.4 Tf
+11.6 TL
+(AI Agent Engineer and backend platform builder focused on production agent systems\072 MCP\057tool\055use contracts\054 public API) Tj
+T*
+(boundaries\054 CLI\057skill distribution\054 evidence\055bound report synthesis\054 Report Voice Platform\054 monetized workflows\054 and) Tj
+T*
+(evidence\055gated releases\056 U\056S\056 Permanent Resident\073 no sponsorship required\056) Tj
+T*
+ET
+Q
+Q
+EMC
+/H2 <<
+/MCID 6
+>> BDC
+q
+1 0 0 1 40.56 609.04 cm
+q
+0.066667 0.066667 0.066667 rg
+BT
+1 0 0 1 0 2 Tm
+/F2 10.4 Tf
+12.4 TL
+(PUBLIC PROOF) Tj
+T*
+ET
+Q
+Q
+EMC
+/Artifact BMC
+q
+1 0 0 1 40.56 607.54 cm
+q
+0.5 w
+1 J
+0.6 0.6 0.6 RG
+n
+0 0 m
+530.88 0 l
+S
+Q
+Q
+EMC
+/LBody <<
+/MCID 7
+>> BDC
+q
+1 0 0 1 40.56 582.34 cm
+q
+0.023529 0.270588 0.678431 RG
+n
+8.7434 12.625 m
+112.1622 12.625 l
+S
+BT
+1 0 0 1 10 13.8 Tm
+-7 0 Td
+11.6 TL
+/F1 9.4 Tf
+0 0 0 rg
+(\055 ) Tj
+0.023529 0.270588 0.678431 rg
+(public user\055research skill) Tj
+0 0 0 rg
+( \055 public AI\055agent skill for end\055to\055end user research across Claude\054 Codex\054 Cursor\054 and) Tj
+T*
+7 0 Td
+(OpenClaw\055style clients\056) Tj
+T*
+ET
+Q
+Q
+EMC
+/LBody <<
+/MCID 8
+>> BDC
+q
+1 0 0 1 40.56 557.64 cm
+q
+0.023529 0.270588 0.678431 RG
+n
+8.7434 12.625 m
+98.0716 12.625 l
+S
+n
+105.9112 12.625 m
+179.579 12.625 l
+S
+BT
+1 0 0 1 10 13.8 Tm
+-7 0 Td
+11.6 TL
+/F1 9.4 Tf
+0 0 0 rg
+(\055 ) Tj
+0.023529 0.270588 0.678431 rg
+(public TypeScript CLI) Tj
+0 0 0 rg
+( \057 ) Tj
+0.023529 0.270588 0.678431 rg
+(npm CLI package) Tj
+0 0 0 rg
+( \055 TypeScript CLI for AI interviews\054 synthetic users\054 quant surveys\054 recruitment\054) Tj
+T*
+7 0 Td
+(playback\054 billing\054 and REST\057MCP\055compatible workflows\056) Tj
+T*
+ET
+Q
+Q
+EMC
+/LBody <<
+/MCID 9
+>> BDC
+q
+1 0 0 1 40.56 532.94 cm
+q
+0.023529 0.270588 0.678431 RG
+n
+8.7434 12.625 m
+67.7754 12.625 l
+S
+n
+88.681 12.625 m
+156.079 12.625 l
+S
+BT
+1 0 0 1 10 13.8 Tm
+-7 0 Td
+11.6 TL
+/F1 9.4 Tf
+0 0 0 rg
+(\055 ) Tj
+0.023529 0.270588 0.678431 rg
+(MCP package) Tj
+0 0 0 rg
+( and ) Tj
+0.023529 0.270588 0.678431 rg
+(developer portal) Tj
+0 0 0 rg
+( \055 one\055command skill\057MCP setup\054 Redoc\057OpenAPI docs\054 and public agent onboarding) Tj
+T*
+7 0 Td
+(surface\056) Tj
+T*
+ET
+Q
+Q
+EMC
+/H2 <<
+/MCID 10
+>> BDC
+q
+1 0 0 1 40.56 514.54 cm
+q
+0.066667 0.066667 0.066667 rg
+BT
+1 0 0 1 0 2 Tm
+/F2 10.4 Tf
+12.4 TL
+(EXPERIENCE) Tj
+T*
+ET
+Q
+Q
+EMC
+/Artifact BMC
+q
+1 0 0 1 40.56 513.04 cm
+q
+0.5 w
+1 J
+0.6 0.6 0.6 RG
+n
+0 0 m
+530.88 0 l
+S
+Q
+Q
+EMC
+/H3 <<
+/MCID 11
+>> BDC
+q
+1 0 0 1 40.56 497.24 cm
+q
+BT
+1 0 0 1 0 2.1 Tm
+11.8 TL
+/F2 9.7 Tf
+0 0 0 rg
+(Cookiy AI \055 AI Agent Engineer) Tj
+T*
+ET
+Q
+Q
+EMC
+/P <<
+/MCID 12
+>> BDC
+q
+1 0 0 1 40.56 486.74 cm
+q
+0.333333 0.333333 0.333333 rg
+BT
+1 0 0 1 0 1.9 Tm
+/F1 8.6 Tf
+10.5 TL
+(Aug 2025 \055 Present \174 Silicon Valley HQ \057 Beijing Engineering Team) Tj
+T*
+ET
+Q
+Q
+EMC
+/P <<
+/MCID 13
+>> BDC
+q
+1 0 0 1 40.56 451.14 cm
+q
+BT
+1 0 0 1 0 25.4 Tm
+11.6 TL
+/F1 9.4 Tf
+0 0 0 rg
+(Voice\055AI platform for user\055research interviews\056 Built agent\055native research infrastructure across MCP tools\054 public REST APIs\054) Tj
+T*
+(OAuth\057billing\054 report generation\054 Report Voice Platform\054 interview\057playback flows\054 and E2E\057release gates\056 Evidence snapshot\072) Tj
+T*
+/F2 9.4 Tf
+(1\054040 Cookiy merged PRs) Tj
+/F1 9.4 Tf
+( spanning MCP\057API\054 report synthesis\054 voice runtime\054 video clips\054 billing\054 and release gates\056) Tj
+T*
+ET
+Q
+Q
+EMC
+/LBody <<
+/MCID 14
+>> BDC
+q
+1 0 0 1 40.56 425.74 cm
+q
+BT
+1 0 0 1 10 13.8 Tm
+-7 0 Td
+11.6 TL
+/F1 9.4 Tf
+0 0 0 rg
+(\055 ) Tj
+/F2 9.4 Tf
+(Contract\055first agent\057API platform\056) Tj
+/F1 9.4 Tf
+( Designed and hardened Zod\057OpenAPI\057MCP\055style tool contracts\054 DTO\057runtime validation\054) Tj
+T*
+7 0 Td
+(pagination\057status semantics\054 CLI payload compatibility\054 and public API boundaries\056) Tj
+T*
+ET
+Q
+Q
+EMC
+/LBody <<
+/MCID 15
+>> BDC
+q
+1 0 0 1 40.56 401.04 cm
+q
+BT
+1 0 0 1 10 13.8 Tm
+-7 0 Td
+11.6 TL
+/F1 9.4 Tf
+0 0 0 rg
+(\055 ) Tj
+/F2 9.4 Tf
+(MCP and tool registry\056) Tj
+/F1 9.4 Tf
+( Owned 41 tools across 4 MCP servers and 26 Zod\057OpenAPI schema files\054 including study\054 interview\054) Tj
+T*
+7 0 Td
+(quant\054 billing\054 recruit\054 guide\054 playback\054 and report workflows\056) Tj
+T*
+ET
+Q
+Q
+EMC
+/LBody <<
+/MCID 16
+>> BDC
+q
+1 0 0 1 40.56 376.34 cm
+q
+BT
+1 0 0 1 10 13.8 Tm
+-7 0 Td
+11.6 TL
+/F1 9.4 Tf
+0 0 0 rg
+(\055 ) Tj
+/F2 9.4 Tf
+(CLI\057skill distribution\056) Tj
+/F1 9.4 Tf
+( Published public skill and TypeScript CLI surfaces\073 migrated shell workflows to npm CLI\073 added) Tj
+T*
+7 0 Td
+(MCP\055first\057REST\055fallback behavior\054 token\057login flows\054 and Cursor\057Claude deep\055link paths\056) Tj
+T*
+ET
+Q
+Q
+EMC
+/LBody <<
+/MCID 17
+>> BDC
+q
+1 0 0 1 40.56 351.64 cm
+q
+BT
+1 0 0 1 10 13.8 Tm
+-7 0 Td
+11.6 TL
+/F1 9.4 Tf
+0 0 0 rg
+(\055 ) Tj
+/F2 9.4 Tf
+(Tool\055using report\057study chat agents\056) Tj
+/F1 9.4 Tf
+( Re\055architected scoped registries\054 artifact load\055before\055edit discipline\054 evidence) Tj
+T*
+7 0 Td
+(bundles\054 direct\055save tools\054 and locked\055fact guards\073 removed 7 duplicate tools and slimmed prompts by \1762\0565k LOC\056) Tj
+T*
+ET
+Q
+Q
+EMC
+/LBody <<
+/MCID 18
+>> BDC
+q
+1 0 0 1 40.56 303.74 cm
+q
+BT
+1 0 0 1 10 37 Tm
+-7 0 Td
+11.6 TL
+/F1 9.4 Tf
+0 0 0 rg
+(\055 ) Tj
+/F2 9.4 Tf
+(Evidence\055bound report synthesis\056) Tj
+/F1 9.4 Tf
+( Moved research reports from fragile single\055shot prompting to objective\055first multi\055pass) Tj
+T*
+7 0 Td
+(synthesis with cohort\055batch passes for large corpora\054 objective\055independence and emergent\055discovery passes\054 chunked) Tj
+T*
+(HTML fidelity\057readiness gates\054 report\055driven auto clips \050MediaConvert \053 GCP Transcoder fallback\051\054 screener\057chat corpus QA\054) Tj
+T*
+(and editorial HTML preservation\056) Tj
+T*
+ET
+Q
+Q
+EMC
+/LBody <<
+/MCID 19
+>> BDC
+q
+1 0 0 1 40.56 267.44 cm
+q
+BT
+1 0 0 1 10 25.4 Tm
+-7 0 Td
+11.6 TL
+/F1 9.4 Tf
+0 0 0 rg
+(\055 ) Tj
+/F2 9.4 Tf
+(LLM production reliability\056) Tj
+/F1 9.4 Tf
+( Hardened OpenAI\057Gemini execution paths under release pressure\072 native fetch\054 uncompressed) Tj
+T*
+7 0 Td
+(SDK responses\054 preserved auth headers\054 typed client options\054 runtime pinning\054 Cloudflare\057401 handling\054 and preview) Tj
+T*
+(backports\056) Tj
+T*
+ET
+Q
+Q
+EMC
+/LBody <<
+/MCID 20
+>> BDC
+q
+1 0 0 1 40.56 242.74 cm
+q
+BT
+1 0 0 1 10 13.8 Tm
+-7 0 Td
+11.6 TL
+/F1 9.4 Tf
+0 0 0 rg
+(\055 ) Tj
+/F2 9.4 Tf
+(Streaming and long tool work\056) Tj
+/F1 9.4 Tf
+( Owned SSE\057WebSocket\057MCP streamable\055HTTP paths with heartbeats\054 abort\055cleanup) Tj
+T*
+7 0 Td
+(isolation\054 hard timeouts\054 run\055ID propagation\054 and stream\055boundary regression tests\056) Tj
+T*
+ET
+Q
+Q
+EMC
+/LBody <<
+/MCID 21
+>> BDC
+q
+1 0 0 1 40.56 206.44 cm
+q
+BT
+1 0 0 1 10 25.4 Tm
+-7 0 Td
+11.6 TL
+/F1 9.4 Tf
+0 0 0 rg
+(\055 ) Tj
+/F2 9.4 Tf
+(Eval\057release infrastructure\056) Tj
+/F1 9.4 Tf
+( Built dual\055surface E2E harness \050291 cases\072 168 SaaS \053 123 CLI\057MCP\051\054 7 L0\055L6 gate profiles\054) Tj
+T*
+7 0 Td
+(preview SaaS\057voice\057share\055link oracles\054 runtime evidence packets\054 trace correlation\054 p95 budgets\054 baseline ledger\054 and) Tj
+T*
+(notification loops\056) Tj
+T*
+ET
+Q
+Q
+EMC
+/LBody <<
+/MCID 22
+>> BDC
+q
+1 0 0 1 40.56 158.54 cm
+q
+BT
+1 0 0 1 10 37 Tm
+-7 0 Td
+11.6 TL
+/F1 9.4 Tf
+0 0 0 rg
+(\055 ) Tj
+/F2 9.4 Tf
+(Realtime interview\054 avatar\054 and Report Voice Platform\056) Tj
+/F1 9.4 Tf
+( Worked across LiveKit rooms\054 Deepgram STT\054 TTS providers\054) Tj
+T*
+7 0 Td
+(Gemini\057OpenAI LLM paths\054 and Tavus\057SpatialReal avatar integration \050\176200 ms barge\055in\051\073 shipped a dedicated report\055voice) Tj
+T*
+(delivery runtime with streaming TTS\054 speculative follow\055up turn\055taking\054 VAD barge\055in\054 voice\055role training\054 and Cookiy\055account) Tj
+T*
+(admin sessions\056) Tj
+T*
+ET
+Q
+Q
+EMC
+/LBody <<
+/MCID 23
+>> BDC
+q
+1 0 0 1 40.56 122.24 cm
+q
+BT
+1 0 0 1 10 25.4 Tm
+-7 0 Td
+11.6 TL
+/F1 9.4 Tf
+0 0 0 rg
+(\055 ) Tj
+/F2 9.4 Tf
+(Agent\055compatible auth and billing\056) Tj
+/F1 9.4 Tf
+( Hardened compact CLI tokens\054 OAuth\057Bearer semantics\054 wallet\055ledger idempotency\054) Tj
+T*
+7 0 Td
+(StripeEventLog webhook audit\054 pay\055before\055reveal report billing\054 post\055queue debit linking\054 and minimum\055disclosure tool) Tj
+T*
+(responses\056) Tj
+T*
+ET
+Q
+Q
+EMC
+/LBody <<
+/MCID 24
+>> BDC
+q
+1 0 0 1 40.56 97.54 cm
+q
+BT
+1 0 0 1 10 13.8 Tm
+-7 0 Td
+11.6 TL
+/F1 9.4 Tf
+0 0 0 rg
+(\055 ) Tj
+/F2 9.4 Tf
+(Platform\057release operations\056) Tj
+/F1 9.4 Tf
+( Supported Nginx gateway\057deploy paths\054 cross\055environment short\055link routing\054 cookie isolation\054) Tj
+T*
+7 0 Td
+(preview\057backport propagation\054 and Homebrew installer distribution\056) Tj
+T*
+ET
+Q
+Q
+EMC
+
+endstream
+endobj
+70 0 obj
+<<
+/Type /StructElem
+/S /Sect
+/P 40 0 R
+/K [ 71 0 R 72 0 R 73 0 R 74 0 R ]
+>>
+endobj
+71 0 obj
+<<
+/Type /StructElem
+/S /H3
+/P 70 0 R
+/Pg 17 0 R
+/K [ <<
+/Type /MCR
+/Pg 17 0 R
+/MCID 0
+>> ]
+>>
+endobj
+72 0 obj
+<<
+/Type /StructElem
+/S /P
+/P 70 0 R
+/Pg 17 0 R
+/K [ <<
+/Type /MCR
+/Pg 17 0 R
+/MCID 1
+>> ]
+>>
+endobj
+73 0 obj
+<<
+/Type /StructElem
+/S /P
+/P 70 0 R
+/Pg 17 0 R
+/K [ <<
+/Type /MCR
+/Pg 17 0 R
+/MCID 2
+>> 117 0 R ]
+>>
+endobj
+74 0 obj
+<<
+/Type /StructElem
+/S /L
+/P 70 0 R
+/ListNumbering /None
+/K [ 75 0 R 77 0 R 79 0 R 81 0 R ]
+>>
+endobj
+75 0 obj
+<<
+/Type /StructElem
+/S /LI
+/P 74 0 R
+/K [ 76 0 R ]
+>>
+endobj
+76 0 obj
+<<
+/Type /StructElem
+/S /LBody
+/P 75 0 R
+/Pg 17 0 R
+/K [ <<
+/Type /MCR
+/Pg 17 0 R
+/MCID 3
+>> ]
+>>
+endobj
+77 0 obj
+<<
+/Type /StructElem
+/S /LI
+/P 74 0 R
+/K [ 78 0 R ]
+>>
+endobj
+78 0 obj
+<<
+/Type /StructElem
+/S /LBody
+/P 77 0 R
+/Pg 17 0 R
+/K [ <<
+/Type /MCR
+/Pg 17 0 R
+/MCID 4
+>> ]
+>>
+endobj
+79 0 obj
+<<
+/Type /StructElem
+/S /LI
+/P 74 0 R
+/K [ 80 0 R ]
+>>
+endobj
+80 0 obj
+<<
+/Type /StructElem
+/S /LBody
+/P 79 0 R
+/Pg 17 0 R
+/K [ <<
+/Type /MCR
+/Pg 17 0 R
+/MCID 5
+>> ]
+>>
+endobj
+81 0 obj
+<<
+/Type /StructElem
+/S /LI
+/P 74 0 R
+/K [ 82 0 R ]
+>>
+endobj
+82 0 obj
+<<
+/Type /StructElem
+/S /LBody
+/P 81 0 R
+/Pg 17 0 R
+/K [ <<
+/Type /MCR
+/Pg 17 0 R
+/MCID 6
+>> ]
+>>
+endobj
+83 0 obj
+<<
+/Type /StructElem
+/S /Sect
+/P 40 0 R
+/K [ 84 0 R 85 0 R 86 0 R 87 0 R ]
+>>
+endobj
+84 0 obj
+<<
+/Type /StructElem
+/S /H3
+/P 83 0 R
+/Pg 17 0 R
+/K [ <<
+/Type /MCR
+/Pg 17 0 R
+/MCID 7
+>> ]
+>>
+endobj
+85 0 obj
+<<
+/Type /StructElem
+/S /P
+/P 83 0 R
+/Pg 17 0 R
+/K [ <<
+/Type /MCR
+/Pg 17 0 R
+/MCID 8
+>> ]
+>>
+endobj
+86 0 obj
+<<
+/Type /StructElem
+/S /P
+/P 83 0 R
+/Pg 17 0 R
+/K [ <<
+/Type /MCR
+/Pg 17 0 R
+/MCID 9
+>> ]
+>>
+endobj
+87 0 obj
+<<
+/Type /StructElem
+/S /L
+/P 83 0 R
+/ListNumbering /None
+/K [ 88 0 R 90 0 R 92 0 R ]
+>>
+endobj
+88 0 obj
+<<
+/Type /StructElem
+/S /LI
+/P 87 0 R
+/K [ 89 0 R ]
+>>
+endobj
+89 0 obj
+<<
+/Type /StructElem
+/S /LBody
+/P 88 0 R
+/Pg 17 0 R
+/K [ <<
+/Type /MCR
+/Pg 17 0 R
+/MCID 10
+>> ]
+>>
+endobj
+90 0 obj
+<<
+/Type /StructElem
+/S /LI
+/P 87 0 R
+/K [ 91 0 R ]
+>>
+endobj
+91 0 obj
+<<
+/Type /StructElem
+/S /LBody
+/P 90 0 R
+/Pg 17 0 R
+/K [ <<
+/Type /MCR
+/Pg 17 0 R
+/MCID 11
+>> ]
+>>
+endobj
+92 0 obj
+<<
+/Type /StructElem
+/S /LI
+/P 87 0 R
+/K [ 93 0 R ]
+>>
+endobj
+93 0 obj
+<<
+/Type /StructElem
+/S /LBody
+/P 92 0 R
+/Pg 17 0 R
+/K [ <<
+/Type /MCR
+/Pg 17 0 R
+/MCID 12
+>> 118 0 R ]
+>>
+endobj
+94 0 obj
+<<
+/Type /StructElem
+/S /Sect
+/P 40 0 R
+/K [ 95 0 R 96 0 R 97 0 R ]
+>>
+endobj
+95 0 obj
+<<
+/Type /StructElem
+/S /H3
+/P 94 0 R
+/Pg 17 0 R
+/K [ <<
+/Type /MCR
+/Pg 17 0 R
+/MCID 13
+>> ]
+>>
+endobj
+96 0 obj
+<<
+/Type /StructElem
+/S /P
+/P 94 0 R
+/Pg 17 0 R
+/K [ <<
+/Type /MCR
+/Pg 17 0 R
+/MCID 14
+>> ]
+>>
+endobj
+97 0 obj
+<<
+/Type /StructElem
+/S /L
+/P 94 0 R
+/ListNumbering /None
+/K [ 98 0 R ]
+>>
+endobj
+98 0 obj
+<<
+/Type /StructElem
+/S /LI
+/P 97 0 R
+/K [ 99 0 R ]
+>>
+endobj
+99 0 obj
+<<
+/Type /StructElem
+/S /LBody
+/P 98 0 R
+/Pg 17 0 R
+/K [ <<
+/Type /MCR
+/Pg 17 0 R
+/MCID 15
+>> ]
+>>
+endobj
+100 0 obj
+<<
+/Type /StructElem
+/S /Sect
+/P 23 0 R
+/K [ 101 0 R 102 0 R 105 0 R ]
+>>
+endobj
+101 0 obj
+<<
+/Type /StructElem
+/S /H2
+/P 100 0 R
+/Pg 17 0 R
+/K [ <<
+/Type /MCR
+/Pg 17 0 R
+/MCID 16
+>> ]
+>>
+endobj
+102 0 obj
+<<
+/Type /StructElem
+/S /Sect
+/P 100 0 R
+/K [ 103 0 R 104 0 R ]
+>>
+endobj
+103 0 obj
+<<
+/Type /StructElem
+/S /H3
+/P 102 0 R
+/Pg 17 0 R
+/K [ <<
+/Type /MCR
+/Pg 17 0 R
+/MCID 17
+>> ]
+>>
+endobj
+104 0 obj
+<<
+/Type /StructElem
+/S /P
+/P 102 0 R
+/Pg 17 0 R
+/K [ <<
+/Type /MCR
+/Pg 17 0 R
+/MCID 18
+>> ]
+>>
+endobj
+105 0 obj
+<<
+/Type /StructElem
+/S /Sect
+/P 100 0 R
+/K [ 106 0 R ]
+>>
+endobj
+106 0 obj
+<<
+/Type /StructElem
+/S /H3
+/P 105 0 R
+/Pg 17 0 R
+/K [ <<
+/Type /MCR
+/Pg 17 0 R
+/MCID 19
+>> ]
+>>
+endobj
+107 0 obj
+<<
+/Length 5859
+>>
+stream
+/Artifact BMC
+1 0 0 1 0 0 cm
+BT
+/F1 12 Tf
+14.4 TL
+ET
+EMC
+/H3 <<
+/MCID 0
+>> BDC
+q
+1 0 0 1 40.56 746.84 cm
+q
+BT
+1 0 0 1 0 2.1 Tm
+11.8 TL
+/F2 9.7 Tf
+0 0 0 rg
+(SMU \055 Software Engineer \057 0\055to\0551 Product Owner) Tj
+T*
+ET
+Q
+Q
+EMC
+/P <<
+/MCID 1
+>> BDC
+q
+1 0 0 1 40.56 736.34 cm
+q
+0.333333 0.333333 0.333333 rg
+BT
+1 0 0 1 0 1.9 Tm
+/F1 8.6 Tf
+10.5 TL
+(Feb 2024 \055 Jan 2026 \174 Los Angeles\054 CA) Tj
+T*
+ET
+Q
+Q
+EMC
+/P <<
+/MCID 2
+>> BDC
+q
+1 0 0 1 40.56 712.34 cm
+q
+0.023529 0.270588 0.678431 RG
+n
+199.0732 1.025 m
+254.458 1.025 l
+S
+BT
+1 0 0 1 0 13.8 Tm
+11.6 TL
+/F1 9.4 Tf
+0 0 0 rg
+(Data\055platform role that expanded into a founder\055sponsored 0\055to\0551 product initiative\072 after shipping core commerce\057ERP) Tj
+T*
+(infrastructure\054 independently built and operated ) Tj
+0.023529 0.270588 0.678431 rg
+(GetDateLove) Tj
+0 0 0 rg
+( as a production consumer product\056) Tj
+T*
+ET
+Q
+Q
+EMC
+/LBody <<
+/MCID 3
+>> BDC
+q
+1 0 0 1 40.56 686.94 cm
+q
+0 0 0 rg
+BT
+1 0 0 1 10 13.8 Tm
+/F1 9.4 Tf
+11.6 TL
+-7 0 Td
+(\055 Built Python AsyncIO pipelines connecting Amazon Seller Central \053 Shopify with ERP\073 processed 500k\053 daily orders and cut) Tj
+T*
+7 0 Td
+(sync latency from 15 min to 30 s\056) Tj
+T*
+ET
+Q
+Q
+EMC
+/LBody <<
+/MCID 4
+>> BDC
+q
+1 0 0 1 40.56 662.24 cm
+q
+0 0 0 rg
+BT
+1 0 0 1 10 13.8 Tm
+/F1 9.4 Tf
+11.6 TL
+-7 0 Td
+(\055 Shipped Redis\057Kafka inventory sync\054 FastAPI\057PostgreSQL tariff services\054 Elasticsearch HS Code lookup\054 Spark migration) Tj
+T*
+7 0 Td
+(jobs\054 Docker\057Jenkins CI\057CD on AWS\054 and Sentry loops\056) Tj
+T*
+ET
+Q
+Q
+EMC
+/LBody <<
+/MCID 5
+>> BDC
+q
+1 0 0 1 40.56 637.54 cm
+q
+0 0 0 rg
+BT
+1 0 0 1 10 13.8 Tm
+/F1 9.4 Tf
+11.6 TL
+-7 0 Td
+(\055 Built GetDateLove end to end with FastAPI\054 Redis asyncio\054 PostgreSQL\054 WebSocket messaging\054 S3 voice notes\054 PayPal) Tj
+T*
+7 0 Td
+(checkout\054 AWS\057Nginx\057CloudFront\054 CI\057Playwright release gates\054 and GDPR\057privacy controls\056) Tj
+T*
+ET
+Q
+Q
+EMC
+/LBody <<
+/MCID 6
+>> BDC
+q
+1 0 0 1 40.56 612.84 cm
+q
+0 0 0 rg
+BT
+1 0 0 1 10 13.8 Tm
+/F1 9.4 Tf
+11.6 TL
+-7 0 Td
+-0.086688 Tw
+(\055 Reduced operational and frontend entropy by replacing blocking Redis patterns\054 consolidating 11 Redis clients\054 batching SQL\054) Tj
+T*
+0 Tw
+7 0 Td
+(moving message storage to redis\056asyncio\054 and extracting stable frontend state owners\056) Tj
+T*
+ET
+Q
+Q
+EMC
+/H3 <<
+/MCID 7
+>> BDC
+q
+1 0 0 1 40.56 597.04 cm
+q
+BT
+1 0 0 1 0 2.1 Tm
+11.8 TL
+/F2 9.7 Tf
+0 0 0 rg
+(Quant Trading Systems Venture \055 Co\055Engineer) Tj
+T*
+ET
+Q
+Q
+EMC
+/P <<
+/MCID 8
+>> BDC
+q
+1 0 0 1 40.56 586.54 cm
+q
+0.333333 0.333333 0.333333 rg
+BT
+1 0 0 1 0 1.9 Tm
+/F1 8.6 Tf
+10.5 TL
+(Apr 2026 \055 Present) Tj
+T*
+ET
+Q
+Q
+EMC
+/P <<
+/MCID 9
+>> BDC
+q
+1 0 0 1 40.56 562.54 cm
+q
+0 0 0 rg
+BT
+1 0 0 1 0 13.8 Tm
+/F1 9.4 Tf
+11.6 TL
+(Private live\055trading systems venture on AWS EC2\072 scanner to factor filter to IBKR bracket orders to S3 Parquet warehouse to) Tj
+T*
+(researcher dashboard\056) Tj
+T*
+ET
+Q
+Q
+EMC
+/LBody <<
+/MCID 10
+>> BDC
+q
+1 0 0 1 40.56 537.14 cm
+q
+0 0 0 rg
+BT
+1 0 0 1 10 13.8 Tm
+/F1 9.4 Tf
+11.6 TL
+-7 0 Td
+(\055 Improved live execution safety with IBKR ibapi heartbeat\057reconnect\054 account\055update ordering\054 broker\053DB startup reconcile\054) Tj
+T*
+7 0 Td
+(bracket\057OCO error fixes\054 and deterministic flatten paths\056) Tj
+T*
+ET
+Q
+Q
+EMC
+/LBody <<
+/MCID 11
+>> BDC
+q
+1 0 0 1 40.56 512.44 cm
+q
+0 0 0 rg
+BT
+1 0 0 1 10 13.8 Tm
+/F1 9.4 Tf
+11.6 TL
+-7 0 Td
+(\055 Reduced scanner\057data latency with event\055based scanner waits\054 vectorized reject reasons\054 warm\055cache fast paths\054 SQLite) Tj
+T*
+7 0 Td
+(parse optimization\054 lazy\055load startup paths\054 and reused timezone\057schedule parsing\056) Tj
+T*
+ET
+Q
+Q
+EMC
+/LBody <<
+/MCID 12
+>> BDC
+q
+1 0 0 1 40.56 487.74 cm
+q
+0.023529 0.270588 0.678431 RG
+n
+124.1848 12.625 m
+185.313 12.625 l
+S
+BT
+1 0 0 1 10 13.8 Tm
+-7 0 Td
+11.6 TL
+/F1 9.4 Tf
+0 0 0 rg
+(\055 Built research\057ops visibility\072 ) Tj
+0.023529 0.270588 0.678431 rg
+(live dashboard) Tj
+0 0 0 rg
+(\054 Pipeline Health\054 Trade Cards\054 Factor\057Calibration\057Drift views\054 Signal Funnel\054 error) Tj
+T*
+7 0 Td
+(timeline\054 gzip uploads\054 daily S3 Parquet archive\054 blocking mypy\054 AST invariant checks\054 and systemd\057cron recovery assets\056) Tj
+T*
+ET
+Q
+Q
+EMC
+/H3 <<
+/MCID 13
+>> BDC
+q
+1 0 0 1 40.56 471.94 cm
+q
+BT
+1 0 0 1 0 2.1 Tm
+11.8 TL
+/F2 9.7 Tf
+0 0 0 rg
+(Huawei Technologies \055 Software Engineer\054 SPU Development) Tj
+T*
+ET
+Q
+Q
+EMC
+/P <<
+/MCID 14
+>> BDC
+q
+1 0 0 1 40.56 461.44 cm
+q
+0.333333 0.333333 0.333333 rg
+BT
+1 0 0 1 0 1.9 Tm
+/F1 8.6 Tf
+10.5 TL
+(Apr 2023 \055 Feb 2024 \174 Beijing) Tj
+T*
+ET
+Q
+Q
+EMC
+/LBody <<
+/MCID 15
+>> BDC
+q
+1 0 0 1 40.56 437.44 cm
+q
+0 0 0 rg
+BT
+1 0 0 1 10 13.8 Tm
+/F1 9.4 Tf
+11.6 TL
+-7 0 Td
+(\055 Built C\057C\053\053 SPU\057router features for NE40E traffic statistics and NetStream monitoring\073 fixed 50\053 packet\055processing\054 flow\055log\054) Tj
+T*
+7 0 Td
+(URL parsing\054 HTTP header\054 and SmartNet resource issues\056) Tj
+T*
+ET
+Q
+Q
+EMC
+/H2 <<
+/MCID 16
+>> BDC
+q
+1 0 0 1 40.56 419.04 cm
+q
+0.066667 0.066667 0.066667 rg
+BT
+1 0 0 1 0 2 Tm
+/F2 10.4 Tf
+12.4 TL
+(EDUCATION) Tj
+T*
+ET
+Q
+Q
+EMC
+/Artifact BMC
+q
+1 0 0 1 40.56 417.54 cm
+q
+0.5 w
+1 J
+0.6 0.6 0.6 RG
+n
+0 0 m
+530.88 0 l
+S
+Q
+Q
+EMC
+/H3 <<
+/MCID 17
+>> BDC
+q
+1 0 0 1 40.56 401.74 cm
+q
+BT
+1 0 0 1 0 2.1 Tm
+11.8 TL
+/F2 9.7 Tf
+0 0 0 rg
+(Boston University \055 M\056S\056 Mathematical Finance \046 FinTech \174 GPA 3\05678) Tj
+T*
+ET
+Q
+Q
+EMC
+/P <<
+/MCID 18
+>> BDC
+q
+1 0 0 1 40.56 391.24 cm
+q
+0.333333 0.333333 0.333333 rg
+BT
+1 0 0 1 0 1.9 Tm
+/F1 8.6 Tf
+10.5 TL
+(Computational Methods\054 Stochastic Calculus\054 Algorithmic Trading) Tj
+T*
+ET
+Q
+Q
+EMC
+/H3 <<
+/MCID 19
+>> BDC
+q
+1 0 0 1 40.56 375.44 cm
+q
+BT
+1 0 0 1 0 2.1 Tm
+11.8 TL
+/F2 9.7 Tf
+0 0 0 rg
+(The Ohio State University \055 B\056A\056 Physics \174 GPA 3\05684 \174 Dean\047s List) Tj
+T*
+ET
+Q
+Q
+EMC
+
+endstream
+endobj
+108 0 obj
+<<
+/Type /StructElem
+/S /Link
+/P 26 0 R
+/Pg 3 0 R
+/Alt (Email Yupeng Lu at yplmicro\100gmail\056com)
+/K [ <<
+/Type /OBJR
+/Obj 4 0 R
+/Pg 3 0 R
+>> ]
+>>
+endobj
+109 0 obj
+<<
+/Type /StructElem
+/S /Link
+/P 26 0 R
+/Pg 3 0 R
+/Alt (Yupeng Lu on LinkedIn)
+/K [ <<
+/Type /OBJR
+/Obj 5 0 R
+/Pg 3 0 R
+>> ]
+>>
+endobj
+110 0 obj
+<<
+/Type /StructElem
+/S /Link
+/P 26 0 R
+/Pg 3 0 R
+/Alt (Yupeng Lu\047s GitHub profile)
+/K [ <<
+/Type /OBJR
+/Obj 6 0 R
+/Pg 3 0 R
+>> ]
+>>
+endobj
+111 0 obj
+<<
+/Type /StructElem
+/S /Link
+/P 26 0 R
+/Pg 3 0 R
+/Alt (Cookiy AI on GitHub)
+/K [ <<
+/Type /OBJR
+/Obj 7 0 R
+/Pg 3 0 R
+>> ]
+>>
+endobj
+112 0 obj
+<<
+/Type /StructElem
+/S /Link
+/P 35 0 R
+/Pg 3 0 R
+/Alt (Public user\055research skill on GitHub)
+/K [ <<
+/Type /OBJR
+/Obj 8 0 R
+/Pg 3 0 R
+>> ]
+>>
+endobj
+113 0 obj
+<<
+/Type /StructElem
+/S /Link
+/P 37 0 R
+/Pg 3 0 R
+/Alt (Cookiy CLI source on GitHub)
+/K [ <<
+/Type /OBJR
+/Obj 9 0 R
+/Pg 3 0 R
+>> ]
+>>
+endobj
+114 0 obj
+<<
+/Type /StructElem
+/S /Link
+/P 37 0 R
+/Pg 3 0 R
+/Alt (cookiy\055cli package on npm)
+/K [ <<
+/Type /OBJR
+/Obj 10 0 R
+/Pg 3 0 R
+>> ]
+>>
+endobj
+115 0 obj
+<<
+/Type /StructElem
+/S /Link
+/P 39 0 R
+/Pg 3 0 R
+/Alt (cookiy\055mcp package on npm)
+/K [ <<
+/Type /OBJR
+/Obj 11 0 R
+/Pg 3 0 R
+>> ]
+>>
+endobj
+116 0 obj
+<<
+/Type /StructElem
+/S /Link
+/P 39 0 R
+/Pg 3 0 R
+/Alt (Cookiy AI developer portal)
+/K [ <<
+/Type /OBJR
+/Obj 12 0 R
+/Pg 3 0 R
+>> ]
+>>
+endobj
+117 0 obj
+<<
+/Type /StructElem
+/S /Link
+/P 73 0 R
+/Pg 17 0 R
+/Alt (GetDateLove website)
+/K [ <<
+/Type /OBJR
+/Obj 18 0 R
+/Pg 17 0 R
+>> ]
+>>
+endobj
+118 0 obj
+<<
+/Type /StructElem
+/S /Link
+/P 93 0 R
+/Pg 17 0 R
+/Alt (Quant trading research dashboard)
+/K [ <<
+/Type /OBJR
+/Obj 19 0 R
+/Pg 17 0 R
+>> ]
+>>
+endobj
+119 0 obj
+<<
+/Nums [ 0 [ 24 0 R 25 0 R 26 0 R 27 0 R 29 0 R 30 0 R 32 0 R 35 0 R 37 0 R 39 0 R 41 0 R 43 0 R 44 0 R 45 0 R 48 0 R 50 0 R 52 0 R 54 0 R 56 0 R 58 0 R 60 0 R 62 0 R 64 0 R 66 0 R 68 0 R ] 1 [ 71 0 R 72 0 R 73 0 R 76 0 R 78 0 R 80 0 R 82 0 R 84 0 R 85 0 R 86 0 R 89 0 R 91 0 R 93 0 R 95 0 R 96 0 R 99 0 R 101 0 R 103 0 R 104 0 R 106 0 R ] 2 108 0 R 3 109 0 R 4 110 0 R 5 111 0 R 6 112 0 R 7 113 0 R 8 114 0 R 9 115 0 R 10 116 0 R 11 117 0 R 12 118 0 R ]
+>>
+endobj
+120 0 obj
+<<
+/Type /Metadata
+/Subtype /XML
+/Length 788
+>>
+stream
+<?xpacket begin="Ôªø" id="W5M0MpCehiHzreSzNTczkc9d"?>
+<x:xmpmeta xmlns:x="adobe:ns:meta/">
+ <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <rdf:Description rdf:about=""
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:xmp="http://ns.adobe.com/xap/1.0/">
+   <dc:title><rdf:Alt><rdf:li xml:lang="x-default">Yupeng Lu - AI Agent Engineer</rdf:li></rdf:Alt></dc:title>
+   <dc:creator><rdf:Seq><rdf:li>Yupeng Lu</rdf:li></rdf:Seq></dc:creator>
+   <dc:language><rdf:Bag><rdf:li>en-US</rdf:li></rdf:Bag></dc:language>
+   <dc:description><rdf:Alt><rdf:li xml:lang="x-default">Resume - AI Agent Engineer</rdf:li></rdf:Alt></dc:description>
+   <xmp:ModifyDate>2026-07-19T17:35:47+00:00</xmp:ModifyDate>
+  </rdf:Description>
+ </rdf:RDF>
+</x:xmpmeta>
+<?xpacket end="w"?>
+endstream
+endobj
+121 0 obj
+<<
+/Length 3001
+>>
+stream
+/CIDInit /ProcSet findresource begin
+12 dict begin
+begincmap
+/CIDSystemInfo << /Registry (Adobe) /Ordering (UCS) /Supplement 0 >> def
+/CMapName /Adobe-Identity-UCS def
+/CMapType 2 def
+1 begincodespacerange
+<00> <FF>
+endcodespacerange
+100 beginbfchar
+<20> <0020>
+<21> <0021>
+<22> <0022>
+<23> <0023>
+<24> <0024>
+<25> <0025>
+<26> <0026>
+<27> <0027>
+<28> <0028>
+<29> <0029>
+<2A> <002A>
+<2B> <002B>
+<2C> <002C>
+<2D> <002D>
+<2E> <002E>
+<2F> <002F>
+<30> <0030>
+<31> <0031>
+<32> <0032>
+<33> <0033>
+<34> <0034>
+<35> <0035>
+<36> <0036>
+<37> <0037>
+<38> <0038>
+<39> <0039>
+<3A> <003A>
+<3B> <003B>
+<3C> <003C>
+<3D> <003D>
+<3E> <003E>
+<3F> <003F>
+<40> <0040>
+<41> <0041>
+<42> <0042>
+<43> <0043>
+<44> <0044>
+<45> <0045>
+<46> <0046>
+<47> <0047>
+<48> <0048>
+<49> <0049>
+<4A> <004A>
+<4B> <004B>
+<4C> <004C>
+<4D> <004D>
+<4E> <004E>
+<4F> <004F>
+<50> <0050>
+<51> <0051>
+<52> <0052>
+<53> <0053>
+<54> <0054>
+<55> <0055>
+<56> <0056>
+<57> <0057>
+<58> <0058>
+<59> <0059>
+<5A> <005A>
+<5B> <005B>
+<5C> <005C>
+<5D> <005D>
+<5E> <005E>
+<5F> <005F>
+<60> <0060>
+<61> <0061>
+<62> <0062>
+<63> <0063>
+<64> <0064>
+<65> <0065>
+<66> <0066>
+<67> <0067>
+<68> <0068>
+<69> <0069>
+<6A> <006A>
+<6B> <006B>
+<6C> <006C>
+<6D> <006D>
+<6E> <006E>
+<6F> <006F>
+<70> <0070>
+<71> <0071>
+<72> <0072>
+<73> <0073>
+<74> <0074>
+<75> <0075>
+<76> <0076>
+<77> <0077>
+<78> <0078>
+<79> <0079>
+<7A> <007A>
+<7B> <007B>
+<7C> <007C>
+<7D> <007D>
+<7E> <007E>
+<7F> <007F>
+<80> <20AC>
+<82> <201A>
+<83> <0192>
+<84> <201E>
+endbfchar
+100 beginbfchar
+<85> <2026>
+<86> <2020>
+<87> <2021>
+<88> <02C6>
+<89> <2030>
+<8A> <0160>
+<8B> <2039>
+<8C> <0152>
+<8E> <017D>
+<91> <2018>
+<92> <2019>
+<93> <201C>
+<94> <201D>
+<95> <2022>
+<96> <2013>
+<97> <2014>
+<98> <02DC>
+<99> <2122>
+<9A> <0161>
+<9B> <203A>
+<9C> <0153>
+<9E> <017E>
+<9F> <0178>
+<A0> <00A0>
+<A1> <00A1>
+<A2> <00A2>
+<A3> <00A3>
+<A4> <00A4>
+<A5> <00A5>
+<A6> <00A6>
+<A7> <00A7>
+<A8> <00A8>
+<A9> <00A9>
+<AA> <00AA>
+<AB> <00AB>
+<AC> <00AC>
+<AD> <00AD>
+<AE> <00AE>
+<AF> <00AF>
+<B0> <00B0>
+<B1> <00B1>
+<B2> <00B2>
+<B3> <00B3>
+<B4> <00B4>
+<B5> <00B5>
+<B6> <00B6>
+<B7> <00B7>
+<B8> <00B8>
+<B9> <00B9>
+<BA> <00BA>
+<BB> <00BB>
+<BC> <00BC>
+<BD> <00BD>
+<BE> <00BE>
+<BF> <00BF>
+<C0> <00C0>
+<C1> <00C1>
+<C2> <00C2>
+<C3> <00C3>
+<C4> <00C4>
+<C5> <00C5>
+<C6> <00C6>
+<C7> <00C7>
+<C8> <00C8>
+<C9> <00C9>
+<CA> <00CA>
+<CB> <00CB>
+<CC> <00CC>
+<CD> <00CD>
+<CE> <00CE>
+<CF> <00CF>
+<D0> <00D0>
+<D1> <00D1>
+<D2> <00D2>
+<D3> <00D3>
+<D4> <00D4>
+<D5> <00D5>
+<D6> <00D6>
+<D7> <00D7>
+<D8> <00D8>
+<D9> <00D9>
+<DA> <00DA>
+<DB> <00DB>
+<DC> <00DC>
+<DD> <00DD>
+<DE> <00DE>
+<DF> <00DF>
+<E0> <00E0>
+<E1> <00E1>
+<E2> <00E2>
+<E3> <00E3>
+<E4> <00E4>
+<E5> <00E5>
+<E6> <00E6>
+<E7> <00E7>
+<E8> <00E8>
+<E9> <00E9>
+<EA> <00EA>
+<EB> <00EB>
+<EC> <00EC>
+endbfchar
+19 beginbfchar
+<ED> <00ED>
+<EE> <00EE>
+<EF> <00EF>
+<F0> <00F0>
+<F1> <00F1>
+<F2> <00F2>
+<F3> <00F3>
+<F4> <00F4>
+<F5> <00F5>
+<F6> <00F6>
+<F7> <00F7>
+<F8> <00F8>
+<F9> <00F9>
+<FA> <00FA>
+<FB> <00FB>
+<FC> <00FC>
+<FD> <00FD>
+<FE> <00FE>
+<FF> <00FF>
+endbfchar
+endcmap
+CMapName currentdict /CMap defineresource pop
+end
+end
+
+endstream
+endobj
+122 0 obj
+<<
+/D [ 3 0 R /Fit ]
+/S /GoTo
+>>
+endobj
+123 0 obj
+<<
+/A 122 0 R
+/Title (Summary)
+/Parent 124 0 R
+/Count 0
+/Next 126 0 R
+>>
+endobj
+124 0 obj
+<<
+/First 123 0 R
+/Count 8
+/Last 138 0 R
+>>
+endobj
+125 0 obj
+<<
+/D [ 3 0 R /Fit ]
+/S /GoTo
+>>
+endobj
+126 0 obj
+<<
+/A 125 0 R
+/Title (Public Proof)
+/Prev 123 0 R
+/Parent 124 0 R
+/Count 0
+/Next 128 0 R
+>>
+endobj
+127 0 obj
+<<
+/D [ 3 0 R /Fit ]
+/S /GoTo
+>>
+endobj
+128 0 obj
+<<
+/A 127 0 R
+/Title (Experience)
+/Prev 126 0 R
+/Parent 124 0 R
+/Count 4
+/First 130 0 R
+/Last 136 0 R
+/Next 138 0 R
+>>
+endobj
+129 0 obj
+<<
+/D [ 3 0 R /Fit ]
+/S /GoTo
+>>
+endobj
+130 0 obj
+<<
+/A 129 0 R
+/Title (Cookiy AI)
+/Parent 128 0 R
+/Count 0
+/Next 132 0 R
+>>
+endobj
+131 0 obj
+<<
+/D [ 17 0 R /Fit ]
+/S /GoTo
+>>
+endobj
+132 0 obj
+<<
+/A 131 0 R
+/Title (SMU)
+/Prev 130 0 R
+/Parent 128 0 R
+/Count 0
+/Next 134 0 R
+>>
+endobj
+133 0 obj
+<<
+/D [ 17 0 R /Fit ]
+/S /GoTo
+>>
+endobj
+134 0 obj
+<<
+/A 133 0 R
+/Title (Quant Trading Systems Venture)
+/Prev 132 0 R
+/Parent 128 0 R
+/Count 0
+/Next 136 0 R
+>>
+endobj
+135 0 obj
+<<
+/D [ 17 0 R /Fit ]
+/S /GoTo
+>>
+endobj
+136 0 obj
+<<
+/A 135 0 R
+/Title (Huawei Technologies)
+/Prev 134 0 R
+/Parent 128 0 R
+/Count 0
+>>
+endobj
+137 0 obj
+<<
+/D [ 17 0 R /Fit ]
+/S /GoTo
+>>
+endobj
+138 0 obj
+<<
+/A 137 0 R
+/Title (Education)
+/Prev 128 0 R
+/Parent 124 0 R
+/Count 0
+>>
+endobj
 xref
-0 22
+0 139
 0000000000 65535 f 
 0000000015 00000 n 
-0000000764 00000 n 
-0000000830 00000 n 
-0000000879 00000 n 
-0000001140 00000 n 
-0000001322 00000 n 
-0000001547 00000 n 
-0000001737 00000 n 
-0000001931 00000 n 
-0000002153 00000 n 
-0000002364 00000 n 
-0000002576 00000 n 
-0000002788 00000 n 
-0000002992 00000 n 
-0000011747 00000 n 
-0000011791 00000 n 
-0000011899 00000 n 
-0000012012 00000 n 
-0000012230 00000 n 
-0000012413 00000 n 
-0000012629 00000 n 
+0000000216 00000 n 
+0000000282 00000 n 
+0000000568 00000 n 
+0000000822 00000 n 
+0000001097 00000 n 
+0000001345 00000 n 
+0000001587 00000 n 
+0000001877 00000 n 
+0000002143 00000 n 
+0000002412 00000 n 
+0000002681 00000 n 
+0000002941 00000 n 
+0000011696 00000 n 
+0000011740 00000 n 
+0000011867 00000 n 
+0000011999 00000 n 
+0000012244 00000 n 
+0000012476 00000 n 
+0000012754 00000 n 
+0000015204 00000 n 
+0000015969 00000 n 
+0000016069 00000 n 
+0000016196 00000 n 
+0000016305 00000 n 
+0000016413 00000 n 
+0000016553 00000 n 
+0000016661 00000 n 
+0000016741 00000 n 
+0000016850 00000 n 
+0000016958 00000 n 
+0000017038 00000 n 
+0000017147 00000 n 
+0000017252 00000 n 
+0000017323 00000 n 
+0000017443 00000 n 
+0000017514 00000 n 
+0000017642 00000 n 
+0000017713 00000 n 
+0000017841 00000 n 
+0000017942 00000 n 
+0000018052 00000 n 
+0000018146 00000 n 
+0000018256 00000 n 
+0000018365 00000 n 
+0000018474 00000 n 
+0000018635 00000 n 
+0000018706 00000 n 
+0000018819 00000 n 
+0000018890 00000 n 
+0000019003 00000 n 
+0000019074 00000 n 
+0000019187 00000 n 
+0000019258 00000 n 
+0000019371 00000 n 
+0000019442 00000 n 
+0000019555 00000 n 
+0000019626 00000 n 
+0000019739 00000 n 
+0000019810 00000 n 
+0000019923 00000 n 
+0000019994 00000 n 
+0000020107 00000 n 
+0000020178 00000 n 
+0000020291 00000 n 
+0000020362 00000 n 
+0000020475 00000 n 
+0000020546 00000 n 
+0000020659 00000 n 
+0000031070 00000 n 
+0000031164 00000 n 
+0000031275 00000 n 
+0000031385 00000 n 
+0000031503 00000 n 
+0000031615 00000 n 
+0000031686 00000 n 
+0000031800 00000 n 
+0000031871 00000 n 
+0000031985 00000 n 
+0000032056 00000 n 
+0000032170 00000 n 
+0000032241 00000 n 
+0000032355 00000 n 
+0000032449 00000 n 
+0000032560 00000 n 
+0000032670 00000 n 
+0000032780 00000 n 
+0000032885 00000 n 
+0000032956 00000 n 
+0000033071 00000 n 
+0000033142 00000 n 
+0000033257 00000 n 
+0000033328 00000 n 
+0000033451 00000 n 
+0000033538 00000 n 
+0000033650 00000 n 
+0000033761 00000 n 
+0000033852 00000 n 
+0000033923 00000 n 
+0000034038 00000 n 
+0000034129 00000 n 
+0000034243 00000 n 
+0000034327 00000 n 
+0000034441 00000 n 
+0000034554 00000 n 
+0000034630 00000 n 
+0000034744 00000 n 
+0000040657 00000 n 
+0000040824 00000 n 
+0000040969 00000 n 
+0000041122 00000 n 
+0000041265 00000 n 
+0000041428 00000 n 
+0000041579 00000 n 
+0000041732 00000 n 
+0000041885 00000 n 
+0000042036 00000 n 
+0000042182 00000 n 
+0000042341 00000 n 
+0000042818 00000 n 
+0000043689 00000 n 
+0000046744 00000 n 
+0000046794 00000 n 
+0000046884 00000 n 
+0000046945 00000 n 
+0000046995 00000 n 
+0000047104 00000 n 
+0000047154 00000 n 
+0000047290 00000 n 
+0000047340 00000 n 
+0000047432 00000 n 
+0000047483 00000 n 
+0000047583 00000 n 
+0000047634 00000 n 
+0000047760 00000 n 
+0000047811 00000 n 
+0000047913 00000 n 
+0000047964 00000 n 
 trailer
 <<
-/Size 22
-/Root 3 0 R
-/Info 1 0 R
+/Size 139
+/Root 1 0 R
+/Info 21 0 R
 >>
 startxref
-15079
+48056
 %%EOF
