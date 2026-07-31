@@ -59,8 +59,57 @@ function assertAccessibleResume(buffer, name) {
   );
 }
 
-assert.match(readme, /\]\(social-preview\.png\)/, 'README must embed the current social preview');
+assert.match(readme, /^# Yupeng Lu \/ BRICKERP$/m, 'README must lead with the BrickerP identity');
+assert.match(readme, /`LOOP \/ LEDGER`/, 'README must name the Loop / Ledger system');
+assert.match(readme, /\*\*Strange loops\. Open ledgers\.\*\*/, 'README must expose the repeatable creator hook');
+assert.match(
+  readme,
+  /\[\*\*OPEN A LINE — EMAIL YUPENG\*\*\]\(mailto:yplmicro@gmail\.com\)/,
+  'README must expose one explicit email collaboration action',
+);
+assert.match(
+  readme,
+  /## \[01 \/ LOOP — Endless Second Ring ↗\]\(https:\/\/brickerp\.github\.io\/\)/,
+  'README must expose the Loop 01 chapter',
+);
+assert.match(
+  readme,
+  /## \[02 \/ LEDGER — AI Usage Chronicle ↗\]\(https:\/\/brickerp\.github\.io\/ai-usage-report\/\)/,
+  'README must expose the Ledger 02 chapter',
+);
+assert.equal(
+  countMatches(readme, /<img\b[^>]*\bwidth="100%"/g),
+  2,
+  'README must render exactly two full-width artifact cards',
+);
+assert.match(
+  readme,
+  /profile-loop-card\.svg"[^>]*alt="Open LOOP 01 — Endless Second Ring, a 48-second generative Beijing night drive"/,
+  'README must give Loop 01 a qualitative linked-image alternative',
+);
+assert.match(
+  readme,
+  /ai-usage-card-light\.svg"[^>]*alt="Open LEDGER 02 — AI Usage Chronicle, a bounded all-time AI-tool usage timeline with cache disclosure"/,
+  'README must give Ledger 02 a qualitative linked-image alternative',
+);
+assert.match(
+  readme,
+  /<source media="\(prefers-color-scheme: dark\)" srcset="https:\/\/brickerp\.github\.io\/ai-usage-report\/ai-usage-card-dark\.svg">/,
+  'README must preserve the fixed dark Ledger card',
+);
+assert.match(
+  readme,
+  /<source media="\(prefers-color-scheme: light\)" srcset="https:\/\/brickerp\.github\.io\/ai-usage-report\/ai-usage-card-light\.svg">/,
+  'README must preserve the fixed light Ledger card',
+);
+assert.doesNotMatch(readme, /\]\(social-preview\.png\)/, 'README must not repeat the Loop artwork as a poster');
 assert.doesNotMatch(readme, /endless-second-ring-preview\.png/, 'README must not reference the stale preview');
+assert.doesNotMatch(readme, /\bwidth="49%"/, 'README must not restore the unreadable two-up card layout');
+assert.doesNotMatch(
+  readme,
+  /\b\d+(?:\.\d+)?[BMT]\s+recorded tokens\b|\b\d+(?:\.\d+)?%\s+of (?:recorded )?traffic\b/i,
+  'README prose must not hard-code dynamic Ledger totals or cache share',
+);
 
 const preview = await readFile(path.join(root, 'social-preview.png'));
 assert.equal(preview.subarray(1, 4).toString('ascii'), 'PNG', 'social preview must be a PNG');
@@ -90,7 +139,12 @@ for (const staleName of ['Resume_YupengLu.docx', '卢昱鹏简历.pdf']) {
 
 for (const match of readme.matchAll(/\]\(([^)]+)\)/g)) {
   const target = match[1];
-  if (!/^https?:\/\//.test(target)) await access(path.join(root, target));
+  if (/^https?:\/\//.test(target)) continue;
+  if (/^mailto:/.test(target)) {
+    assert.match(target, /^mailto:[^@\s]+@[^@\s]+\.[^@\s]+$/, 'README contains an invalid email link');
+    continue;
+  }
+  await access(path.join(root, target));
 }
 
 assert.equal((await readFile(path.join(root, '.node-version'), 'utf8')).trim(), '22.23.1', 'Node version must stay pinned');
