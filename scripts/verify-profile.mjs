@@ -103,6 +103,13 @@ function textRecords(svg) {
   }));
 }
 
+function roleValues(svg) {
+  return [...svg.matchAll(/(?:^|[\t\n\r ])role\s*=\s*(["'])([^"']+)\1/g)].map((match) => match[2]);
+}
+
+assert.deepEqual(roleValues('<svg role="img"><g data-role="blue-tape"/></svg>'), ['img'], 'data-role must not be counted as role');
+assert.deepEqual(roleValues('<svg role="img"><g role="button"/></svg>'), ['img', 'button'], 'true role attributes must be counted');
+
 function countWords(value) {
   return value.match(/[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*/g)?.length ?? 0;
 }
@@ -179,7 +186,7 @@ for (const asset of assets) {
     /\brole\s*=\s*["'](?:application|button|checkbox|combobox|grid|gridcell|link|listbox|menu|menuitem|option|radio|scrollbar|searchbox|slider|spinbutton|switch|tab|textbox|tree|treeitem)\b/i,
     `${asset.file}: interactive role values are forbidden`,
   );
-  assert.deepEqual([...svg.matchAll(/\brole="([^"]+)"/g)].map((match) => match[1]), ['img'], `${asset.file}: only the root img role is allowed`);
+  assert.deepEqual(roleValues(svg), ['img'], `${asset.file}: only the root img role is allowed`);
   assert.doesNotMatch(svg, /@(?:import|font-face|media)|prefers-color-scheme|animation\s*:|transition\s*:/i, `${asset.file}: remote fonts, theme branches, and motion are forbidden`);
   assert.doesNotMatch(svg.replace('xmlns="http://www.w3.org/2000/svg"', ''), /https?:\/\//i, `${asset.file}: remote resources are forbidden`);
   for (const match of svg.matchAll(/url\(([^)]+)\)/g)) {
