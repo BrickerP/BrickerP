@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="open-title open-desc">
+  <title id="open-title">Open a line</title>
+  <desc id="open-desc">A left-aligned invitation with a single cobalt brush-and-tape block and generous paper space.</desc>
+  <metadata>
+    Human Zine Issue 00. Hand-authored static SVG. Film source: src/rendering/BeijingDriveScene.ts at 7d4b0bf9876fdaa7b303ba40b4075170a73b4a6c. Independent design attempts; no ancestry or sequential replacement claim: 5E8F667 = 5e8f66756afc9b483beb0070524ac4cc4d7f3856; B9EF619 = b9ef61997260c359005aa175a62dcb370c2007e8; 520E83F = 520e83f32ed20efc0beb64982b1db45c7600db9e. Source anchors: buildOlympic and buildSecondRingThreshold. AI Usage rule source: BrickerP/ai-usage-report (/Users/yupeng/Projects/ai-usage-report) at 6bae0fa23492ece45ae49ad57093d4f003883215; external to the film repository.
+  </metadata>
+  <defs>
+    <pattern id="open-grain" width="31" height="31" patternUnits="userSpaceOnUse">
+      <path d="M3 8l6-2M18 5l4 1M10 22l7-1M24 27l3-2" fill="none" stroke="#111111" stroke-width="1" stroke-opacity="0.045"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="360" fill="#F4F0E3"/>
+  <rect width="1200" height="360" fill="url(#open-grain)"/>
+  <g data-role="crop-marks" fill="none" stroke="#111111" stroke-width="3">
+    <path d="M20 28h36M38 10v36M1144 28h36M1162 10v36M20 332h36M38 314v36M1144 332h36M1162 314v36"/>
+  </g>
+  <path data-role="blue-brush-tape" d="M756 39l444-20v169l-78-18-72 10-76-24-67 9-76-20-82 5 25-39-20-32Z" fill="#1457FF"/>
+  <path d="M806 34l276-13-8 36-278 14Z" fill="#1457FF" opacity="0.62"/>
+  <path d="M794 160l96-5 42 17 93-13 78 17 70-4" fill="none" stroke="#F4F0E3" stroke-width="8" stroke-linecap="square" opacity="0.8"/>
+  <path d="M66 263c133-13 269-8 406-14" fill="none" stroke="#FF4B35" stroke-width="10" stroke-linecap="square"/>
+  <rect x="1059" y="250" width="56" height="31" fill="#FFD83D" transform="rotate(-5 1087 266)"/>
+  <path d="M1126 277l45-4 5 34-48 5Z" fill="#63E2B7"/>
+  <text x="62" y="229" fill="#111111" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="144" font-weight="900" letter-spacing="-5" textLength="610" lengthAdjust="spacingAndGlyphs">OPEN A LINE</text>
+</svg>
