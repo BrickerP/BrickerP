@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="ai-usage-title ai-usage-desc">
+  <title id="ai-usage-title">AI Usage — Play Archive</title>
+  <desc id="ai-usage-desc">A full-width cobalt data terrain with isometric archive cubes, signal marks, and an invitation to play the real model history.</desc>
+  <metadata>
+    Human Zine Issue 00. Hand-authored static SVG. Film source: src/rendering/BeijingDriveScene.ts at 7d4b0bf9876fdaa7b303ba40b4075170a73b4a6c. Independent design attempts; no ancestry or sequential replacement claim: 5E8F667 = 5e8f66756afc9b483beb0070524ac4cc4d7f3856; B9EF619 = b9ef61997260c359005aa175a62dcb370c2007e8; 520E83F = 520e83f32ed20efc0beb64982b1db45c7600db9e. Source anchors: buildOlympic and buildSecondRingThreshold. AI Usage rule source: BrickerP/ai-usage-report (/Users/yupeng/Projects/ai-usage-report) at 6bae0fa23492ece45ae49ad57093d4f003883215; external to the film repository.
+  </metadata>
+  <defs>
+    <pattern id="ai-usage-grain" width="31" height="31" patternUnits="userSpaceOnUse">
+      <path d="M3 8l6-2M18 5l4 1M10 22l7-1M24 27l3-2" fill="none" stroke="#111111" stroke-width="1" stroke-opacity="0.045"/>
+    </pattern>
+    <pattern id="ai-usage-grid" width="46" height="46" patternUnits="userSpaceOnUse">
+      <path d="M0 0h46M0 0v46" fill="none" stroke="#F4F0E3" stroke-width="2" stroke-opacity="0.48"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="720" fill="#F4F0E3"/>
+  <rect width="1200" height="720" fill="url(#ai-usage-grain)"/>
+
+  <path data-role="data-terrain" d="M37 61l1120-13 9 97-8 100 10 96-9 98 11 99-9 91-1118 13 8-98-9-104 11-95-10-99 9-99-8-87Z" fill="#1457FF"/>
+  <path d="M37 61l1120-13 9 97-8 100 10 96-9 98 11 99-9 91-1118 13 8-98-9-104 11-95-10-99 9-99-8-87Z" fill="url(#ai-usage-grid)" opacity="0.62"/>
+  <path d="M52 201c168-56 318-59 460-11 149 51 292 51 677-46v128c-267 72-450 87-617 41-154-43-308-36-520 24Z" fill="#63E2B7" opacity="0.75"/>
+  <path d="M44 417c157-67 307-80 447-36 157 50 313 45 665-65" fill="none" stroke="#FFD83D" stroke-width="15" stroke-dasharray="42 25"/>
+  <path d="M51 481c190-72 346-79 507-28 166 52 325 41 595-55" fill="none" stroke="#F4F0E3" stroke-width="8" opacity="0.88"/>
+  <path d="M54 531c189-72 348-77 505-28 170 52 330 42 591-51" fill="none" stroke="#111111" stroke-width="5" opacity="0.82"/>
+
+  <g fill="#FFD83D" stroke="#111111" stroke-width="4">
+    <circle cx="112" cy="145" r="12"/><circle cx="245" cy="120" r="9"/><circle cx="382" cy="159" r="14"/><circle cx="536" cy="110" r="10"/>
+    <circle cx="676" cy="166" r="12"/><circle cx="824" cy="111" r="9"/><circle cx="996" cy="154" r="13"/><circle cx="1103" cy="102" r="8"/>
+  </g>
+  <g fill="none" stroke="#F4F0E3" stroke-width="6" opacity="0.9">
+    <path d="M103 289v-78M202 280v-109M314 293v-75M437 276V168M579 298v-94M718 279v-126M855 301v-92M1000 273v-118M1121 289v-75"/>
+  </g>
+
+  <g data-role="archive-cubes" stroke="#111111" stroke-width="4" stroke-linejoin="round">
+    <path d="M119 358l126-72 128 72-127 76Z" fill="#63E2B7"/>
+    <path d="M119 358l127 76v77l-127-76Z" fill="#111111" opacity="0.78"/>
+    <path d="M373 358l-127 76v77l127-76Z" fill="#FF4B35" opacity="0.86"/>
+    <path d="M163 357l82-47 83 47-83 49Z" fill="#FFD83D"/>
+
+    <path d="M501 312l107-62 108 62-108 64Z" fill="#1457FF" stroke="#F4F0E3" stroke-width="5"/>
+    <path d="M501 312l107 64v66l-107-64Z" fill="#111111" opacity="0.82"/>
+    <path d="M716 312l-108 64v66l108-64Z" fill="#63E2B7" opacity="0.9"/>
+    <path d="M540 312l68-40 69 40-69 41Z" fill="#F4F0E3"/>
+
+    <path d="M852 363l143-82 144 82-144 85Z" fill="#FF4B35"/>
+    <path d="M852 363l143 85v83l-143-84Z" fill="#FFD83D" opacity="0.86"/>
+    <path d="M1139 363l-144 85v83l144-84Z" fill="#111111" opacity="0.82"/>
+    <path d="M898 361l97-56 98 56-98 59Z" fill="#63E2B7"/>
+
+    <path d="M281 264l25-14 26 14-26 15Z" fill="#F4F0E3"/><path d="M281 264l25 15v39l-25-15Z" fill="#1457FF"/><path d="M332 264l-26 15v39l26-15Z" fill="#FF4B35"/>
+    <path d="M763 244l24-14 24 14-24 15Z" fill="#FFD83D"/><path d="M763 244l24 15v58l-24-15Z" fill="#1457FF"/><path d="M811 244l-24 15v58l24-15Z" fill="#FF4B35"/>
+    <path d="M1038 250l22-13 22 13-22 14Z" fill="#F4F0E3"/><path d="M1038 250l22 14v47l-22-14Z" fill="#1457FF"/><path d="M1082 250l-22 14v47l22-14Z" fill="#63E2B7"/>
+  </g>
+
+  <text x="70" y="652" fill="#FF4B35" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="122" font-weight="900" letter-spacing="-5" textLength="451" lengthAdjust="spacingAndGlyphs">AI USAGE</text>
+  <text x="72" y="700" fill="#111111" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="60" font-weight="900" letter-spacing="-1" textLength="590" lengthAdjust="spacingAndGlyphs">REAL MODEL HISTORY, MADE PLAYABLE.</text>
+
+  <path d="M826 602l334-7 7 83-336 8Z" fill="#FF4B35"/>
+  <path d="M846 594l96-2 5 18-99 2Z" fill="#FFD83D"/>
+  <text x="861" y="657" fill="#F4F0E3" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="66" font-weight="900" letter-spacing="-2" textLength="273" lengthAdjust="spacingAndGlyphs">PLAY ARCHIVE ↗</text>
+</svg>
