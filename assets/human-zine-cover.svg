@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="cover-title cover-desc">
+  <title id="cover-title">Yupeng Lu — Field Notes, Issue 00</title>
+  <desc id="cover-desc">A tactile editorial cover with an oversized name, blue tape, crop marks, and a misregistered red circle around the issue theme.</desc>
+  <metadata>
+    Human Zine Issue 00. Hand-authored static SVG. Film source: src/rendering/BeijingDriveScene.ts at 7d4b0bf9876fdaa7b303ba40b4075170a73b4a6c. Independent design attempts; no ancestry or sequential replacement claim: 5E8F667 = 5e8f66756afc9b483beb0070524ac4cc4d7f3856; B9EF619 = b9ef61997260c359005aa175a62dcb370c2007e8; 520E83F = 520e83f32ed20efc0beb64982b1db45c7600db9e. Source anchors: buildOlympic and buildSecondRingThreshold. AI Usage rule source: BrickerP/ai-usage-report (/Users/yupeng/Projects/ai-usage-report) at 6bae0fa23492ece45ae49ad57093d4f003883215; external to the film repository.
+  </metadata>
+  <defs>
+    <pattern id="cover-grain" width="31" height="31" patternUnits="userSpaceOnUse">
+      <path d="M2 7l6-2M18 4l4 1M9 21l7-2M24 27l4-1" fill="none" stroke="#111111" stroke-width="1" stroke-opacity="0.045"/>
+    </pattern>
+    <pattern id="cover-halftone" width="14" height="14" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="2.4" fill="#F4F0E3"/>
+      <circle cx="10" cy="10" r="2.4" fill="#F4F0E3"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="#F4F0E3"/>
+  <rect width="1200" height="630" fill="url(#cover-grain)"/>
+  <path data-role="blue-tape" d="M36 0l49 8-5 91 7 79-9 92 8 72-51 5 6-79-8-86 7-88Z" fill="#1457FF" opacity="0.96"/>
+  <path data-role="halftone-wedge" d="M1115 245l85-44v429h-128l16-70-6-75 18-68-8-77Z" fill="#111111"/>
+  <path d="M1139 359l61-31v302h-103l15-61-5-68 18-69Z" fill="url(#cover-halftone)"/>
+  <path d="M1115 245l31-16-6 64 9 57-14 55 8 63-15 53" fill="none" stroke="#F4F0E3" stroke-width="7" stroke-linecap="square"/>
+
+  <g data-role="crop-marks" fill="none" stroke="#111111" stroke-width="3" stroke-linecap="square">
+    <path d="M22 28h38M41 9v38M1077 31h43M1098 10v43"/>
+    <path d="M22 592h38M41 573v38M1077 592h43M1098 573v38"/>
+    <path d="M1044 498h34M1061 481v34" stroke-width="2"/>
+  </g>
+
+  <text x="78" y="259" fill="#111111" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="190" font-weight="900" letter-spacing="-8" textLength="1015" lengthAdjust="spacingAndGlyphs">YUPENG LU</text>
+
+  <text x="82" y="468" fill="#1457FF" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="60" font-weight="900" letter-spacing="-1">
+    <tspan x="82" dy="0">FIELD NOTES ·</tspan>
+    <tspan x="82" dy="66">ISSUE 00</tspan>
+  </text>
+  <path d="M80 554c74-8 151-6 246 3" fill="none" stroke="#111111" stroke-width="8" stroke-linecap="square"/>
+
+  <g data-role="misregistered-circle">
+    <ellipse cx="768" cy="479" rx="252" ry="112" fill="none" stroke="#FF4B35" stroke-width="11" transform="rotate(-5 768 479)"/>
+    <path d="M526 478c19-71 108-116 224-120 127-5 232 38 268 105M1006 513c-46 66-143 91-253 88-104-3-190-34-223-88" fill="none" stroke="#FF4B35" stroke-width="5" stroke-linecap="square"/>
+  </g>
+  <text x="598" y="441" fill="#111111" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="61" font-weight="900" letter-spacing="-1" transform="rotate(-5 598 441)">
+    <tspan x="598" dy="0">THINGS I KEEP</tspan>
+    <tspan x="598" dy="62">RETURNING TO</tspan>
+  </text>
+  <path d="M648 553c95 12 194 6 290-18" fill="none" stroke="#FF4B35" stroke-width="7" stroke-linecap="square"/>
+</svg>

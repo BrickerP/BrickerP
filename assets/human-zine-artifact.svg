@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="artifacts-title artifacts-desc">
+  <title id="artifacts-title">Endless Second Ring and AI Usage</title>
+  <desc id="artifacts-desc">A torn-paper vector crop of a Beijing night drive beside a pixel-isometric archive terrain.</desc>
+  <metadata>
+    Human Zine Issue 00. Hand-authored static SVG. Film source: src/rendering/BeijingDriveScene.ts at 7d4b0bf9876fdaa7b303ba40b4075170a73b4a6c. Independent design attempts; no ancestry or sequential replacement claim: 5E8F667 = 5e8f66756afc9b483beb0070524ac4cc4d7f3856; B9EF619 = b9ef61997260c359005aa175a62dcb370c2007e8; 520E83F = 520e83f32ed20efc0beb64982b1db45c7600db9e. Source anchors: buildOlympic and buildSecondRingThreshold. AI Usage rule source: BrickerP/ai-usage-report (/Users/yupeng/Projects/ai-usage-report) at 6bae0fa23492ece45ae49ad57093d4f003883215; external to the film repository.
+  </metadata>
+  <defs>
+    <pattern id="artifact-grain" width="29" height="29" patternUnits="userSpaceOnUse">
+      <path d="M2 8l7-2M17 5l4 1M9 21l6-1M23 26l4-2" fill="none" stroke="#111111" stroke-width="1" stroke-opacity="0.045"/>
+    </pattern>
+    <clipPath id="film-torn">
+      <path d="M32 37l119-9 105 8 110-7 118 10 107-8 116 12 113-7-6 89 9 95-8 103 10 94-8 105 7 96-94-5-111 9-108-8-121 10-112-8-110 7-117-10-95 7 7-99-9-101 8-97-10-103 8-95Z"/>
+    </clipPath>
+  </defs>
+
+  <rect width="1200" height="720" fill="#F4F0E3"/>
+  <rect width="1200" height="720" fill="url(#artifact-grain)"/>
+
+  <g data-role="film-collage" clip-path="url(#film-torn)">
+    <rect x="24" y="24" width="806" height="672" fill="#111111"/>
+    <path d="M24 24h806v354c-128-57-242-78-363-54-131 26-249 4-443 56Z" fill="#1457FF" opacity="0.42"/>
+    <path d="M24 315c151-22 278-18 383 4 141 29 260-2 423-38v118H24Z" fill="#111111"/>
+
+    <g fill="#111111" stroke="#F4F0E3" stroke-width="3" stroke-opacity="0.45">
+      <path d="M78 279h91v60H78ZM181 250h102v89H181ZM296 288h72v51h-72ZM680 270h112v69H680Z"/>
+      <path d="M503 286v-49h126v49h29v58H475v-58Z"/>
+      <path d="M479 241l53-24 34 8 36-19 64 35-22 8-38-9-42 12-42-11-29 10Z"/>
+      <path d="M513 216l43-26 49 26-20 7-30-9-27 9Z"/>
+    </g>
+    <g fill="#FFD83D" opacity="0.9">
+      <rect x="99" y="296" width="8" height="7"/><rect x="122" y="292" width="8" height="7"/><rect x="146" y="298" width="8" height="7"/>
+      <rect x="208" y="273" width="7" height="7"/><rect x="231" y="283" width="7" height="7"/><rect x="254" y="269" width="7" height="7"/>
+      <rect x="702" y="291" width="7" height="7"/><rect x="726" y="282" width="7" height="7"/><rect x="751" y="295" width="7" height="7"/>
+    </g>
+
+    <path d="M43 692C155 596 218 492 350 413c124-74 248-100 480-68v347Z" fill="#F4F0E3" opacity="0.2"/>
+    <path d="M52 692C167 607 235 512 362 436c128-77 247-102 468-69" fill="none" stroke="#1457FF" stroke-width="34" opacity="0.7"/>
+    <path d="M49 682C159 593 222 493 351 415c124-75 245-101 470-72" fill="none" stroke="#F4F0E3" stroke-width="8" opacity="0.82"/>
+    <path d="M231 692C293 578 356 491 454 437c101-56 207-71 360-60" fill="none" stroke="#FFD83D" stroke-width="10" stroke-dasharray="45 30"/>
+    <path d="M623 690C598 582 615 487 688 424c39-34 80-49 129-49" fill="none" stroke="#F4F0E3" stroke-width="10" stroke-dasharray="52 32"/>
+
+    <g fill="none" stroke="#111111" stroke-width="8">
+      <path d="M170 458v-121M256 423v-112M344 391v-102M432 359v-91M520 337v-82M610 326v-71M697 322v-66"/>
+    </g>
+    <g fill="#FFD83D" stroke="#F4F0E3" stroke-width="4">
+      <circle cx="170" cy="337" r="13"/><circle cx="256" cy="311" r="12"/><circle cx="344" cy="289" r="11"/>
+      <circle cx="432" cy="268" r="10"/><circle cx="520" cy="255" r="9"/><circle cx="610" cy="255" r="8"/><circle cx="697" cy="256" r="7"/>
+    </g>
+
+    <g data-role="rear-car">
+      <path d="M414 552l28-65 57-27h98l61 31 27 61 13 90-37 36H423l-35-36Z" fill="#111111" stroke="#1457FF" stroke-width="10"/>
+      <path d="M461 493l45-18h78l45 22 14 44H445Z" fill="#1457FF" opacity="0.55"/>
+      <path d="M408 560h90v55h-99ZM588 560h93l9 55H588Z" fill="#FF4B35"/>
+      <path d="M424 575h58v22h-63ZM606 575h61l4 22h-65Z" fill="#F4F0E3" opacity="0.8"/>
+      <rect x="520" y="596" width="65" height="24" fill="#FFD83D"/>
+      <path d="M428 646h47M608 646h48" stroke="#F4F0E3" stroke-width="10"/>
+    </g>
+  </g>
+  <path d="M32 37l119-9 105 8 110-7 118 10 107-8 116 12 113-7-6 89 9 95-8 103 10 94-8 105 7 96-94-5-111 9-108-8-121 10-112-8-110 7-117-10-95 7 7-99-9-101 8-97-10-103 8-95Z" fill="none" stroke="#111111" stroke-width="5"/>
+
+  <path d="M54 521l484-9 36 23-12 136-512 8 11-78Z" fill="#F4F0E3"/>
+  <text x="72" y="588" fill="#111111" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="68" font-weight="900" letter-spacing="-2" textLength="456" lengthAdjust="spacingAndGlyphs">ENDLESS SECOND RING</text>
+  <text x="72" y="653" fill="#111111" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="60" font-weight="900" letter-spacing="-1" textLength="456" lengthAdjust="spacingAndGlyphs">A 48-SECOND BEIJING NIGHT DRIVE.</text>
+
+  <path data-role="data-terrain" d="M859 54l292-12 17 92-10 107 13 101-17 108 12 91-13 101-301 18 8-107-12-99 12-111-10-92 14-103Z" fill="#1457FF" opacity="0.9"/>
+  <g data-role="archive-cubes" stroke="#111111" stroke-width="3" stroke-linejoin="round">
+    <path d="M872 330l137-82 136 82-137 84Z" fill="#1457FF" stroke="#F4F0E3" stroke-width="5"/>
+    <path d="M872 330l136 84v54l-136-83Z" fill="#111111" opacity="0.7"/>
+    <path d="M1145 330l-137 84v54l137-83Z" fill="#63E2B7" opacity="0.7"/>
+    <path d="M906 329l102-61 101 61-101 62Z" fill="#63E2B7"/>
+    <path d="M944 326l64-38 63 38-63 39Z" fill="#FFD83D"/>
+
+    <path d="M898 277l23-14 23 14-23 14Z" fill="#F4F0E3"/><path d="M898 277l23 14v29l-23-14Z" fill="#1457FF"/><path d="M944 277l-23 14v29l23-14Z" fill="#63E2B7"/>
+    <path d="M1018 260l22-13 22 13-22 14Z" fill="#FFD83D"/><path d="M1018 260l22 14v49l-22-14Z" fill="#1457FF"/><path d="M1062 260l-22 14v49l22-14Z" fill="#FF4B35"/>
+    <path d="M1070 301l21-13 22 13-22 13Z" fill="#F4F0E3"/><path d="M1070 301l21 13v35l-21-13Z" fill="#1457FF"/><path d="M1113 301l-22 13v35l22-13Z" fill="#63E2B7"/>
+    <path d="M970 300l19-12 20 12-20 12Z" fill="#FF4B35"/><path d="M970 300l19 12v30l-19-12Z" fill="#111111"/><path d="M1009 300l-20 12v30l20-12Z" fill="#1457FF"/>
+    <path d="M1038 215l24-14 24 14-24 15Z" fill="#FFD83D"/><path d="M1038 215l24 15v82l-24-15Z" fill="#1457FF"/><path d="M1086 215l-24 15v82l24-15Z" fill="#FF4B35"/>
+    <path d="M937 234l19-11 19 11-19 12Z" fill="#F4F0E3"/><path d="M937 234l19 12v46l-19-12Z" fill="#1457FF"/><path d="M975 234l-19 12v46l19-12Z" fill="#63E2B7"/>
+  </g>
+  <path d="M840 494l332-11 8 214-345 8 11-71-9-68Z" fill="#FFD83D"/>
+  <path d="M1129 478l43 5 8 101-50-1 7-52Z" fill="#63E2B7"/>
+  <text x="865" y="563" fill="#111111" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="68" font-weight="900" letter-spacing="-1">AI USAGE</text>
+  <text x="864" y="626" fill="#111111" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="60" font-weight="900" letter-spacing="-1">
+    <tspan x="864" dy="0">REAL MODEL</tspan>
+    <tspan x="864" dy="58" textLength="274" lengthAdjust="spacingAndGlyphs">HISTORY, MADE PLAYABLE.</tspan>
+  </text>
+</svg>

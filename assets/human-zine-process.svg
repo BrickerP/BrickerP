@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="process-title process-desc">
+  <title id="process-title">Three film attempts and two attributed rules</title>
+  <desc id="process-desc">Three independent torn receipt fragments beside separate film and game rule cards.</desc>
+  <metadata>
+    Human Zine Issue 00. Hand-authored static SVG. Film source: src/rendering/BeijingDriveScene.ts at 7d4b0bf9876fdaa7b303ba40b4075170a73b4a6c. Independent design attempts; no ancestry or sequential replacement claim: 5E8F667 = 5e8f66756afc9b483beb0070524ac4cc4d7f3856; B9EF619 = b9ef61997260c359005aa175a62dcb370c2007e8; 520E83F = 520e83f32ed20efc0beb64982b1db45c7600db9e. Source anchors: buildOlympic and buildSecondRingThreshold. AI Usage rule source: BrickerP/ai-usage-report (/Users/yupeng/Projects/ai-usage-report) at 6bae0fa23492ece45ae49ad57093d4f003883215; external to the film repository. The short receipts identify independent snapshots, not a diff or inherited progression.
+  </metadata>
+  <defs>
+    <pattern id="process-grain" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M3 8l6-2M18 4l4 2M10 22l7-1M24 27l3-2" fill="none" stroke="#111111" stroke-width="1" stroke-opacity="0.05"/>
+    </pattern>
+    <pattern id="process-stamp" width="16" height="16" patternUnits="userSpaceOnUse">
+      <circle cx="4" cy="4" r="2" fill="#111111" opacity="0.28"/>
+      <circle cx="12" cy="12" r="2" fill="#111111" opacity="0.28"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="720" fill="#F4F0E3"/>
+  <rect width="1200" height="720" fill="url(#process-grain)"/>
+  <g data-role="crop-marks" fill="none" stroke="#111111" stroke-width="3">
+    <path d="M19 29h34M36 12v34M1147 29h34M1164 12v34M19 687h34M36 670v34M1147 687h34M1164 670v34"/>
+  </g>
+  <text x="62" y="103" fill="#1457FF" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="68" font-weight="900" letter-spacing="-2" textLength="1076" lengthAdjust="spacingAndGlyphs">THREE ATTEMPTS. ONE QUESTION: WHAT BELONGS HERE?</text>
+  <path d="M66 126c184-9 362-5 529-11 176-6 355-2 536 5" fill="none" stroke="#1457FF" stroke-width="9" stroke-linecap="square"/>
+  <text x="68" y="186" fill="#111111" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="60" font-weight="900" letter-spacing="0">FROM THE FILM</text>
+
+  <g data-role="receipt" transform="translate(54 205) rotate(-2 112 225)">
+    <path d="M12 12l211-5 10 83-7 80 8 91-9 79 8 91-215 9-8-83 7-89-9-84 8-87Z" fill="#111111" opacity="0.14" transform="translate(8 9)"/>
+    <path d="M12 12l211-5 10 83-7 80 8 91-9 79 8 91-215 9-8-83 7-89-9-84 8-87Z" fill="#F4F0E3" stroke="#111111" stroke-width="3"/>
+    <path d="M23 8l112-5 4 31-114 7Z" fill="#1457FF" opacity="0.86"/>
+    <text x="28" y="83" fill="#111111" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="54" font-weight="900" letter-spacing="-1" textLength="182" lengthAdjust="spacingAndGlyphs">5E8F667 /</text>
+    <text x="28" y="141" fill="#111111" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="60" font-weight="900" letter-spacing="-1" textLength="182" lengthAdjust="spacingAndGlyphs">RECOGNIZABLE</text>
+    <text x="28" y="197" fill="#111111" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="60" font-weight="900" letter-spacing="-1" textLength="182" lengthAdjust="spacingAndGlyphs">LANDMARKS</text>
+    <g fill="none" stroke="#111111" stroke-width="3" opacity="0.65">
+      <path d="M30 247l28-18 23 31 31-48 26 35 24-58 32 75"/>
+      <path d="M30 281h174M30 310h174M44 223v107M92 213v117M148 203v127M191 230v100" stroke-width="2"/>
+      <path d="M38 354h160M38 365h160M38 376h160M38 387h160" stroke-width="5" stroke-dasharray="4 7"/>
+    </g>
+    <rect x="155" y="272" width="48" height="48" fill="url(#process-stamp)" transform="rotate(8 179 296)"/>
+  </g>
+
+  <g data-role="receipt" transform="translate(302 198) rotate(1.4 112 225)">
+    <path d="M9 10l216 4 7 80-9 86 10 88-8 79 6 88-213 4-9-88 8-82-10-90 8-83Z" fill="#111111" opacity="0.14" transform="translate(8 9)"/>
+    <path d="M9 10l216 4 7 80-9 86 10 88-8 79 6 88-213 4-9-88 8-82-10-90 8-83Z" fill="#F4F0E3" stroke="#111111" stroke-width="3"/>
+    <path d="M97 5l105 5-2 31-106-3Z" fill="#FFD83D" opacity="0.9"/>
+    <text x="27" y="83" fill="#111111" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="54" font-weight="900" letter-spacing="-1" textLength="181" lengthAdjust="spacingAndGlyphs">B9EF619 /</text>
+    <text x="27" y="141" fill="#111111" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="60" font-weight="900" letter-spacing="-1" textLength="181" lengthAdjust="spacingAndGlyphs">CLEAR THE</text>
+    <text x="27" y="197" fill="#111111" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="60" font-weight="900" letter-spacing="-1" textLength="181" lengthAdjust="spacingAndGlyphs">FORECOURT</text>
+    <g fill="none" stroke="#111111" stroke-width="3" opacity="0.65">
+      <path d="M30 260c27-50 54-31 78-4 24 28 51 26 96-30"/>
+      <path d="M30 288c31-27 58-30 86-7 29 23 57 17 88-17"/>
+      <path d="M31 321l46-45 42 39 36-64 49 38"/>
+      <path d="M42 219v120M86 211v128M134 224v115M182 204v135" stroke-width="2"/>
+      <path d="M37 358h167M37 372h167M37 386h167" stroke-width="5" stroke-dasharray="10 5 3 5"/>
+    </g>
+    <rect x="32" y="282" width="46" height="46" fill="url(#process-stamp)" transform="rotate(-9 55 305)"/>
+  </g>
+
+  <g data-role="receipt" transform="translate(548 207) rotate(-1.2 112 225)">
+    <path d="M11 11l214-4 8 86-9 79 9 91-8 86 8 82-214 8-9-91 8-80-10-88 8-86Z" fill="#111111" opacity="0.14" transform="translate(8 9)"/>
+    <path d="M11 11l214-4 8 86-9 79 9 91-8 86 8 82-214 8-9-91 8-80-10-88 8-86Z" fill="#F4F0E3" stroke="#111111" stroke-width="3"/>
+    <path d="M25 7l118-3 5 32-122 5Z" fill="#63E2B7" opacity="0.9"/>
+    <text x="28" y="82" fill="#111111" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="54" font-weight="900" letter-spacing="-1" textLength="181" lengthAdjust="spacingAndGlyphs">520E83F /</text>
+    <text x="28" y="140" fill="#111111" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="60" font-weight="900" letter-spacing="-1" textLength="181" lengthAdjust="spacingAndGlyphs">REPLACE THE</text>
+    <text x="28" y="196" fill="#111111" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="60" font-weight="900" letter-spacing="-1" textLength="181" lengthAdjust="spacingAndGlyphs">OLYMPIC SCENE</text>
+    <g fill="none" stroke="#111111" stroke-width="3" opacity="0.65">
+      <path d="M39 267l37-45 42 29 31-51 51 59-38 54-54-33-35 43Z"/>
+      <path d="M29 292l175-64M31 324l171-85M53 211l129 124" stroke-width="2"/>
+      <path d="M35 358h170M35 370h170M35 382h170M35 394h170" stroke-width="5" stroke-dasharray="2 8"/>
+    </g>
+    <rect x="154" y="280" width="48" height="48" fill="url(#process-stamp)" transform="rotate(11 178 304)"/>
+  </g>
+
+  <g data-role="rule-card">
+    <path d="M834 191l315-8 10 66-7 69 9 67-10 64-313 6-7-69 8-66-9-65Z" fill="#111111" opacity="0.14" transform="translate(8 9)"/>
+    <path d="M834 191l315-8 10 66-7 69 9 67-10 64-313 6-7-69 8-66-9-65Z" fill="#F4F0E3" stroke="#111111" stroke-width="3"/>
+    <path d="M832 203l25-7 7 244-27 8 6-82-8-78 7-54Z" fill="#1457FF"/>
+    <text x="876" y="254" fill="#1457FF" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="60" font-weight="900" textLength="246" lengthAdjust="spacingAndGlyphs">FILM RULE</text>
+    <text x="876" y="322" fill="#111111" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="60" font-weight="900" letter-spacing="-1">
+      <tspan x="876" dy="0">ARTISTIC</tspan>
+      <tspan x="876" dy="57" textLength="246" lengthAdjust="spacingAndGlyphs">COMPOSITION.</tspan>
+      <tspan x="876" dy="57" textLength="246" lengthAdjust="spacingAndGlyphs">NOT FOR NAVIGATION.</tspan>
+    </text>
+  </g>
+
+  <g data-role="rule-card">
+    <path d="M834 472l316-9 9 59-7 59 9 59-11 63-312 5-7-60 8-59-9-58Z" fill="#111111" opacity="0.14" transform="translate(8 8)"/>
+    <path d="M834 472l316-9 9 59-7 59 9 59-11 63-312 5-7-60 8-59-9-58Z" fill="#F4F0E3" stroke="#111111" stroke-width="3"/>
+    <path d="M832 482l27-8 6 218-28 8 5-71-7-73 7-48Z" fill="#FF4B35"/>
+    <text x="876" y="528" fill="#FF4B35" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="60" font-weight="900" textLength="246" lengthAdjust="spacingAndGlyphs">GAME RULE</text>
+    <text x="876" y="591" fill="#111111" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="60" font-weight="900" letter-spacing="-1">
+      <tspan x="876" dy="0" textLength="246" lengthAdjust="spacingAndGlyphs">HISTORY PATTERN.</tspan>
+      <tspan x="876" dy="55">NOT MODEL</tspan>
+      <tspan x="876" dy="55">CAPABILITY.</tspan>
+    </text>
+  </g>
+</svg>

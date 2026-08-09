@@ -1,44 +1,11 @@
-# Yupeng Lu / BRICKERP
+<img src="assets/human-zine-cover.svg" width="100%" alt="Yupeng Lu. Field Notes, Issue 00. Things I keep returning to.">
 
-`LOOP / LEDGER`
+<img src="assets/human-zine-artifact.svg" width="100%" alt="Two independent works: Endless Second Ring, a 48-second Beijing night drive; and AI Usage, real model history made playable.">
 
-**Strange loops. Open ledgers.**
+[WATCH FILM →](https://brickerp.github.io/) · [PLAY ARCHIVE →](https://brickerp.github.io/ai-usage-report/)
 
-I build strange AI loops and keep the ledger open.
+<img src="assets/human-zine-process.svg" width="100%" alt="Three independent film design attempts ask what belongs in one scene, beside two attributed rules: film is artistic composition, not navigation; game history pattern is not model capability.">
 
-Building a strange AI experiment—an agent tool or visual world?
+<img src="assets/human-zine-open-line.svg" width="100%" alt="Open a line.">
 
-[**OPEN A LINE — EMAIL YUPENG**](mailto:yplmicro@gmail.com)
-
-## [01 / LOOP — Endless Second Ring ↗](https://brickerp.github.io/)
-
-A 48-second generative Beijing night drive: enter the world.
-
-<a href="https://brickerp.github.io/">
-  <img src="https://brickerp.github.io/profile-loop-card.svg" width="100%" alt="Open LOOP 01 — Endless Second Ring, a 48-second generative Beijing night drive">
-</a>
-
-## [02 / LEDGER — AI Usage Chronicle ↗](https://brickerp.github.io/ai-usage-report/)
-
-A bounded AI-tool usage trace with sources, coverage, freshness, and limits disclosed.
-
-<a href="https://brickerp.github.io/ai-usage-report/">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://brickerp.github.io/ai-usage-report/ai-usage-card-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="https://brickerp.github.io/ai-usage-report/ai-usage-card-light.svg">
-    <img src="https://brickerp.github.io/ai-usage-report/ai-usage-card-light.svg" width="100%" alt="Open LEDGER 02 — AI Usage Chronicle, a bounded all-time AI-tool usage timeline with cache disclosure">
-  </picture>
-</a>
-
-## More systems
-
-[Cookiy research skill](https://github.com/cookiy-ai/user-research-skill) · [Context Intent Recommender](https://github.com/BrickerP/context-intent-recommender) · [STT Bench](https://github.com/BrickerP/stt-bench)
-
-<details>
-<summary>Professional background</summary>
-
-AI Platform / Product Engineer · San Francisco Bay Area<br>
-US permanent resident · No sponsorship required<br>
-[Current resume (PDF)](Yupeng_Lu_Resume.pdf) · [LinkedIn](https://www.linkedin.com/in/yupeng-lu-845a0b411)
-
-</details>
+[EMAIL YUPENG →](mailto:yplmicro@gmail.com) · [RESUME →](https://brickerp.github.io/resume.pdf) · [GITHUB →](https://github.com/BrickerP)
