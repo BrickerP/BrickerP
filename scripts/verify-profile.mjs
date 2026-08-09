@@ -32,16 +32,18 @@ const assets = [
     text: ['YUPENG LU', 'FIELD NOTES · ISSUE 00', 'THINGS I KEEP RETURNING TO'],
   },
   {
-    file: 'human-zine-artifact.svg',
+    file: 'human-zine-film.svg',
     width: 1200,
     height: 720,
-    alt: 'Two independent works: Endless Second Ring, a 48-second Beijing night drive; and AI Usage, real model history made playable.',
-    text: [
-      'ENDLESS SECOND RING',
-      'A 48-SECOND BEIJING NIGHT DRIVE.',
-      'AI USAGE',
-      'REAL MODEL HISTORY, MADE PLAYABLE.',
-    ],
+    alt: 'Endless Second Ring, a 48-second Beijing night drive. Open the film.',
+    text: ['ENDLESS SECOND RING', 'A 48-SECOND BEIJING NIGHT DRIVE.', 'ENTER FILM ↗'],
+  },
+  {
+    file: 'human-zine-ai-usage.svg',
+    width: 1200,
+    height: 720,
+    alt: 'AI Usage, real model history made playable. Open the archive.',
+    text: ['AI USAGE', 'REAL MODEL HISTORY, MADE PLAYABLE.', 'PLAY ARCHIVE ↗'],
   },
   {
     file: 'human-zine-process.svg',
@@ -70,22 +72,20 @@ const assets = [
     file: 'human-zine-open-line.svg',
     width: 1200,
     height: 360,
-    alt: 'Open a line.',
+    alt: 'Open a line to email Yupeng Lu.',
     text: ['OPEN A LINE'],
   },
 ];
 
 const expectedReadme = `<img src="assets/human-zine-cover.svg" width="100%" alt="${assets[0].alt}">
 
-<img src="assets/human-zine-artifact.svg" width="100%" alt="${assets[1].alt}">
+<a href="https://brickerp.github.io/"><img src="assets/human-zine-film.svg" width="100%" alt="${assets[1].alt}"></a>
 
-[WATCH FILM →](https://brickerp.github.io/) · [PLAY ARCHIVE →](https://brickerp.github.io/ai-usage-report/)
+<a href="https://brickerp.github.io/ai-usage-report/"><img src="assets/human-zine-ai-usage.svg" width="100%" alt="${assets[2].alt}"></a>
 
-<img src="assets/human-zine-process.svg" width="100%" alt="${assets[2].alt}">
+<img src="assets/human-zine-process.svg" width="100%" alt="${assets[3].alt}">
 
-<img src="assets/human-zine-open-line.svg" width="100%" alt="${assets[3].alt}">
-
-[EMAIL YUPENG →](mailto:yplmicro@gmail.com) · [RESUME →](https://brickerp.github.io/resume.pdf) · [GITHUB →](https://github.com/BrickerP)
+<a href="mailto:yplmicro@gmail.com"><img src="assets/human-zine-open-line.svg" width="100%" alt="${assets[4].alt}"></a>
 `;
 
 function normalizeText(value) {
@@ -115,11 +115,38 @@ function countWords(value) {
 }
 
 const readme = await readFile(path.join(root, 'README.md'), 'utf8');
-assert.equal(readme, expectedReadme, 'README must contain only the four ordered full-width spreads and two frozen native-link lines');
+assert.equal(readme, expectedReadme, 'README must contain only the five ordered full-width spreads and three native image anchors');
 assert.doesNotMatch(readme, legacyFlow, 'README must not retain the superseded LOOP / LEDGER flow');
 
+const expectedAnchors = [
+  {
+    href: 'https://brickerp.github.io/',
+    src: 'assets/human-zine-film.svg',
+    alt: assets[1].alt,
+  },
+  {
+    href: 'https://brickerp.github.io/ai-usage-report/',
+    src: 'assets/human-zine-ai-usage.svg',
+    alt: assets[2].alt,
+  },
+  {
+    href: 'mailto:yplmicro@gmail.com',
+    src: 'assets/human-zine-open-line.svg',
+    alt: assets[4].alt,
+  },
+];
+const readmeAnchors = [...readme.matchAll(/<a href="([^"]+)"><img src="([^"]+)" width="100%" alt="([^"]+)"><\/a>/g)].map((match) => ({
+  href: match[1],
+  src: match[2],
+  alt: match[3],
+}));
+assert.deepEqual(readmeAnchors, expectedAnchors, 'README must expose exactly the approved Film, AI Usage, and Open Line image anchors');
+assert.equal((readme.match(/<a\b/g) ?? []).length, expectedAnchors.length, 'README must not contain extra anchors');
+assert.doesNotMatch(readme, /^\s*\[[^\]]+\]\([^)]+\).*$/m, 'README must not retain bare markdown text-link rows');
+assert.doesNotMatch(readme, /(?:WATCH FILM|PLAY ARCHIVE|EMAIL YUPENG|RESUME|GITHUB)\s*(?:→|↗)/i, 'README must not retain superseded text-link labels');
+
 const assetNames = (await readdir(assetRoot)).sort();
-assert.deepEqual(assetNames, assets.map(({ file }) => file).sort(), 'assets must contain exactly the four approved Human Zine spreads');
+assert.deepEqual(assetNames, assets.map(({ file }) => file).sort(), 'assets must contain exactly the five approved Human Zine spreads');
 
 const svgs = new Map();
 const visibleCopy = [];
@@ -206,17 +233,26 @@ assert.match(cover, /data-role="halftone-wedge"/, 'cover must retain the torn ha
 assert.match(cover, /<g\b[^>]*data-role="misregistered-circle"[\s\S]*?<ellipse\b[^>]*stroke="#FF4B35"/, 'cover must retain the misregistered signal-red editorial circle');
 assert.equal([...svgs.values()].reduce((count, svg) => count + (svg.match(/data-role="misregistered-circle"/g) ?? []).length, 0), 1, 'the signature editorial circle must appear only once in the Human Zine');
 
-const artifacts = svgs.get('human-zine-artifact.svg');
-assert.match(artifacts, /data-role="film-collage"/, 'artifact spread must retain the vector night-drive collage');
-assert.match(artifacts, /data-role="rear-car"/, 'artifact spread must retain the rear car and tail-light composition');
-assert.match(artifacts, /data-role="data-terrain"/, 'artifact spread must retain the pixel/data terrain');
-assert.match(artifacts, /data-role="archive-cubes"/, 'artifact spread must retain the isometric archive cubes');
-assert.doesNotMatch(artifacts, /data-role="(?:bar|bar-chart|chart)"/, 'artifact spread must not regress to a generic bar chart');
-for (const record of textRecords(artifacts)) {
+const film = svgs.get('human-zine-film.svg');
+assert.match(film, /data-role="film-collage"/, 'film spread must retain the vector night-drive collage');
+assert.match(film, /data-role="rear-car"/, 'film spread must retain the rear car and tail-light composition');
+assert.doesNotMatch(film, /data-role="(?:data-terrain|archive-cubes|bar|bar-chart|chart)"/, 'film spread must remain a distinct night-drive composition');
+for (const record of textRecords(film)) {
   const fontSize = Number(getAttribute(record.attributes, 'font-size'));
-  assert.ok(Number.isFinite(fontSize) && fontSize >= 60, `human-zine-artifact.svg: artifact title or caption ${record.text} must use at least 60px source text`);
+  assert.ok(Number.isFinite(fontSize) && fontSize >= 60, `human-zine-film.svg: title, caption, or CTA ${record.text} must use at least 60px source text`);
 }
-assert.equal(visibleCopy.filter((text) => text === 'AI USAGE').length, 1, 'AI USAGE must appear exactly once, on the Artifact spread');
+assert.equal(visibleCopy.filter((text) => text === 'ENTER FILM ↗').length, 1, 'ENTER FILM CTA must appear exactly once, on the Film spread');
+
+const aiUsage = svgs.get('human-zine-ai-usage.svg');
+assert.match(aiUsage, /data-role="data-terrain"/, 'AI Usage spread must retain the pixel/data terrain');
+assert.match(aiUsage, /data-role="archive-cubes"/, 'AI Usage spread must retain the isometric archive cubes');
+assert.doesNotMatch(aiUsage, /data-role="(?:film-collage|rear-car|bar|bar-chart|chart)"/, 'AI Usage spread must remain a distinct archive composition');
+for (const record of textRecords(aiUsage)) {
+  const fontSize = Number(getAttribute(record.attributes, 'font-size'));
+  assert.ok(Number.isFinite(fontSize) && fontSize >= 60, `human-zine-ai-usage.svg: title, caption, or CTA ${record.text} must use at least 60px source text`);
+}
+assert.equal(visibleCopy.filter((text) => text === 'AI USAGE').length, 1, 'AI USAGE must appear exactly once, on the AI Usage spread');
+assert.equal(visibleCopy.filter((text) => text === 'PLAY ARCHIVE ↗').length, 1, 'PLAY ARCHIVE CTA must appear exactly once, on the AI Usage spread');
 
 const process = svgs.get('human-zine-process.svg');
 const processCopy = textRecords(process).map(({ text }) => text);

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="film-title film-desc">
+  <title id="film-title">Endless Second Ring — Enter Film</title>
+  <desc id="film-desc">A full-width night-drive composition with a cobalt sky, a looping road, and a rear car, followed by an invitation to enter the film.</desc>
+  <metadata>
+    Human Zine Issue 00. Hand-authored static SVG. Film source: src/rendering/BeijingDriveScene.ts at 7d4b0bf9876fdaa7b303ba40b4075170a73b4a6c. Independent design attempts; no ancestry or sequential replacement claim: 5E8F667 = 5e8f66756afc9b483beb0070524ac4cc4d7f3856; B9EF619 = b9ef61997260c359005aa175a62dcb370c2007e8; 520E83F = 520e83f32ed20efc0beb64982b1db45c7600db9e. Source anchors: buildOlympic and buildSecondRingThreshold. AI Usage rule source: BrickerP/ai-usage-report (/Users/yupeng/Projects/ai-usage-report) at 6bae0fa23492ece45ae49ad57093d4f003883215; external to the film repository.
+  </metadata>
+  <defs>
+    <pattern id="film-grain" width="29" height="29" patternUnits="userSpaceOnUse">
+      <path d="M2 8l7-2M17 5l4 1M9 21l6-1M23 26l4-2" fill="none" stroke="#111111" stroke-width="1" stroke-opacity="0.045"/>
+    </pattern>
+    <clipPath id="film-frame">
+      <path d="M38 53l151-8 166 8 158-9 171 10 157-8 157 10 163-7-7 90 8 97-9 97 10 96-8 94 7 77-153 8-169-7-165 8-173-9-165 8-172-10-151 8 8-89-8-102 9-99-8-94 8-100-7-87Z"/>
+    </clipPath>
+  </defs>
+
+  <rect width="1200" height="720" fill="#F4F0E3"/>
+  <rect width="1200" height="720" fill="url(#film-grain)"/>
+
+  <g data-role="film-collage" clip-path="url(#film-frame)">
+    <rect x="26" y="37" width="1148" height="542" fill="#111111"/>
+    <path d="M26 37h1148v264c-158-49-296-60-427-28-151 36-278 21-721 66Z" fill="#1457FF"/>
+    <path d="M26 222c162-30 296-23 431 11 152 38 320-2 717-67v173H26Z" fill="#111111" opacity="0.82"/>
+    <path d="M26 316c180-29 348-21 485 8 162 34 323-7 689-61v75H26Z" fill="#FF4B35" opacity="0.75"/>
+
+    <g fill="#111111" stroke="#F4F0E3" stroke-width="3" stroke-opacity="0.42">
+      <path d="M67 284h84v68H67ZM167 252h96v100h-96ZM279 296h76v56h-76ZM826 267h120v85H826ZM967 291h83v61h-83ZM1070 250h82v102h-82Z"/>
+      <path d="M471 296v-69h143v69h30v57H438v-57Z"/>
+      <path d="M446 239l59-28 37 10 42-22 74 40-26 10-40-10-45 14-49-14-32 12Z"/>
+    </g>
+    <g fill="#FFD83D" opacity="0.92">
+      <rect x="83" y="304" width="8" height="8"/><rect x="108" y="296" width="8" height="8"/><rect x="133" y="306" width="8" height="8"/>
+      <rect x="195" y="278" width="8" height="8"/><rect x="220" y="291" width="8" height="8"/><rect x="246" y="273" width="8" height="8"/>
+      <rect x="851" y="291" width="8" height="8"/><rect x="879" y="280" width="8" height="8"/><rect x="909" y="293" width="8" height="8"/>
+      <rect x="1090" y="275" width="8" height="8"/><rect x="1116" y="286" width="8" height="8"/>
+    </g>
+
+    <path d="M22 579C163 491 255 409 399 365c174-53 357-45 779 16v198H22Z" fill="#1457FF" opacity="0.78"/>
+    <path d="M24 581c145-88 238-166 379-212 176-57 367-48 776 17" fill="none" stroke="#F4F0E3" stroke-width="11" opacity="0.88"/>
+    <path d="M19 587c149-84 248-160 393-207 176-56 363-42 773 18" fill="none" stroke="#111111" stroke-width="5" opacity="0.9"/>
+    <path d="M173 579c124-63 212-119 333-149 159-40 316-24 564 20" fill="none" stroke="#FFD83D" stroke-width="12" stroke-dasharray="46 29"/>
+    <path d="M697 579c-13-84 16-155 92-205 54-36 115-53 191-53" fill="none" stroke="#F4F0E3" stroke-width="9" stroke-dasharray="54 34"/>
+
+    <g fill="none" stroke="#111111" stroke-width="8">
+      <path d="M164 484v-122M258 451v-115M354 418v-105M450 394v-88M548 382v-73M646 382v-67M745 391v-61M845 406v-57"/>
+    </g>
+    <g fill="#FFD83D" stroke="#F4F0E3" stroke-width="4">
+      <circle cx="164" cy="362" r="13"/><circle cx="258" cy="336" r="12"/><circle cx="354" cy="313" r="11"/><circle cx="450" cy="306" r="10"/>
+      <circle cx="548" cy="309" r="9"/><circle cx="646" cy="315" r="8"/><circle cx="745" cy="330" r="8"/><circle cx="845" cy="349" r="7"/>
+    </g>
+
+    <g data-role="rear-car">
+      <path d="M445 481l31-68 66-30h116l70 34 31 64 15 96-41 38H454l-39-38Z" fill="#111111" stroke="#1457FF" stroke-width="11"/>
+      <path d="M493 420l53-20h92l53 25 17 51H475Z" fill="#1457FF" opacity="0.62"/>
+      <path d="M438 488h108v63H424ZM648 488h109l11 63H648Z" fill="#FF4B35"/>
+      <path d="M454 506h72v26h-79ZM670 506h73l5 26h-78Z" fill="#F4F0E3" opacity="0.84"/>
+      <rect x="567" y="525" width="78" height="29" fill="#FFD83D"/>
+      <path d="M449 594h55M686 594h57" stroke="#F4F0E3" stroke-width="11"/>
+    </g>
+  </g>
+  <path d="M38 53l151-8 166 8 158-9 171 10 157-8 157 10 163-7-7 90 8 97-9 97 10 96-8 94 7 77-153 8-169-7-165 8-173-9-165 8-172-10-151 8 8-89-8-102 9-99-8-94 8-100-7-87Z" fill="none" stroke="#111111" stroke-width="5"/>
+
+  <path d="M62 600c130-9 269-6 406 2l-6 76c-139-7-274-7-411 2Z" fill="#F4F0E3"/>
+  <text x="70" y="642" fill="#111111" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="91" font-weight="900" letter-spacing="-3" textLength="624" lengthAdjust="spacingAndGlyphs">ENDLESS SECOND RING</text>
+  <text x="72" y="695" fill="#1457FF" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="60" font-weight="900" letter-spacing="-1" textLength="590" lengthAdjust="spacingAndGlyphs">A 48-SECOND BEIJING NIGHT DRIVE.</text>
+
+  <path d="M871 603l286 7-8 78-278-8Z" fill="#1457FF"/>
+  <path d="M888 598l89 3-5 16-89-3Z" fill="#FFD83D" opacity="0.9"/>
+  <text x="904" y="658" fill="#F4F0E3" font-family="'Arial Narrow', 'Avenir Next Condensed', Impact, sans-serif" font-stretch="condensed" font-size="66" font-weight="900" letter-spacing="-2" textLength="237" lengthAdjust="spacingAndGlyphs">ENTER FILM ↗</text>
+</svg>
