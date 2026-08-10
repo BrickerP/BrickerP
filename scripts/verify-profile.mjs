@@ -481,6 +481,7 @@ for (const experiment of foundExperiments) {
 const approvedFoundCorpus = foundPublicCorpus
   .join('\n')
   .replaceAll('http://www.w3.org/2000/svg', '')
+  .replaceAll('width="100%"', '')
   .replace(/not investment performance/gi, 'approved-visible-boundary')
   .replace(/separated from investment performance/gi, 'approved-description-boundary')
   .replace(/no performance claim/gi, 'approved-metadata-boundary');
