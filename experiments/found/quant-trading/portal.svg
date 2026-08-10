@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="quant-title quant-desc">
+  <title id="quant-title">Quant Trading — continuous paper research record</title>
+  <desc id="quant-desc">An aged greenbar tractor-feed sheet carries one continuous research record from hypothesis through paper loop to audit trail, explicitly separated from investment performance.</desc>
+  <metadata>Found experiment from 2026.04. Hand-authored static vector. Paper research only; no performance claim.</metadata>
+  <defs>
+    <pattern id="quant-grain" width="25" height="25" patternUnits="userSpaceOnUse">
+      <path d="M3 8l7-2M15 17l7-2M5 23l4-1" stroke="#171717" stroke-width="1" opacity=".07"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="720" fill="#E5E0CC"/>
+  <g transform="translate(0 2) scale(1 .795)">
+  <rect width="1200" height="900" fill="#E5E0CC"/>
+  <rect width="1200" height="900" fill="url(#quant-grain)"/>
+  <g data-role="continuous-paper">
+    <path d="M82 52h1036v796H82Z" fill="#E5E0CC" stroke="#171717" stroke-width="5"/>
+    <path d="M128 54v792M1072 54v792" stroke="#496B57" stroke-width="4" stroke-dasharray="11 13"/>
+    <path d="M132 218h936v78H132ZM132 374h936v78H132ZM132 530h936v78H132ZM132 686h936v78H132Z" fill="#9BAE91" opacity=".42"/>
+    <path d="M132 296h936M132 452h936M132 608h936M132 764h936" stroke="#496B57" stroke-width="3" opacity=".58"/>
+    <path d="M132 334h936M132 646h936" stroke="#171717" stroke-width="3" stroke-dasharray="18 13" opacity=".45"/>
+  </g>
+  <g data-role="perforation" fill="#171717">
+    <circle cx="104" cy="91" r="10"/><circle cx="104" cy="153" r="10"/><circle cx="104" cy="215" r="10"/><circle cx="104" cy="277" r="10"/><circle cx="104" cy="339" r="10"/><circle cx="104" cy="401" r="10"/><circle cx="104" cy="463" r="10"/><circle cx="104" cy="525" r="10"/><circle cx="104" cy="587" r="10"/><circle cx="104" cy="649" r="10"/><circle cx="104" cy="711" r="10"/><circle cx="104" cy="773" r="10"/><circle cx="104" cy="835" r="10"/>
+    <circle cx="1096" cy="91" r="10"/><circle cx="1096" cy="153" r="10"/><circle cx="1096" cy="215" r="10"/><circle cx="1096" cy="277" r="10"/><circle cx="1096" cy="339" r="10"/><circle cx="1096" cy="401" r="10"/><circle cx="1096" cy="463" r="10"/><circle cx="1096" cy="525" r="10"/><circle cx="1096" cy="587" r="10"/><circle cx="1096" cy="649" r="10"/><circle cx="1096" cy="711" r="10"/><circle cx="1096" cy="773" r="10"/><circle cx="1096" cy="835" r="10"/>
+  </g>
+  <text x="0" y="0" fill="#496B57" font-family="Arial Black, Arial, sans-serif" font-size="60" font-weight="900" transform="translate(178 694) rotate(-90) scale(.62 1)">FOUND EXPERIMENT / 2026.04</text>
+  <text x="0" y="0" fill="#171717" font-family="Arial Black, Arial, sans-serif" font-size="112" font-weight="900" transform="translate(218 174) scale(.82 1)">QUANT TRADING</text>
+  <text x="0" y="0" fill="#171717" font-family="Arial Black, Arial, sans-serif" font-size="60" font-weight="900" transform="translate(219 350) scale(.72 1)">CAN A MARKET HYPOTHESIS</text>
+  <text x="0" y="0" fill="#171717" font-family="Arial Black, Arial, sans-serif" font-size="60" font-weight="900" transform="translate(219 417) scale(.72 1)">SURVIVE AN AUDIT?</text>
+  <g data-role="research-stage">
+    <path d="M218 486h795v114H218Z" fill="none" stroke="#171717" stroke-width="4"/>
+    <path d="M482 486v114M747 486v114" stroke="#171717" stroke-width="4"/>
+    <path d="M456 543h45M721 543h45" stroke="#A65B32" stroke-width="8"/>
+    <path d="M486 529l16 14-16 14M751 529l16 14-16 14" fill="none" stroke="#A65B32" stroke-width="7"/>
+  </g>
+  <text x="0" y="0" fill="#171717" font-family="Arial Black, Arial, sans-serif" font-size="60" font-weight="900" transform="translate(238 564) scale(.49 1)">HYPOTHESIS</text>
+  <text x="0" y="0" fill="#171717" font-family="Arial Black, Arial, sans-serif" font-size="60" font-weight="900" transform="translate(510 564) scale(.49 1)">PAPER LOOP</text>
+  <text x="0" y="0" fill="#171717" font-family="Arial Black, Arial, sans-serif" font-size="60" font-weight="900" transform="translate(777 564) scale(.49 1)">AUDIT TRAIL</text>
+  <path d="M803 626l213 5-4 78-216-2Z" fill="none" stroke="#A65B32" stroke-width="8" transform="rotate(-3 906 667)"/>
+  <text x="0" y="0" fill="#A65B32" font-family="Arial Black, Arial, sans-serif" font-size="60" font-weight="900" transform="translate(824 685) rotate(-3) scale(.62 1)">RECORDED</text>
+  <text x="0" y="0" fill="#496B57" font-family="Arial Black, Arial, sans-serif" font-size="60" font-weight="900" transform="translate(219 255) scale(.49 1)">PAPER RESEARCH / NOT INVESTMENT PERFORMANCE</text>
+  <path d="M647 778l369-5" stroke="#A65B32" stroke-width="5"/>
+  <text x="0" y="0" fill="#496B57" font-family="Arial Black, Arial, sans-serif" font-size="60" font-weight="900" transform="translate(665 829) rotate(-2) scale(.38 1)">ENTER THE RESEARCH LOOP ↗</text>
+  </g>
+</svg>

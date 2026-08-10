@@ -1,6 +1,6 @@
 <img src="assets/human-zine-cover.svg" width="100%" alt="Yupeng Lu. Field Notes, Issue 00. Things I keep returning to.">
 
-<a href="experiments/001-a-profile-with-memory/README.md"><img src="assets/human-zine-memory.svg" width="100%" alt="A Profile With Memory asks how many past selves a profile should remember. Enter the history."></a>
+<a href="experiments/README.md"><img src="assets/human-zine-memory.svg" width="100%" alt="Enter the Thought Experiments archive: current experiment 001, A Profile With Memory, and found experiments from before Issue 001."></a>
 
 <a href="https://brickerp.github.io/"><img src="assets/human-zine-film.svg" width="100%" alt="Endless Second Ring, a 48-second Beijing night drive. Open the film."></a>
 
