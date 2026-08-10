@@ -8,7 +8,7 @@ const assetRoot = path.join(root, 'assets');
 
 const palette = ['#F4F0E3', '#111111', '#1457FF', '#FF4B35', '#FFD83D', '#63E2B7'];
 const legacyFlow = /(?:LOOP\s*\/\s*LEDGER|Strange loops\. Open ledgers\.|profile-loop-card\.svg|AI Usage Chronicle)/i;
-const metadataEvidence = [
+const legacyMetadataEvidence = [
   'Independent design attempts; no ancestry or sequential replacement claim',
   '5E8F667 = 5e8f66756afc9b483beb0070524ac4cc4d7f3856',
   'B9EF619 = b9ef61997260c359005aa175a62dcb370c2007e8',
@@ -23,7 +23,7 @@ const metadataEvidence = [
   'external to the film repository',
 ];
 
-const assets = [
+const coreAssets = [
   {
     file: 'human-zine-cover.svg',
     width: 1200,
@@ -77,15 +77,22 @@ const assets = [
   },
 ];
 
-const expectedReadme = `<img src="assets/human-zine-cover.svg" width="100%" alt="${assets[0].alt}">
+const memoryAsset = {
+  file: 'human-zine-memory.svg',
+  width: 1200,
+  height: 900,
+};
+const assets = [...coreAssets, memoryAsset];
 
-<a href="https://brickerp.github.io/"><img src="assets/human-zine-film.svg" width="100%" alt="${assets[1].alt}"></a>
+const expectedCoreReadme = `<img src="assets/human-zine-cover.svg" width="100%" alt="${coreAssets[0].alt}">
 
-<a href="https://brickerp.github.io/ai-usage-report/"><img src="assets/human-zine-ai-usage.svg" width="100%" alt="${assets[2].alt}"></a>
+<a href="https://brickerp.github.io/"><img src="assets/human-zine-film.svg" width="100%" alt="${coreAssets[1].alt}"></a>
 
-<img src="assets/human-zine-process.svg" width="100%" alt="${assets[3].alt}">
+<a href="https://brickerp.github.io/ai-usage-report/"><img src="assets/human-zine-ai-usage.svg" width="100%" alt="${coreAssets[2].alt}"></a>
 
-<a href="mailto:yplmicro@gmail.com"><img src="assets/human-zine-open-line.svg" width="100%" alt="${assets[4].alt}"></a>
+<img src="assets/human-zine-process.svg" width="100%" alt="${coreAssets[3].alt}">
+
+<a href="mailto:yplmicro@gmail.com"><img src="assets/human-zine-open-line.svg" width="100%" alt="${coreAssets[4].alt}"></a>
 `;
 
 function normalizeText(value) {
@@ -115,24 +122,97 @@ function countWords(value) {
 }
 
 const readme = await readFile(path.join(root, 'README.md'), 'utf8');
-assert.equal(readme, expectedReadme, 'README must contain only the five ordered full-width spreads and three native image anchors');
 assert.doesNotMatch(readme, legacyFlow, 'README must not retain the superseded LOOP / LEDGER flow');
+
+const intrusionMatches = [...readme.matchAll(/^<a href="(experiments\/[^"#?]+)"><img src="(assets\/[^"#?]+\.svg)" width="100%" alt="([^"]+)"><\/a>$/gm)];
+assert.equal(intrusionMatches.length, 1, 'README must contain exactly one current local experiment intrusion');
+const [intrusionLine, intrusionTarget, intrusionImage, intrusionAlt] = intrusionMatches[0];
+assert.ok(countWords(intrusionAlt) >= 6, 'the current intrusion must provide a meaningful alt description');
+assert.match(intrusionAlt, /\bprofile\b/i, 'the current intrusion alt must identify the profile subject');
+
+for (const localReference of [intrusionTarget, intrusionImage]) {
+  const resolved = path.resolve(root, localReference);
+  assert.ok(resolved.startsWith(`${root}${path.sep}`), `local reference must remain inside the repository: ${localReference}`);
+  await readFile(resolved);
+}
+
+const coverLine = `<img src="assets/human-zine-cover.svg" width="100%" alt="${coreAssets[0].alt}">`;
+const filmLine = `<a href="https://brickerp.github.io/"><img src="assets/human-zine-film.svg" width="100%" alt="${coreAssets[1].alt}"></a>`;
+assert.ok(
+  readme.indexOf(coverLine) < readme.indexOf(intrusionLine) && readme.indexOf(intrusionLine) < readme.indexOf(filmLine),
+  'the current intrusion must appear between the cover and Film',
+);
+assert.equal(readme.replace(`${intrusionLine}\n\n`, ''), expectedCoreReadme, `the original ${coreAssets.length} spreads must retain their exact contract`);
+
+const experimentsIndex = await readFile(path.join(root, 'experiments', 'README.md'), 'utf8');
+assert.doesNotMatch(experimentsIndex, /PAST FIXATIONS/i, 'phase one must not fabricate an empty past');
+const archiveEntries = [...experimentsIndex.matchAll(/^- \[(\d{3}) — ([^\]]+)\]\(([^)]+)\)$/gm)].map((match) => ({
+  id: match[1],
+  title: match[2],
+  target: match[3],
+}));
+assert.ok(archiveEntries.some(({ id }) => id === '001'), 'experiments index must include experiment 001');
+assert.equal(new Set(archiveEntries.map(({ id }) => id)).size, archiveEntries.length, 'experiment ids must be unique');
+assert.equal(new Set(archiveEntries.map(({ target }) => target)).size, archiveEntries.length, 'experiment targets must be unique');
+assert.deepEqual(
+  archiveEntries.map(({ id }) => id),
+  archiveEntries.map(({ id }) => id).sort(),
+  'experiment entries must remain ordered by id',
+);
+for (const { target } of archiveEntries) {
+  const resolved = path.resolve(root, 'experiments', target);
+  assert.ok(resolved.startsWith(`${path.join(root, 'experiments')}${path.sep}`), `experiment target must remain inside the archive: ${target}`);
+  await readFile(resolved);
+}
+const currentArchiveEntry = archiveEntries.find(({ id }) => id === '001');
+assert.equal(
+  path.resolve(root, 'experiments', currentArchiveEntry.target),
+  path.resolve(root, intrusionTarget),
+  'README intrusion and archive entry 001 must resolve to the same detail page',
+);
+
+const experimentDetail = await readFile(path.join(root, 'experiments', '001-a-profile-with-memory', 'README.md'), 'utf8');
+const profileHistory = [
+  ['91A7A77', '91a7a77faf8492d1aaedd975cca404dc3890657e'],
+  ['35AA305', '35aa3052a2765879a5c0973260f11042b81ca55e'],
+  ['B130094', 'b130094cb5f273bbb20cec5cff163eafb511f638'],
+  ['D71F9F3', 'd71f9f3c92a1c615d6b49a59da9bf1f40ddfffb1'],
+];
+assert.match(experimentDetail, /^\[← Thought Experiments\]\(\.\.\/README\.md\)$/m, 'experiment detail must link back to the archive');
+for (const [label, hash] of profileHistory) {
+  assert.match(
+    experimentDetail,
+    new RegExp(`\\[${label}\\]\\(https://github\\.com/BrickerP/BrickerP/commit/${hash}\\)`),
+    `experiment 001 must link the full ${label} commit receipt`,
+  );
+}
+assert.deepEqual(
+  [...experimentDetail.matchAll(/\b[0-9a-f]{40}\b/g)].map((match) => match[0]).sort(),
+  profileHistory.map(([, hash]) => hash).sort(),
+  'experiment 001 must contain exactly the four approved full commit receipts',
+);
+assert.doesNotMatch(experimentDetail, /PAST FIXATIONS/i, 'phase one detail must not display an empty past');
 
 const expectedAnchors = [
   {
+    href: intrusionTarget,
+    src: intrusionImage,
+    alt: intrusionAlt,
+  },
+  {
     href: 'https://brickerp.github.io/',
     src: 'assets/human-zine-film.svg',
-    alt: assets[1].alt,
+    alt: coreAssets[1].alt,
   },
   {
     href: 'https://brickerp.github.io/ai-usage-report/',
     src: 'assets/human-zine-ai-usage.svg',
-    alt: assets[2].alt,
+    alt: coreAssets[2].alt,
   },
   {
     href: 'mailto:yplmicro@gmail.com',
     src: 'assets/human-zine-open-line.svg',
-    alt: assets[4].alt,
+    alt: coreAssets[4].alt,
   },
 ];
 const readmeAnchors = [...readme.matchAll(/<a href="([^"]+)"><img src="([^"]+)" width="100%" alt="([^"]+)"><\/a>/g)].map((match) => ({
@@ -140,21 +220,22 @@ const readmeAnchors = [...readme.matchAll(/<a href="([^"]+)"><img src="([^"]+)" 
   src: match[2],
   alt: match[3],
 }));
-assert.deepEqual(readmeAnchors, expectedAnchors, 'README must expose exactly the approved Film, AI Usage, and Open Line image anchors');
+assert.deepEqual(readmeAnchors, expectedAnchors, 'README must expose exactly the approved History, Film, AI Usage, and Open Line image anchors');
 assert.equal((readme.match(/<a\b/g) ?? []).length, expectedAnchors.length, 'README must not contain extra anchors');
 assert.doesNotMatch(readme, /^\s*\[[^\]]+\]\([^)]+\).*$/m, 'README must not retain bare markdown text-link rows');
 assert.doesNotMatch(readme, /(?:WATCH FILM|PLAY ARCHIVE|EMAIL YUPENG|RESUME|GITHUB)\s*(?:→|↗)/i, 'README must not retain superseded text-link labels');
 
 const assetNames = (await readdir(assetRoot)).sort();
-assert.deepEqual(assetNames, assets.map(({ file }) => file).sort(), 'assets must contain exactly the five approved Human Zine spreads');
+assert.deepEqual(assetNames, assets.map(({ file }) => file).sort(), `assets must contain exactly the ${assets.length} approved Human Zine spreads`);
 
 const svgs = new Map();
 const visibleCopy = [];
 const usedPalette = new Set();
 for (const asset of assets) {
+  const isCoreAsset = coreAssets.some(({ file }) => file === asset.file);
   const svg = await readFile(path.join(assetRoot, asset.file), 'utf8');
   svgs.set(asset.file, svg);
-  assert.doesNotMatch(svg, legacyFlow, `${asset.file}: superseded LOOP / LEDGER flow is forbidden`);
+  if (isCoreAsset) assert.doesNotMatch(svg, legacyFlow, `${asset.file}: superseded LOOP / LEDGER flow is forbidden`);
 
   const rootTag = svg.match(/^<svg\b([^>]*)>/)?.[1];
   assert.ok(rootTag, `${asset.file}: missing root svg element`);
@@ -166,23 +247,36 @@ for (const asset of assets) {
 
   const records = textRecords(svg);
   const assetCopy = records.map(({ text }) => text);
-  assert.deepEqual(assetCopy, asset.text, `${asset.file}: visible copy must remain exact and complete`);
-  visibleCopy.push(...assetCopy);
   assert.doesNotMatch(svg, /<tspan\b[^>]*\bfont-size=/i, `${asset.file}: nested text must not override the verified source size`);
-  for (const record of records) {
-    const fontSize = Number(getAttribute(record.attributes, 'font-size'));
-    const isReceiptIdentifier = /^(?:5E8F667|B9EF619|520E83F) \/$/.test(record.text);
-    if (isReceiptIdentifier) {
-      assert.equal(fontSize, 54, `${asset.file}: ${record.text} must use exactly 54px source text`);
-    } else {
-      assert.ok(Number.isFinite(fontSize) && fontSize >= 60, `${asset.file}: ${record.text} must use at least 60px source text`);
+  if (isCoreAsset) {
+    assert.deepEqual(assetCopy, asset.text, `${asset.file}: visible copy must remain exact and complete`);
+    visibleCopy.push(...assetCopy);
+    for (const record of records) {
+      const fontSize = Number(getAttribute(record.attributes, 'font-size'));
+      const isReceiptIdentifier = /^(?:5E8F667|B9EF619|520E83F) \/$/.test(record.text);
+      if (isReceiptIdentifier) {
+        assert.equal(fontSize, 54, `${asset.file}: ${record.text} must use exactly 54px source text`);
+      } else {
+        assert.ok(Number.isFinite(fontSize) && fontSize >= 60, `${asset.file}: ${record.text} must use at least 60px source text`);
+      }
     }
   }
 
   const metadata = normalizeText(svg.match(/<metadata>([\s\S]*?)<\/metadata>/)?.[1] ?? '');
   assert.ok(metadata, `${asset.file}: missing nonvisible source metadata`);
-  for (const evidence of metadataEvidence) {
-    assert.ok(metadata.includes(evidence), `${asset.file}: metadata must include ${evidence}`);
+  if (isCoreAsset) {
+    for (const evidence of legacyMetadataEvidence) {
+      assert.ok(metadata.includes(evidence), `${asset.file}: metadata must include ${evidence}`);
+    }
+  } else {
+    assert.match(metadata, /Thought experiment 001: A Profile With Memory\./, `${asset.file}: missing experiment identity`);
+    assert.match(metadata, /linear main-branch history of this profile/i, `${asset.file}: receipts must be identified as linear main history`);
+    assert.deepEqual(
+      [...metadata.matchAll(/\b[0-9a-f]{40}\b/g)].map((match) => match[0]).sort(),
+      profileHistory.map(([, hash]) => hash).sort(),
+      `${asset.file}: metadata must contain only the four profile commit receipts`,
+    );
+    assert.doesNotMatch(metadata, /(?:\/Users\/|BeijingDriveScene|buildOlympic|buildSecondRingThreshold|ai-usage-report)/, `${asset.file}: unrelated film, AI, or machine-local evidence is forbidden`);
   }
 
   const colors = [...svg.matchAll(/#[0-9A-Fa-f]{6}\b/g)].map((match) => match[0].toUpperCase());
@@ -223,8 +317,22 @@ for (const asset of assets) {
 
 for (const color of palette) assert.ok(usedPalette.has(color), `Human Zine set is missing approved palette color ${color}`);
 
+const memoryRecords = textRecords(svgs.get(memoryAsset.file));
+for (const [semanticRole, minimumSize] of [
+  ['memory-question-line', 60],
+  ['memory-cta', 60],
+  ['memory-history-label', 54],
+]) {
+  const semanticRecords = memoryRecords.filter(({ attributes }) => getAttribute(attributes, 'data-role') === semanticRole);
+  assert.ok(semanticRecords.length > 0, `${memoryAsset.file}: missing ${semanticRole} text`);
+  for (const record of semanticRecords) {
+    const fontSize = Number(getAttribute(record.attributes, 'font-size'));
+    assert.ok(Number.isFinite(fontSize) && fontSize >= minimumSize, `${memoryAsset.file}: ${semanticRole} text must use at least ${minimumSize}px source text`);
+  }
+}
+
 const nativeLinkLabels = [...readme.matchAll(/\[([^\]]+)\]\([^)]+\)/g)].map((match) => match[1]);
-assert.ok(countWords([...visibleCopy, ...nativeLinkLabels].join(' ')) <= 85, 'Human Zine visible copy must stay within the 85-word budget');
+assert.ok(countWords([...visibleCopy, ...nativeLinkLabels].join(' ')) <= 85, `The original ${coreAssets.length} Human Zine spreads must stay within the 85-word budget`);
 
 const cover = svgs.get('human-zine-cover.svg');
 assert.match(cover, /data-role="crop-marks"/, 'cover must retain crop marks');
