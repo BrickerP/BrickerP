@@ -1,5 +1,7 @@
 <img src="assets/human-zine-cover.svg" width="100%" alt="Yupeng Lu. Field Notes, Issue 00. Things I keep returning to.">
 
+<a href="experiments/001-a-profile-with-memory/README.md"><img src="assets/human-zine-memory.svg" width="100%" alt="A Profile With Memory asks how many past selves a profile should remember. Enter the history."></a>
+
 <a href="https://brickerp.github.io/"><img src="assets/human-zine-film.svg" width="100%" alt="Endless Second Ring, a 48-second Beijing night drive. Open the film."></a>
 
 <a href="https://brickerp.github.io/ai-usage-report/"><img src="assets/human-zine-ai-usage.svg" width="100%" alt="AI Usage, real model history made playable. Open the archive."></a>

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">A Profile With Memory</title>
+  <desc id="desc">A torn, misregistered and stitched photocopy tracing four real profile versions and inviting the reader into their history.</desc>
+  <metadata>
+    Thought experiment 001: A Profile With Memory.
+    These four receipts are the linear main-branch history of this profile:
+    91a7a77faf8492d1aaedd975cca404dc3890657e;
+    35aa3052a2765879a5c0973260f11042b81ca55e;
+    b130094cb5f273bbb20cec5cff163eafb511f638;
+    d71f9f3c92a1c615d6b49a59da9bf1f40ddfffb1.
+  </metadata>
+  <defs>
+    <pattern id="memory-grain" width="13" height="13" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="3" r="1" fill="#111111" opacity=".12"/>
+      <circle cx="10" cy="8" r=".8" fill="#1457FF" opacity=".12"/>
+      <path d="M4 12l3-1" stroke="#111111" opacity=".1"/>
+    </pattern>
+    <pattern id="memory-halftone" width="10" height="10" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="3" r="2" fill="#111111"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="900" fill="#F4F0E3"/>
+  <path d="M0 0H1200V88L1157 77l-48 18-46-13-52 17-45-14-50 18-49-16-52 15-48-18-50 19-47-15-54 17-46-18-51 16-48-17-52 19-48-17-52 15-47-18-54 20-45-17-52 15-49-18-49 19-53-16-46 15-54-19-47 18-49-17-52 20-49-17-51 14-49-18-52 19-48-16-51 15-49-18-52 18-48-15-52 17-47-18-54 17-46-15-53 17-47-19L0 101Z" fill="#1457FF"/>
+  <path d="M54 59L533 48 526 214 62 222Z" fill="#FFD83D" stroke="#111111" stroke-width="7"/>
+  <path d="M64 68L543 57 536 223 72 231Z" fill="none" stroke="#FF4B35" stroke-width="7" opacity=".9"/>
+  <text x="84" y="126" fill="#111111" font-family="Arial Black, Arial, sans-serif" font-size="60" font-weight="900" letter-spacing="-2">A PROFILE</text>
+  <text x="84" y="190" fill="#111111" font-family="Arial Black, Arial, sans-serif" font-size="60" font-weight="900" letter-spacing="-2">WITH MEMORY</text>
+  <path d="M568 45l576 12-8 218-570-8Z" fill="url(#memory-halftone)"/>
+  <path d="M578 48l558 12" stroke="#63E2B7" stroke-width="15" stroke-dasharray="4 18"/>
+  <rect x="574" y="69" width="559" height="187" fill="#F4F0E3" opacity=".94"/>
+  <g data-role="memory-question" fill="#111111" font-family="Arial, sans-serif" font-size="60" font-weight="900" letter-spacing="-2">
+    <text data-role="memory-question-line" x="598" y="120" font-size="60">HOW MANY PAST</text>
+    <text data-role="memory-question-line" x="598" y="170" font-size="60">SELVES SHOULD</text>
+    <text data-role="memory-question-line" x="598" y="220" font-size="60">A PROFILE</text>
+    <text data-role="memory-question-line" x="598" y="270" font-size="60">REMEMBER?</text>
+  </g>
+  <g data-role="history-fragments" font-family="Arial Black, Arial, sans-serif" font-weight="900">
+    <g transform="rotate(-1 332 380)">
+      <path d="M55 292l555-7 7 180-562 11Z" fill="#111111"/>
+      <path d="M65 300l545-7" stroke="#FF4B35" stroke-width="8"/>
+      <text data-role="memory-history-label" x="76" y="365" fill="#F4F0E3" font-size="58">91A7A77 /</text>
+      <text data-role="memory-history-label" x="76" y="438" fill="#F4F0E3" font-size="54">RECRUITER SCAN</text>
+    </g>
+    <g transform="rotate(1.2 890 370)">
+      <path d="M630 282l516 10-8 181-513-8Z" fill="#FF4B35"/>
+      <path d="M637 291l500 10" stroke="#1457FF" stroke-width="8"/>
+      <text data-role="memory-history-label" x="650" y="356" fill="#111111" font-size="58">35AA305 /</text>
+      <text data-role="memory-history-label" x="650" y="429" fill="#111111" font-size="54">LOOP / LEDGER</text>
+    </g>
+    <g transform="rotate(1.1 315 588)">
+      <path d="M68 500l501 9-8 178-499-7Z" fill="#FFD83D" stroke="#111111" stroke-width="7"/>
+      <text data-role="memory-history-label" x="98" y="572" fill="#111111" font-size="58">B130094 /</text>
+      <text data-role="memory-history-label" x="98" y="645" fill="#111111" font-size="54">HUMAN ZINE</text>
+    </g>
+    <g transform="rotate(-1 874 586)">
+      <path d="M600 494l550-5-3 188-546 8Z" fill="#63E2B7" stroke="#111111" stroke-width="7"/>
+      <text data-role="memory-history-label" x="610" y="568" fill="#111111" font-size="58">D71F9F3 /</text>
+      <text data-role="memory-history-label" x="610" y="641" fill="#111111" font-size="54">VISUAL PORTALS</text>
+    </g>
+  </g>
+  <path data-role="stitches" d="M584 275l8 425M596 274l8 425M51 484l1097-10" fill="none" stroke="#1457FF" stroke-width="5" stroke-dasharray="3 15"/>
+  <path d="M332 734l818-8 1 124-822 7Z" fill="#111111"/>
+  <path d="M337 725l810-8" stroke="#FF4B35" stroke-width="12"/>
+  <text data-role="memory-cta" x="350" y="826" fill="#F4F0E3" font-family="Arial Black, Arial, sans-serif" font-size="60" font-weight="900" letter-spacing="-1">ENTER THE HISTORY ↗</text>
+  <rect width="1200" height="900" fill="url(#memory-grain)"/>
+</svg>
