@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="gdl-title gdl-desc">
+  <title id="gdl-title">Get Date Love — anonymized translation case file</title>
+  <desc id="gdl-desc">Irregular overlapping case papers, translation fragments, redactions, tape, and registration marks preserve a private archive around one public question.</desc>
+  <metadata>Found experiment from 2026.01. Hand-authored static vector. Public question only; private product material is not reproduced.</metadata>
+  <defs>
+    <pattern id="gdl-grain" width="19" height="19" patternUnits="userSpaceOnUse">
+      <circle cx="3" cy="5" r="1" fill="#171717" opacity=".09"/>
+      <path d="M9 15l6-2M2 18l4-1" stroke="#77736B" stroke-width="1" opacity=".14"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="720" fill="#E9DFC8"/>
+  <g transform="translate(0 2) scale(1 .795)">
+  <rect width="1200" height="900" fill="#E9DFC8"/>
+  <rect width="1200" height="900" fill="url(#gdl-grain)"/>
+  <g data-role="case-file-collage">
+    <path d="M91 92l657-18 13 64-10 70 14 74-8 68 10 73-681 26 11-71-13-73 12-69-11-76Z" fill="#E9DFC8" stroke="#171717" stroke-width="5" transform="rotate(-2 426 260)"/>
+    <path d="M420 311l660-16 12 77-9 86 13 79-10 89 11 80-662 20 9-82-13-79 12-86-11-78Z" fill="#77736B" opacity=".34" stroke="#171717" stroke-width="5" transform="rotate(1.5 758 512)"/>
+    <path d="M104 445l716-27 10 76-12 83 14 85-11 91 9 67-711 10 8-75-12-84 11-84-12-71Z" fill="#D1CAB9" stroke="#171717" stroke-width="5" transform="rotate(-1 467 625)"/>
+  </g>
+  <path d="M132 106l185-16 8 46-187 14Z" fill="#C28A28" opacity=".78" transform="rotate(-5 230 120)"/>
+  <path d="M711 72l265 9-3 49-268-7Z" fill="#C28A28" opacity=".68" transform="rotate(3 841 102)"/>
+  <g data-role="translation-slip">
+    <path d="M758 142l332 11-7 223-327-5Z" fill="#244F9E" transform="rotate(3 923 258)"/>
+    <path d="M786 184h254M780 242h271M774 300h247" stroke="#E9DFC8" stroke-width="12" opacity=".8" transform="rotate(3 923 258)"/>
+    <path d="M839 432l164-8 5 57-168 9ZM822 510l214-9 5 60-220 7ZM856 588l185-6 4 58-190 7Z" fill="#244F9E" opacity=".9"/>
+  </g>
+  <g data-role="redaction-strip" fill="#171717">
+    <rect x="793" y="198" width="244" height="28" transform="rotate(4 915 212)"/>
+    <rect x="778" y="258" width="275" height="31" transform="rotate(1 916 273)"/>
+    <rect x="813" y="319" width="207" height="27" transform="rotate(5 916 333)"/>
+    <rect x="862" y="451" width="192" height="31" transform="rotate(-2 958 467)"/>
+    <rect x="835" y="529" width="221" height="29" transform="rotate(2 946 544)"/>
+    <rect x="879" y="607" width="169" height="28" transform="rotate(-1 964 621)"/>
+  </g>
+  <g fill="none" stroke="#8E201B" stroke-width="5" opacity=".8">
+    <circle cx="1062" cy="104" r="28"/><path d="M1018 104h88M1062 60v88"/>
+    <circle cx="104" cy="804" r="25"/><path d="M66 804h76M104 766v76"/>
+  </g>
+  <text x="0" y="0" fill="#C28A28" font-family="Arial Black, Arial, sans-serif" font-size="60" font-weight="900" transform="translate(124 181) rotate(-2) scale(.72 1)">FOUND EXPERIMENT / 2026.01</text>
+  <text x="0" y="0" fill="#8E201B" font-family="Arial Black, Arial, sans-serif" font-size="104" font-weight="900" transform="translate(117 306) rotate(-2) scale(.88 1)">GET DATE LOVE</text>
+  <text x="0" y="0" fill="#171717" font-family="Arial Black, Arial, sans-serif" font-size="60" font-weight="900" transform="translate(157 508) rotate(-1) scale(.78 1)">CAN AI CROSS A</text>
+  <text x="0" y="0" fill="#171717" font-family="Arial Black, Arial, sans-serif" font-size="60" font-weight="900" transform="translate(157 578) rotate(-1) scale(.72 1)">CULTURE WITHOUT</text>
+  <text x="0" y="0" fill="#171717" font-family="Arial Black, Arial, sans-serif" font-size="60" font-weight="900" transform="translate(157 648) rotate(-1) scale(.68 1)">OPTIMIZING INTIMACY?</text>
+  <path d="M348 700l738-33 9 92-729 42Z" fill="#8E201B" transform="rotate(-5 722 734)"/>
+  <text x="0" y="0" fill="#E9DFC8" font-family="Arial Black, Arial, sans-serif" font-size="60" font-weight="900" transform="translate(397 751) rotate(-5) scale(.5 1)">PRIVATE CODE / PUBLIC QUESTION</text>
+  <path d="M180 763l678-11 9 74-681 8Z" fill="#E9DFC8" stroke="#171717" stroke-width="4" transform="rotate(1 524 793)"/>
+  <text x="0" y="0" fill="#244F9E" font-family="Arial Black, Arial, sans-serif" font-size="60" font-weight="900" transform="translate(223 817) rotate(1) scale(.72 1)">ENTER THE CASE FILE ↗</text>
+  </g>
+</svg>

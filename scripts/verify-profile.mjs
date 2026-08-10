@@ -121,6 +121,30 @@ function countWords(value) {
   return value.match(/[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*/g)?.length ?? 0;
 }
 
+function imageAnchors(markdown) {
+  return [...markdown.matchAll(/<a href="([^"]+)"><img src="([^"]+)" width="100%" alt="([^"]+)"><\/a>/g)].map((match) => ({
+    href: match[1],
+    src: match[2],
+    alt: match[3],
+  }));
+}
+
+async function readLocalReference(base, reference) {
+  const resolved = path.resolve(base, reference);
+  assert.ok(resolved.startsWith(`${root}${path.sep}`), `local reference must remain inside the repository: ${reference}`);
+  return readFile(resolved, 'utf8');
+}
+
+async function listRelativePaths(directory, prefix = '') {
+  const results = [];
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const relative = path.join(prefix, entry.name);
+    results.push(relative);
+    if (entry.isDirectory()) results.push(...await listRelativePaths(path.join(directory, entry.name), relative));
+  }
+  return results;
+}
+
 const readme = await readFile(path.join(root, 'README.md'), 'utf8');
 assert.doesNotMatch(readme, legacyFlow, 'README must not retain the superseded LOOP / LEDGER flow');
 
@@ -129,6 +153,9 @@ assert.equal(intrusionMatches.length, 1, 'README must contain exactly one curren
 const [intrusionLine, intrusionTarget, intrusionImage, intrusionAlt] = intrusionMatches[0];
 assert.ok(countWords(intrusionAlt) >= 6, 'the current intrusion must provide a meaningful alt description');
 assert.match(intrusionAlt, /\bprofile\b/i, 'the current intrusion alt must identify the profile subject');
+assert.equal(intrusionTarget, 'experiments/README.md', 'the memory portal must enter the Thought Experiments archive');
+assert.match(intrusionAlt, /Thought Experiments archive/i, 'the memory portal alt must identify the archive destination');
+assert.match(intrusionAlt, /found experiments/i, 'the memory portal alt must identify the found experiments');
 
 for (const localReference of [intrusionTarget, intrusionImage]) {
   const resolved = path.resolve(root, localReference);
@@ -146,30 +173,32 @@ assert.equal(readme.replace(`${intrusionLine}\n\n`, ''), expectedCoreReadme, `th
 
 const experimentsIndex = await readFile(path.join(root, 'experiments', 'README.md'), 'utf8');
 assert.doesNotMatch(experimentsIndex, /PAST FIXATIONS/i, 'phase one must not fabricate an empty past');
-const archiveEntries = [...experimentsIndex.matchAll(/^- \[(\d{3}) — ([^\]]+)\]\(([^)]+)\)$/gm)].map((match) => ({
-  id: match[1],
-  title: match[2],
-  target: match[3],
-}));
-assert.ok(archiveEntries.some(({ id }) => id === '001'), 'experiments index must include experiment 001');
-assert.equal(new Set(archiveEntries.map(({ id }) => id)).size, archiveEntries.length, 'experiment ids must be unique');
-assert.equal(new Set(archiveEntries.map(({ target }) => target)).size, archiveEntries.length, 'experiment targets must be unique');
-assert.deepEqual(
-  archiveEntries.map(({ id }) => id),
-  archiveEntries.map(({ id }) => id).sort(),
-  'experiment entries must remain ordered by id',
-);
-for (const { target } of archiveEntries) {
-  const resolved = path.resolve(root, 'experiments', target);
-  assert.ok(resolved.startsWith(`${path.join(root, 'experiments')}${path.sep}`), `experiment target must remain inside the archive: ${target}`);
-  await readFile(resolved);
+assert.match(experimentsIndex, /^\[← Profile\]\(\.\.\/README\.md\)$/m, 'archive must link back to the profile');
+assert.match(experimentsIndex, /^## CURRENT \/ 001$/m, 'archive must identify current experiment 001');
+assert.match(experimentsIndex, /^## FOUND BEFORE ISSUE 001$/m, 'archive must identify the found-before-001 section');
+const chronologyDisclaimer = 'The before-issue-001 classification is author-reported from private source history and is not independently verifiable from this public page.';
+assert.ok(experimentsIndex.includes(chronologyDisclaimer), 'archive must disclose the private-source chronology boundary');
+const expectedArchiveAnchors = [
+  ['001-a-profile-with-memory/README.md', '../assets/human-zine-memory.svg'],
+  ['found/get-date-love/README.md', 'found/get-date-love/portal.svg'],
+  ['found/quant-trading/README.md', 'found/quant-trading/portal.svg'],
+];
+const archiveAltContracts = [
+  [/A Profile With Memory/i, /editorial|collage|zine/i, /enter|detail/i],
+  [/Get Date Love/i, /case file|dossier/i, /enter|detail/i],
+  [/Quant Trading/i, /paper research|research sheet|tractor-feed/i, /enter|detail/i],
+];
+const archiveAnchors = imageAnchors(experimentsIndex);
+assert.deepEqual(archiveAnchors.map(({ href, src }) => [href, src]), expectedArchiveAnchors, 'archive portals must retain current, January, then April order');
+for (const [index, { href, src, alt }] of archiveAnchors.entries()) {
+  assert.ok(countWords(alt) >= 6, `archive portal ${src} must provide meaningful alt text`);
+  const [work, editorialForm, detailDestination] = archiveAltContracts[index];
+  assert.match(alt, work, `archive portal ${src} alt must identify the work`);
+  assert.match(alt, editorialForm, `archive portal ${src} alt must identify its editorial form`);
+  assert.match(alt, detailDestination, `archive portal ${src} alt must identify the detail destination`);
+  await readLocalReference(path.join(root, 'experiments'), href);
+  await readLocalReference(path.join(root, 'experiments'), src);
 }
-const currentArchiveEntry = archiveEntries.find(({ id }) => id === '001');
-assert.equal(
-  path.resolve(root, 'experiments', currentArchiveEntry.target),
-  path.resolve(root, intrusionTarget),
-  'README intrusion and archive entry 001 must resolve to the same detail page',
-);
 
 const experimentDetail = await readFile(path.join(root, 'experiments', '001-a-profile-with-memory', 'README.md'), 'utf8');
 const profileHistory = [
@@ -375,5 +404,106 @@ assert.doesNotMatch(
 
 const openLine = svgs.get('human-zine-open-line.svg');
 assert.match(openLine, /data-role="blue-brush-tape"/, 'open-line spread must retain the restrained upper-right cobalt brush/tape block');
+
+const foundExperiments = [
+  {
+    directory: 'found/get-date-love',
+    identity: /Private product experiment in 2026\.01/i,
+    headline: /\bGET DATE LOVE\b/,
+    question: /CAN AI CROSS A CULTURE WITHOUT OPTIMIZING INTIMACY\?/,
+    boundary: /PRIVATE CODE \/ PUBLIC QUESTION/,
+    semanticDescription: /case[\s\S]*translation[\s\S]*redaction/i,
+    excludedDescription: /greenbar|tractor-feed|perforat|research record/i,
+  },
+  {
+    directory: 'found/quant-trading',
+    identity: /Private research experiment in 2026\.04/i,
+    headline: /\bQUANT TRADING\b/,
+    question: /CAN A MARKET HYPOTHESIS SURVIVE AN AUDIT\?/,
+    boundary: /PAPER RESEARCH \/ NOT INVESTMENT PERFORMANCE/,
+    semanticDescription: /greenbar[\s\S]*tractor-feed[\s\S]*research record/i,
+    excludedDescription: /case file|translation|redaction/i,
+  },
+];
+
+const foundDetailForbidden = /(?:https?:\/\/|\b[0-9a-f]{7,40}\b|(?:^|[\s`])(?:src|source|app|packages?)\/|\b(?:screenshots?|configs?|users?|chats?|avatars?|metrics?|deploy(?:ed|ment)?|P&L|returns?|win rate|accounts?|investment advice|live trading|tech stack|frameworks?|libraries|database|endpoints?|architecture)\b)/i;
+const foundPublicCorpus = [experimentsIndex];
+for (const experiment of foundExperiments) {
+  const experimentDirectory = path.join(root, 'experiments', experiment.directory);
+  const portal = await readFile(path.join(experimentDirectory, 'portal.svg'), 'utf8');
+  foundPublicCorpus.push(portal);
+  const portalRoot = portal.match(/^<svg\b([^>]*)>/)?.[1];
+  assert.ok(portalRoot, `${experiment.directory}/portal.svg: missing root svg element`);
+  assert.equal(getAttribute(portalRoot, 'width'), '1200', `${experiment.directory}/portal.svg: width must remain 1200`);
+  assert.equal(getAttribute(portalRoot, 'height'), '720', `${experiment.directory}/portal.svg: height must remain 720`);
+  assert.equal(getAttribute(portalRoot, 'viewBox'), '0 0 1200 720', `${experiment.directory}/portal.svg: viewBox must match its release size`);
+  assert.equal(getAttribute(portalRoot, 'role'), 'img', `${experiment.directory}/portal.svg: root role must be img`);
+  const labelledBy = getAttribute(portalRoot, 'aria-labelledby')?.split(/\s+/) ?? [];
+  assert.equal(labelledBy.length, 2, `${experiment.directory}/portal.svg: aria-labelledby must reference title and description`);
+  assert.equal((portal.match(/<title\b/g) ?? []).length, 1, `${experiment.directory}/portal.svg: exactly one title is required`);
+  assert.equal((portal.match(/<desc\b/g) ?? []).length, 1, `${experiment.directory}/portal.svg: exactly one description is required`);
+  for (const id of labelledBy) assert.match(portal, new RegExp(`<(?:title|desc)\\b[^>]*\\bid="${id}"`), `${experiment.directory}/portal.svg: missing labelled element ${id}`);
+  assert.deepEqual(roleValues(portal), ['img'], `${experiment.directory}/portal.svg: only the root img role is allowed`);
+  assert.doesNotMatch(
+    portal,
+    /<(?:a|script|style|image|foreignObject|animate|animateMotion|animateTransform|set|iframe|video|audio|canvas|button|use)\b/i,
+    `${experiment.directory}/portal.svg: interactive, embedded, or dynamic elements are forbidden`,
+  );
+  assert.doesNotMatch(portal, /\b(?:href|xlink:href|on[a-z]+|pointer-events|cursor|tabindex)\s*=/i, `${experiment.directory}/portal.svg: links, handlers, and hit zones are forbidden`);
+  assert.doesNotMatch(portal, /\bfocusable\s*=\s*["']?true\b/i, `${experiment.directory}/portal.svg: focusable content is forbidden`);
+  assert.doesNotMatch(portal, /@(?:import|font-face|media)|prefers-color-scheme|animation\s*:|transition\s*:/i, `${experiment.directory}/portal.svg: remote fonts, themes, and motion are forbidden`);
+  assert.doesNotMatch(portal.replace('xmlns="http://www.w3.org/2000/svg"', ''), /https?:\/\//i, `${experiment.directory}/portal.svg: remote resources are forbidden`);
+  for (const match of portal.matchAll(/url\(([^)]+)\)/g)) assert.match(match[1], /^#[A-Za-z][\w.-]*$/, `${experiment.directory}/portal.svg: only local paint references are allowed`);
+
+  const portalRecords = textRecords(portal);
+  for (const record of portalRecords) {
+    assert.match(getAttribute(record.attributes, 'font-family') ?? '', /Arial|sans-serif|system-ui|-apple-system/i, `${experiment.directory}/portal.svg: visible text must use a system font stack`);
+    const fontSize = Number(getAttribute(record.attributes, 'font-size'));
+    assert.ok(Number.isFinite(fontSize) && fontSize >= 60, `${experiment.directory}/portal.svg: core text ${record.text} must use at least 60px source text`);
+  }
+  const portalCopy = portalRecords.map(({ text }) => text).join(' ');
+  assert.match(portalCopy, experiment.headline, `${experiment.directory}/portal.svg: missing approved headline`);
+  assert.match(portalCopy, experiment.question, `${experiment.directory}/portal.svg: missing approved question`);
+  assert.match(portalCopy, experiment.boundary, `${experiment.directory}/portal.svg: missing approved public boundary`);
+  const portalDescription = normalizeText(portal.match(/<desc\b[^>]*>([\s\S]*?)<\/desc>/)?.[1] ?? '');
+  assert.match(portalDescription, experiment.semanticDescription, `${experiment.directory}/portal.svg: accessible description must identify its distinct visual semantics`);
+  assert.doesNotMatch(portalDescription, experiment.excludedDescription, `${experiment.directory}/portal.svg: visual semantics must remain distinct from the other found experiment`);
+
+  const detail = await readFile(path.join(experimentDirectory, 'README.md'), 'utf8');
+  foundPublicCorpus.push(detail);
+  for (const heading of ['## The question', '## What existed', '## What it exposed', '## Public boundary']) assert.match(detail, new RegExp(`^${heading}$`, 'm'), `${experiment.directory}/README.md: missing ${heading}`);
+  assert.match(detail, experiment.identity, `${experiment.directory}/README.md: missing approved experiment identity and month`);
+  assert.ok(detail.includes(chronologyDisclaimer), `${experiment.directory}/README.md: missing chronology disclaimer`);
+  assert.match(detail, /^\[← Experiment Archive\]\(\.\.\/\.\.\/README\.md\)$/m, `${experiment.directory}/README.md: archive backlink must remain relative`);
+  assert.doesNotMatch(detail, foundDetailForbidden, `${experiment.directory}/README.md: contains private implementation evidence, user data, deployment claims, or financial claims`);
+}
+
+const approvedFoundCorpus = foundPublicCorpus
+  .join('\n')
+  .replaceAll('http://www.w3.org/2000/svg', '')
+  .replaceAll('width="100%"', '')
+  .replace(/not investment performance/gi, 'approved-visible-boundary')
+  .replace(/separated from investment performance/gi, 'approved-description-boundary')
+  .replace(/no performance claim/gi, 'approved-metadata-boundary');
+const forbiddenFoundCorpus = [
+  ['public or private repository URL', /https?:\/\/|\b(?:github|gitlab)\.com\//i],
+  ['commit hash', /\b[0-9a-f]{7,40}\b/i],
+  ['source or machine path', /(?:^|[\s"'(])(?:\/Users\/|[A-Za-z]:\\|(?:src|source|app|packages?)\/)|\b[\w.-]+\.(?:ts|tsx|js|jsx|py|go|java|rs|sql|env|toml|ya?ml)\b/im],
+  ['configuration or secret value', /\b(?:configs?|configuration|secrets?|tokens?|api keys?|credentials?|passwords?)\b/i],
+  ['person identity or location', /\b(?:full name|real name|email|phone|address|identity|person|people|location|city|country|street)\b|\b[^\s@]+@[^\s@]+\.[^\s@]+\b/i],
+  ['conversation or image evidence', /\b(?:conversations?|chats?|messages?|photos?|screenshots?|avatars?|portraits?)\b/i],
+  ['metric, score, percentage, or currency', /\b(?:metrics?|scores?|percentages?|USD|CNY|RMB|EUR|HKD|dollars?|yuan)\b|\d+(?:\.\d+)?%|[$€£¥]/i],
+  ['financial result or advice', /\b(?:returns?|revenues?|profits?|profitability|performance|P&L|win rate|accounts?|investment advice)\b/i],
+  ['live production or release claim', /\b(?:live production|live system|live service|production|deployed|deployment|released|launched|shipped)\b/i],
+  ['claimed result', /\b(?:claimed results?|results?|outcomes?|achieved|improved|increased|decreased|success|successful)\b/i],
+];
+for (const [label, pattern] of forbiddenFoundCorpus) assert.doesNotMatch(approvedFoundCorpus, pattern, `Found public corpus must not expose ${label}`);
+
+const experimentPaths = await listRelativePaths(path.join(root, 'experiments'));
+assert.ok(experimentPaths.every((entry) => !/^(?:found-get-date-love|found-quant-trading)(?:\/|$)/.test(entry)), 'superseded flat found-experiment paths must remain removed');
+assert.ok(experimentPaths.every((entry) => !/^(?:000|002|003)(?:[-/]|$)/.test(entry)), 'numbered experiments 000, 002, and 003 must remain absent in this phase');
+for (const relative of experimentPaths.filter((entry) => /\.(?:md|svg)$/i.test(entry))) {
+  assert.doesNotMatch(await readFile(path.join(root, 'experiments', relative), 'utf8'), /PAST FIXATIONS/i, `${relative}: phase one must not fabricate a past-fixations section`);
+}
 
 console.log('Human Zine profile contract verified.');
