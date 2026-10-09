@@ -148,7 +148,35 @@ async function listRelativePaths(directory, prefix = '') {
 const readme = await readFile(path.join(root, 'README.md'), 'utf8');
 assert.doesNotMatch(readme, legacyFlow, 'README must not retain the superseded LOOP / LEDGER flow');
 
-const intrusionMatches = [...readme.matchAll(/^<a href="(experiments\/[^"#?]+)"><img src="(assets\/[^"#?]+\.svg)" width="100%" alt="([^"]+)"><\/a>$/gm)];
+const coverLine = `<img src="assets/human-zine-cover.svg" width="100%" alt="${coreAssets[0].alt}">`;
+const coverIndex = readme.indexOf(coverLine);
+assert.notEqual(coverIndex, -1, 'README must retain the exact zine cover spread');
+assert.ok(coverIndex > 0, 'README must open with a plain-Markdown text header above the zine cover');
+const header = readme.slice(0, coverIndex);
+const zine = readme.slice(coverIndex);
+
+assert.match(header, /^# Yupeng Lu\n\n/, 'the text header must open with the H1 name');
+assert.match(header, /^\*\*Backend Engineer — [^\n]+\*\*$/m, 'the text header must carry the bold role line');
+assert.doesNotMatch(header, /<[A-Za-z!/]/, 'the text header must stay plain Markdown without HTML');
+assert.ok(header.endsWith('\n\n'), 'the text header must be separated from the zine cover by one blank line');
+const headerLinks = [...header.matchAll(/\[([^\]]+)\]\(([^)]+)\)/g)].map((match) => ({ label: match[1], href: match[2] }));
+assert.ok(headerLinks.length > 0, 'the text header must carry Markdown links');
+for (const { label, href } of headerLinks) {
+  assert.match(href, /^(?:https:\/\/|mailto:)/, `header link ${label} must use https or mailto: ${href}`);
+}
+for (const [label, href] of [
+  ['Technical sheet № 01', 'https://brickerp.github.io/work/quant/'],
+  ['Resume', 'https://brickerp.github.io/resume'],
+  ['Email', 'mailto:yplmicro@gmail.com'],
+  ['LinkedIn', 'https://linkedin.com/in/yupeng-lu-845a0b411'],
+]) {
+  assert.ok(headerLinks.some((link) => link.label === label && link.href === href), `the text header must link ${label} to ${href}`);
+}
+assert.match(header, /^- \*\*Live trading execution\*\* — /m, 'the text header must lead with the live trading execution entry');
+assert.match(header, /^- \*\*AI agent platforms at Baidu \(MeDo\)\*\* — /m, 'the text header must carry the Baidu agent platform entry');
+assert.match(header, /^- \*\*Beijing Infinite Loop\*\* — /m, 'the text header must carry the film entry');
+
+const intrusionMatches = [...zine.matchAll(/^<a href="(experiments\/[^"#?]+)"><img src="(assets\/[^"#?]+\.svg)" width="100%" alt="([^"]+)"><\/a>$/gm)];
 assert.equal(intrusionMatches.length, 1, 'README must contain exactly one current local experiment intrusion');
 const [intrusionLine, intrusionTarget, intrusionImage, intrusionAlt] = intrusionMatches[0];
 assert.ok(countWords(intrusionAlt) >= 6, 'the current intrusion must provide a meaningful alt description');
@@ -163,13 +191,12 @@ for (const localReference of [intrusionTarget, intrusionImage]) {
   await readFile(resolved);
 }
 
-const coverLine = `<img src="assets/human-zine-cover.svg" width="100%" alt="${coreAssets[0].alt}">`;
 const filmLine = `<a href="https://brickerp.github.io/"><img src="assets/human-zine-film.svg" width="100%" alt="${coreAssets[1].alt}"></a>`;
 assert.ok(
-  readme.indexOf(coverLine) < readme.indexOf(intrusionLine) && readme.indexOf(intrusionLine) < readme.indexOf(filmLine),
+  zine.indexOf(coverLine) < zine.indexOf(intrusionLine) && zine.indexOf(intrusionLine) < zine.indexOf(filmLine),
   'the current intrusion must appear between the cover and Film',
 );
-assert.equal(readme.replace(`${intrusionLine}\n\n`, ''), expectedCoreReadme, `the original ${coreAssets.length} spreads must retain their exact contract`);
+assert.equal(zine.replace(`${intrusionLine}\n\n`, ''), expectedCoreReadme, `the original ${coreAssets.length} spreads must retain their exact contract`);
 
 const experimentsIndex = await readFile(path.join(root, 'experiments', 'README.md'), 'utf8');
 assert.doesNotMatch(experimentsIndex, /PAST FIXATIONS/i, 'phase one must not fabricate an empty past');
@@ -244,15 +271,11 @@ const expectedAnchors = [
     alt: coreAssets[4].alt,
   },
 ];
-const readmeAnchors = [...readme.matchAll(/<a href="([^"]+)"><img src="([^"]+)" width="100%" alt="([^"]+)"><\/a>/g)].map((match) => ({
-  href: match[1],
-  src: match[2],
-  alt: match[3],
-}));
-assert.deepEqual(readmeAnchors, expectedAnchors, 'README must expose exactly the approved History, Film, AI Usage, and Open Line image anchors');
+const zineAnchors = imageAnchors(zine);
+assert.deepEqual(zineAnchors, expectedAnchors, 'the zine must expose exactly the approved History, Film, AI Usage, and Open Line image anchors');
 assert.equal((readme.match(/<a\b/g) ?? []).length, expectedAnchors.length, 'README must not contain extra anchors');
-assert.doesNotMatch(readme, /^\s*\[[^\]]+\]\([^)]+\).*$/m, 'README must not retain bare markdown text-link rows');
-assert.doesNotMatch(readme, /(?:WATCH FILM|PLAY ARCHIVE|EMAIL YUPENG|RESUME|GITHUB)\s*(?:→|↗)/i, 'README must not retain superseded text-link labels');
+assert.doesNotMatch(zine, /^\s*\[[^\]]+\]\([^)]+\).*$/m, 'the zine must not retain bare markdown text-link rows');
+assert.doesNotMatch(zine, /(?:WATCH FILM|PLAY ARCHIVE|EMAIL YUPENG|RESUME|GITHUB)\s*(?:→|↗)/i, 'the zine must not retain superseded text-link labels');
 
 const assetNames = (await readdir(assetRoot)).sort();
 assert.deepEqual(assetNames, assets.map(({ file }) => file).sort(), `assets must contain exactly the ${assets.length} approved Human Zine spreads`);
@@ -360,7 +383,7 @@ for (const [semanticRole, minimumSize] of [
   }
 }
 
-const nativeLinkLabels = [...readme.matchAll(/\[([^\]]+)\]\([^)]+\)/g)].map((match) => match[1]);
+const nativeLinkLabels = [...zine.matchAll(/\[([^\]]+)\]\([^)]+\)/g)].map((match) => match[1]);
 assert.ok(countWords([...visibleCopy, ...nativeLinkLabels].join(' ')) <= 85, `The original ${coreAssets.length} Human Zine spreads must stay within the 85-word budget`);
 
 const cover = svgs.get('human-zine-cover.svg');
@@ -414,6 +437,7 @@ const foundExperiments = [
     boundary: /PRIVATE CODE \/ PUBLIC QUESTION/,
     semanticDescription: /case[\s\S]*translation[\s\S]*redaction/i,
     excludedDescription: /greenbar|tractor-feed|perforat|research record/i,
+    detailHeadings: ['## The question', '## What existed', '## What it exposed', '## Public boundary'],
   },
   {
     directory: 'found/quant-trading',
@@ -423,6 +447,10 @@ const foundExperiments = [
     boundary: /PAPER RESEARCH \/ NOT INVESTMENT PERFORMANCE/,
     semanticDescription: /greenbar[\s\S]*tractor-feed[\s\S]*research record/i,
     excludedDescription: /case file|translation|redaction/i,
+    detailHeadings: ['## Public boundary'],
+    detailBoundary: 'This page describes a research method, not investment performance.',
+    // The detail page is a short pointer to the public technical sheet; that one URL is the only remote reference allowed.
+    detailPointer: ['Technical sheet № 01', 'https://brickerp.github.io/work/quant/'],
   },
 ];
 
@@ -469,9 +497,19 @@ for (const experiment of foundExperiments) {
   assert.match(portalDescription, experiment.semanticDescription, `${experiment.directory}/portal.svg: accessible description must identify its distinct visual semantics`);
   assert.doesNotMatch(portalDescription, experiment.excludedDescription, `${experiment.directory}/portal.svg: visual semantics must remain distinct from the other found experiment`);
 
-  const detail = await readFile(path.join(experimentDirectory, 'README.md'), 'utf8');
+  const rawDetail = await readFile(path.join(experimentDirectory, 'README.md'), 'utf8');
+  let detail = rawDetail;
+  if (experiment.detailPointer) {
+    const [pointerLabel, pointerHref] = experiment.detailPointer;
+    const pointerLink = `[${pointerLabel}](${pointerHref})`;
+    assert.equal(rawDetail.split(pointerLink).length, 2, `${experiment.directory}/README.md: must point to the technical sheet exactly once`);
+    detail = rawDetail.replace(pointerLink, pointerLabel);
+  }
+  if (experiment.detailBoundary) {
+    assert.ok(detail.includes(experiment.detailBoundary), `${experiment.directory}/README.md: missing public boundary sentence`);
+  }
   foundPublicCorpus.push(detail);
-  for (const heading of ['## The question', '## What existed', '## What it exposed', '## Public boundary']) assert.match(detail, new RegExp(`^${heading}$`, 'm'), `${experiment.directory}/README.md: missing ${heading}`);
+  for (const heading of experiment.detailHeadings) assert.match(detail, new RegExp(`^${heading}$`, 'm'), `${experiment.directory}/README.md: missing ${heading}`);
   assert.match(detail, experiment.identity, `${experiment.directory}/README.md: missing approved experiment identity and month`);
   assert.ok(detail.includes(chronologyDisclaimer), `${experiment.directory}/README.md: missing chronology disclaimer`);
   assert.match(detail, /^\[← Experiment Archive\]\(\.\.\/\.\.\/README\.md\)$/m, `${experiment.directory}/README.md: archive backlink must remain relative`);
