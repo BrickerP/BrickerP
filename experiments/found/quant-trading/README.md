@@ -1,16 +1,8 @@
 # Quant Trading / 2026.04
 
-## The question
+Private research experiment in 2026.04. The current write-up lives on the technical sheet:
 
-Can a market hypothesis survive an audit?
-
-## What existed
-
-A private research experiment in 2026.04 organized hypotheses, paper research, and recorded audit trails.
-
-## What it exposed
-
-A research loop becomes more useful when each claim keeps its assumptions and review trail visible.
+→ [Technical sheet № 01](https://brickerp.github.io/work/quant/)
 
 ## Public boundary
 
