@@ -6,9 +6,12 @@ run; the service notices when a job **stops reporting** or when its **p95 durati
 threshold**, opens an incident, pings Telegram / a webhook, and exposes JSON plus SVG badges
 you can drop into a README.
 
+Live instance (workers.dev, free plan): <https://heartbeat.brickerp.workers.dev> — the demo
+monitor `scan-batch` only receives synthetic beats, so expect it to show `down` between demos.
+
 ```markdown
-![scan-batch](https://heartbeat.<subdomain>.workers.dev/v1/monitors/scan-batch/badge.svg)
-![scan-batch p95](https://heartbeat.<subdomain>.workers.dev/v1/monitors/scan-batch/sparkline.svg)
+![scan-batch](https://heartbeat.brickerp.workers.dev/v1/monitors/scan-batch/badge.svg)
+![scan-batch p95](https://heartbeat.brickerp.workers.dev/v1/monitors/scan-batch/sparkline.svg)
 ```
 
 ## Why
@@ -79,7 +82,7 @@ JSON webhook (`notify.webhookUrl`). Both get the same event:
 { "monitorId": "scan-batch", "name": "scan-batch", "kind": "missed", "state": "down",
   "p95Ms": 2380, "at": "2026-10-10T08:00:00.000Z",
   "detail": "No beat for 7m (expected every 5.0m, grace 2.0m). Next reminder in 5.0m",
-  "url": "https://heartbeat.<subdomain>.workers.dev/v1/monitors/scan-batch" }
+  "url": "https://heartbeat.brickerp.workers.dev/v1/monitors/scan-batch" }
 ```
 
 Rules: one open incident per kind; at most one notification per minute per monitor (events
@@ -246,8 +249,8 @@ with it). Tests: `python3 -m unittest discover -s clients/python -p 'test_*.py' 
 ## Badges
 
 ```markdown
-![scan-batch](https://heartbeat.<subdomain>.workers.dev/v1/monitors/scan-batch/badge.svg)
-![scan-batch latency](https://heartbeat.<subdomain>.workers.dev/v1/monitors/scan-batch/sparkline.svg?n=60&w=480&h=90)
+![scan-batch](https://heartbeat.brickerp.workers.dev/v1/monitors/scan-batch/badge.svg)
+![scan-batch latency](https://heartbeat.brickerp.workers.dev/v1/monitors/scan-batch/sparkline.svg?n=60&w=480&h=90)
 ```
 
 Badge text by state: `up · p95 2.4s`, `late 2m`, `down 13m`, `degraded · p95 9.2s`,
@@ -267,8 +270,9 @@ npx wrangler secret put ADMIN_TOKEN              # paste e.g. `openssl rand -hex
 ```
 
 `wrangler.jsonc` enables `workers_dev`, so the Worker answers at
-`https://heartbeat.<account-subdomain>.workers.dev`. No KV, R2, queues or custom domains are
-used; nothing in this project bills.
+`https://heartbeat.<account-subdomain>.workers.dev` (for this account:
+`https://heartbeat.brickerp.workers.dev`). No KV, R2, queues or custom domains are used;
+nothing in this project bills.
 
 ### With the REST API (no wrangler login)
 
