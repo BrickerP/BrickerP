@@ -1,0 +1,13 @@
+# Copy to `.dev.vars` for `wrangler dev`. Never commit `.dev.vars`.
+
+# Required. Bearer token clients must send on /mcp and /sse.
+# Generate one with: node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+MCP_API_KEY=replace-with-a-random-64-hex-string
+
+# Optional. Leave unset to serve the built-in deterministic demo ledger.
+# LEDGER_BASE_URL=https://open-ledger.example.workers.dev
+
+# Optional. Alpaca Market Data v2 credentials for market_quote / market_bars.
+# Without them those two tools return an MCP tool error instead of fabricated data.
+# ALPACA_KEY_ID=
+# ALPACA_SECRET_KEY=
