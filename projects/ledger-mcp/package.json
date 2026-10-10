@@ -1,0 +1,29 @@
+{
+  "name": "ledger-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Remote MCP server on Cloudflare Workers exposing a hash-chained trading ledger and market data",
+  "license": "MIT",
+  "author": "Yupeng Lu <yplmicro@gmail.com>",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "vitest run",
+    "typecheck": "wrangler types --strict-vars=false && tsc --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.30.0",
+    "@modelcontextprotocol/server": "2.0.0",
+    "agents": "0.28.0",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-plugin": "^1.4.0",
+    "@modelcontextprotocol/client": "2.0.0",
+    "@types/node": "^22.20.5",
+    "typescript": "~5.9.3",
+    "vitest": "^5.0.3",
+    "wrangler": "^4.149.0"
+  }
+}

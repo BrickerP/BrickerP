@@ -1,0 +1,28 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ledger-mcp",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  "compatibility_flags": ["nodejs_compat"],
+  // ~1.75 MB minified vs ~3.4 MB plain: smaller upload, faster isolate start on the Free plan.
+  "minify": true,
+  "observability": { "enabled": true },
+  // workers.dev only; no custom routes/DNS (see README "Deploy").
+  "workers_dev": true,
+  "preview_urls": false,
+  // Plain-text configuration. Secrets (MCP_API_KEY, ALPACA_*) live in `.dev.vars`
+  // locally and in `wrangler secret put` remotely — never here.
+  "vars": {
+    // Ledger id advertised in resource listings / prompts when a client has not picked one.
+    "LEDGER_DEFAULT_ID": "demo"
+    // Point at an open-ledger deployment to leave demo mode, e.g.
+    // "LEDGER_BASE_URL": "https://open-ledger.<account>.workers.dev"
+  },
+  // Legacy SSE lane (`/sse`) is served by the deprecated-but-supported McpAgent, which
+  // needs a Durable Object with the SQLite backend (the only DO backend on the Free plan).
+  // The stateless `/mcp` route does not use this binding.
+  "durable_objects": {
+    "bindings": [{ "name": "MCP_OBJECT", "class_name": "LedgerMcp" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["LedgerMcp"] }]
+}
