@@ -46,10 +46,13 @@ export interface VerifyResult {
   checked: number;
   from: number;
   to: number;
+  /** Ledger head seq at verification time: a client paging through `verify` stops once `to >= headSeq`. */
   headSeq: number;
+  /**
+   * Chain hash at the end of the verified range, i.e. the hash of row `to`. Empty when the range
+   * failed verification or covers no rows. ledger-mcp compares it with its own recomputation.
+   */
   headHash: string;
-  /** Hash of the last verified row (equals headHash once the whole chain is covered). */
-  lastHash: string | null;
   firstBadSeq?: number;
   reason?: string;
 }
@@ -292,24 +295,24 @@ export class Ledger extends DurableObject<Env> {
     if (to > head.seq) to = head.seq;
     if (to - from + 1 > MAX_VERIFY_RANGE) to = from + MAX_VERIFY_RANGE - 1;
 
-    const base = { from, to, headSeq: head.seq, headHash: head.headHash };
-    const bad = (seq: number, reason: string, checked: number, lastHash: string | null): VerifyResult => ({
+    const base = { from, to, headSeq: head.seq };
+    const bad = (seq: number, reason: string, checked: number): VerifyResult => ({
       ok: false,
       checked,
       ...base,
-      lastHash,
+      headHash: "",
       firstBadSeq: seq,
       reason,
     });
 
-    if (from > to) return { ok: true, checked: 0, ...base, lastHash: null };
+    if (from > to) return { ok: true, checked: 0, ...base, headHash: "" };
 
     let prevHash: string;
     if (from === 1) {
       prevHash = GENESIS_HASH;
     } else {
       const prevRows = this.sql.exec<{ hash: string }>("SELECT hash FROM events WHERE seq = ?", from - 1).toArray();
-      if (prevRows.length === 0) return bad(from - 1, "missing row", 0, null);
+      if (prevRows.length === 0) return bad(from - 1, "missing row", 0);
       prevHash = prevRows[0]!.hash;
     }
 
@@ -319,24 +322,22 @@ export class Ledger extends DurableObject<Env> {
 
     let expectedSeq = from;
     let checked = 0;
-    let lastHash: string | null = null;
     for (const row of rows) {
-      if (row.seq !== expectedSeq) return bad(expectedSeq, "missing row", checked, lastHash);
-      if (row.prev_hash !== prevHash) return bad(row.seq, "prev_hash mismatch", checked, lastHash);
+      if (row.seq !== expectedSeq) return bad(expectedSeq, "missing row", checked);
+      if (row.prev_hash !== prevHash) return bad(row.seq, "prev_hash mismatch", checked);
       let recomputed: string;
       try {
         recomputed = await computeHash(prevHash, rowToEvent(row));
       } catch {
-        return bad(row.seq, "row is not decodable", checked, lastHash);
+        return bad(row.seq, "row is not decodable", checked);
       }
-      if (recomputed !== row.hash) return bad(row.seq, "hash mismatch", checked, lastHash);
+      if (recomputed !== row.hash) return bad(row.seq, "hash mismatch", checked);
       prevHash = row.hash;
-      lastHash = row.hash;
       checked += 1;
       expectedSeq += 1;
     }
-    if (expectedSeq !== to + 1) return bad(expectedSeq, "missing row", checked, lastHash);
-    return { ok: true, checked, ...base, lastHash };
+    if (expectedSeq !== to + 1) return bad(expectedSeq, "missing row", checked);
+    return { ok: true, checked, ...base, headHash: prevHash };
   }
 
   async summary(): Promise<SummaryResult | null> {

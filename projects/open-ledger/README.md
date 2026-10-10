@@ -46,7 +46,7 @@ never received an event return `404 {"error":"ledger_not_found"}`.
 | `GET` | `/v1/ledgers/:ledgerId/head` | → `{ ledgerId, seq, count, headHash, updatedAt }` |
 | `GET` | `/v1/ledgers/:ledgerId/events?since=<seq>&limit=<n≤1000>&symbol=<sym>` | Events with `seq > since`, ascending. → `{ ledgerId, events: ChainedEvent[], nextSince }` |
 | `GET` | `/v1/ledgers/:ledgerId/snapshots?from=YYYY-MM-DD&to=YYYY-MM-DD` | → `{ ledgerId, snapshots: [{ date, seq, count, headHash }] }` |
-| `GET` | `/v1/ledgers/:ledgerId/verify?from=<seq>&to=<seq>` | Server-side recomputation of `[from, to]`, **max 2000 rows per call** (default 1000). → `{ ledgerId, ok, checked, from, to, headSeq, headHash, lastHash, firstBadSeq?, reason? }` |
+| `GET` | `/v1/ledgers/:ledgerId/verify?from=<seq>&to=<seq>` | Server-side recomputation of `[from, to]`, **max 2000 rows per call** (default 1000). → `{ ledgerId, ok, checked, from, to, headSeq, headHash, firstBadSeq?, reason? }`. `headHash` is the chain hash at `to` (the last verified row); it is `""` when the range failed or is empty. `headSeq` is the ledger's current head seq |
 | `GET` | `/v1/ledgers/:ledgerId/export.ndjson?since=<seq>&symbol=<sym>` | Streamed NDJSON, one `ChainedEvent` per line, 500-row SQL pages |
 | `GET` | `/v1/ledgers/:ledgerId/summary` | SQL aggregates over `type = "fill"`. → `{ ledgerId, byDay: [{ date, fills, buyQty, sellQty, notional }], bySymbol: [{ symbol, … }] }` |
 | `GET` | `/v1` | Endpoint index |
@@ -58,8 +58,8 @@ Status codes: `400` schema/parameter errors (`{"error":"invalid_request","messag
 Pagination: pass `nextSince` back as `since`; stop when `events` is empty. When a page is short
 (fewer than `limit` rows) `nextSince` is advanced to the current head seq, so symbol-filtered
 pollers resume from the head instead of rescanning. `verify` is paginated the same way: loop with
-`from = to + 1` until `to >= headSeq`; `lastHash` of the final page equals `headHash` when the whole
-chain is intact.
+`from = to + 1` until `to >= headSeq`; on the final page `headHash` equals the `headHash` of `/head`
+when the whole chain is intact.
 
 ### Validation rules
 
@@ -179,7 +179,8 @@ SHA-256 vectors; TS ↔ browser implementation parity; idempotent ingest (duplic
 unchanged, in-batch duplicates, concurrent batches); pagination and symbol filter; `verify` catching
 a tampered row (mutated directly through Durable Object storage), a rewritten hash, a broken link
 and a deleted row; auth rejection; 400 schema errors; 404 unknown ledgers; snapshots; summary
-aggregates; NDJSON export re-verified with the browser verifier; static dashboard.
+aggregates; the exact response shapes `projects/ledger-mcp` parses; NDJSON export re-verified with
+the browser verifier; static dashboard.
 
 ## Deploy
 
@@ -196,8 +197,8 @@ time with `npx wrangler secret put INGEST_TOKEN`.
 
 ### Without Wrangler login (REST API only)
 
-Useful from an environment that only has an API token or an OAuth session (this is how the first
-deployment was made). All calls are `https://api.cloudflare.com/client/v4/accounts/{account_id}/…`.
+Useful from an environment that only has an API token or an OAuth session and no Wrangler login.
+All calls are `https://api.cloudflare.com/client/v4/accounts/{account_id}/…`.
 
 1. Build: `npx wrangler deploy --dry-run --outdir=dist` → `dist/index.js` (single ES module).
 2. The dashboard (`public/`) can reach the edge in two ways:
@@ -209,8 +210,8 @@ deployment was made). All calls are `https://api.cloudflare.com/client/v4/accoun
      Then add `{ "type": "assets", "name": "ASSETS" }` to `bindings` and
      `"assets": { "jwt": "<completion jwt>", "config": { "run_worker_first": ["/v1/*"] } }` to the
      metadata in step 3.
-   - **Inline build** (used for the first deployment, because that environment could not present
-     the session JWT): `npm run build:inline` runs the dry-run bundle and writes
+    - **Inline build** (for environments that cannot present the per-session upload JWT):
+      `npm run build:inline` runs the dry-run bundle and writes
      `dist/inline/worker.js` (the bundle, unchanged) plus `dist/inline/index.js`, a generated entry
      that re-exports `Ledger`, serves `public/` from memory when no `ASSETS` binding exists and
      delegates everything else to the bundle. Upload both modules; skip the assets binding.
@@ -253,6 +254,8 @@ deployment was made). All calls are `https://api.cloudflare.com/client/v4/accoun
 - No ledger listing endpoint (Durable Object namespaces cannot be enumerated); a registry object or
   a static list in the dashboard would fix that.
 - `verify` covers ≤ 2000 rows per call; the dashboard verifies everything client-side instead.
+- The `symbol` filter is an exact, case-sensitive match on the stored value. `projects/ledger-mcp`
+  upper-cases its filter, so publish tickers upper-case (the demo and the Alpaca convention do).
 - Timestamps must be UTC; the publisher converts epoch seconds/milliseconds and naive strings.
 - Responses are `no-store`; immutable pages (`events?since` fully behind the head) could be cached
   at the edge to stretch the 100k requests/day budget.

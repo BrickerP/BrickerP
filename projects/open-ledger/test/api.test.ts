@@ -276,18 +276,24 @@ describe("pagination", () => {
 describe("verify", () => {
   it("verifies the whole chain and sub-ranges", async () => {
     await post("verify-ok", { events: fills(30) });
-    const full = (await (await get("/v1/ledgers/verify-ok/verify")).json()) as Record<string, unknown>;
+    const list = (await (await get("/v1/ledgers/verify-ok/events?limit=30")).json()) as { events: ChainedEvent[] };
+    const hashAt = (seq: number) => list.events[seq - 1]!.hash;
     const head = (await (await get("/v1/ledgers/verify-ok/head")).json()) as { headHash: string };
-    expect(full).toMatchObject({ ok: true, checked: 30, from: 1, to: 30, headSeq: 30, headHash: head.headHash, lastHash: head.headHash });
+    expect(head.headHash).toBe(hashAt(30));
 
+    const full = (await (await get("/v1/ledgers/verify-ok/verify")).json()) as Record<string, unknown>;
+    expect(full).toMatchObject({ ok: true, checked: 30, from: 1, to: 30, headSeq: 30, headHash: hashAt(30) });
+
+    // headHash is the chain hash at the end of the verified range (what ledger-mcp recomputes locally),
+    // not the ledger head, so partial ranges stay comparable.
     const part = (await (await get("/v1/ledgers/verify-ok/verify?from=11&to=20")).json()) as Record<string, unknown>;
-    expect(part).toMatchObject({ ok: true, checked: 10, from: 11, to: 20 });
+    expect(part).toMatchObject({ ok: true, checked: 10, from: 11, to: 20, headSeq: 30, headHash: hashAt(20) });
 
     const beyond = (await (await get("/v1/ledgers/verify-ok/verify?from=25&to=999")).json()) as Record<string, unknown>;
-    expect(beyond).toMatchObject({ ok: true, checked: 6, from: 25, to: 30 });
+    expect(beyond).toMatchObject({ ok: true, checked: 6, from: 25, to: 30, headHash: hashAt(30) });
 
     const past = (await (await get("/v1/ledgers/verify-ok/verify?from=31")).json()) as Record<string, unknown>;
-    expect(past).toMatchObject({ ok: true, checked: 0 });
+    expect(past).toMatchObject({ ok: true, checked: 0, headHash: "" });
   });
 
   it("detects a row tampered with directly in Durable Object storage", async () => {
@@ -298,7 +304,7 @@ describe("verify", () => {
     });
 
     const res = (await (await get("/v1/ledgers/verify-tamper/verify")).json()) as Record<string, unknown>;
-    expect(res).toMatchObject({ ok: false, checked: 3, firstBadSeq: 4, reason: "hash mismatch" });
+    expect(res).toMatchObject({ ok: false, checked: 3, firstBadSeq: 4, reason: "hash mismatch", headHash: "" });
 
     // Ranges that do not include the tampered row still pass, ranges after it chain correctly.
     const before = (await (await get("/v1/ledgers/verify-tamper/verify?from=1&to=3")).json()) as { ok: boolean };
@@ -442,6 +448,60 @@ describe("export", () => {
     const symRows = (await sym.text()).trim().split("\n").map((l) => JSON.parse(l) as ChainedEvent);
     expect(symRows.every((e) => e.symbol === "SPY" && e.seq > 1195)).toBe(true);
     expect(symRows.length).toBeGreaterThan(0);
+  });
+});
+
+describe("ledger-mcp contract", () => {
+  const HASH = expect.stringMatching(/^[0-9a-f]{64}$/);
+  const DATE = expect.stringMatching(/^\d{4}-\d{2}-\d{2}$/);
+  const NUM = expect.any(Number);
+
+  it("returns exactly the shapes projects/ledger-mcp parses", async () => {
+    await post("mcp", { events: fills(12) });
+    const getJson = async (path: string) => (await (await get(path)).json()) as Record<string, unknown>;
+
+    const head = await getJson("/v1/ledgers/mcp/head");
+    expect(head).toEqual({ ledgerId: "mcp", seq: 12, count: 12, headHash: HASH, updatedAt: expect.any(String) });
+
+    const page = await getJson("/v1/ledgers/mcp/events?since=10&limit=5");
+    expect(page).toEqual({
+      ledgerId: "mcp",
+      nextSince: 12,
+      events: [
+        { seq: 11, ...fill(11), prevHash: HASH, hash: HASH },
+        { seq: 12, ...fill(12), prevHash: HASH, hash: HASH },
+      ],
+    });
+
+    const snapshots = await getJson("/v1/ledgers/mcp/snapshots");
+    expect(snapshots).toEqual({
+      ledgerId: "mcp",
+      snapshots: [{ date: DATE, seq: 12, count: 12, headHash: head.headHash }],
+    });
+
+    const verify = await getJson("/v1/ledgers/mcp/verify?from=1&to=12");
+    expect(verify).toEqual({
+      ledgerId: "mcp",
+      ok: true,
+      checked: 12,
+      from: 1,
+      to: 12,
+      headSeq: 12,
+      headHash: head.headHash,
+    });
+
+    const summary = await getJson("/v1/ledgers/mcp/summary");
+    expect(summary).toEqual({
+      ledgerId: "mcp",
+      byDay: [{ date: "2026-03-02", fills: 12, buyQty: NUM, sellQty: NUM, notional: NUM }],
+      bySymbol: ["AAPL", "MSFT", "NVDA", "SPY"].map((symbol) => ({
+        symbol,
+        fills: 3,
+        buyQty: NUM,
+        sellQty: NUM,
+        notional: NUM,
+      })),
+    });
   });
 });
 
