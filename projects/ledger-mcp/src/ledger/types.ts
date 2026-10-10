@@ -67,6 +67,8 @@ export const VerifyResultSchema = z.object({
   from: z.number().int(),
   to: z.number().int(),
   headHash: z.string(),
+  firstBadSeq: z.number().int().optional(),
+  reason: z.string().optional(),
 });
 export type VerifyResult = z.infer<typeof VerifyResultSchema>;
 
