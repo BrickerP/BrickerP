@@ -15,6 +15,7 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
+    "build:inline": "node deploy/build-inline.mjs",
     "test": "vitest run",
     "typecheck": "wrangler types && tsc --noEmit && tsc --noEmit -p test/tsconfig.json",
     "publish:demo": "node publisher/bin.mjs demo"

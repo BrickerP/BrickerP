@@ -30,7 +30,7 @@ dashboard numbers come straight from a chain whose integrity the reader checks f
 
 - [API](#api) · [Shared contract](#shared-contract) · [Hash chain](#hash-chain) · [Snapshots](#snapshots)
 - [Dashboard](#dashboard) · [Publisher CLI](#publisher-cli)
-- [Local development](#local-development) · [Tests](#tests) · [Deploy](#deploy)
+- [Local development](#local-development) · [Tests](#tests) · [Deploy](#deploy) (`deploy/build-inline.mjs` for REST-only uploads)
 - [Free-tier budget](#free-tier-budget) · [Security notes](#security-notes) · [Limitations and follow-ups](#limitations-and-follow-ups)
 
 ## API
@@ -200,22 +200,30 @@ Useful from an environment that only has an API token or an OAuth session (this 
 deployment was made). All calls are `https://api.cloudflare.com/client/v4/accounts/{account_id}/…`.
 
 1. Build: `npx wrangler deploy --dry-run --outdir=dist` → `dist/index.js` (single ES module).
-2. Static assets (optional — the dashboard): `POST workers/scripts/open-ledger/assets-upload-session`
-   with `{ manifest: { "/index.html": { hash, size }, … } }` where `hash` is the first 32 hex chars of
-   the SHA-256 of each file. Upload each returned bucket to `POST workers/assets/upload?base64=true`
-   as multipart form-data (field name = file hash, base64 body) with `Authorization: Bearer <jwt from
-   step 2>`; the last response returns a completion `jwt`.
+2. The dashboard (`public/`) can reach the edge in two ways:
+   - **Static assets API** (what `wrangler deploy` does): `POST workers/scripts/open-ledger/assets-upload-session`
+     with `{ manifest: { "/index.html": { hash, size }, … } }` where `hash` is the first 32 hex chars
+     of `sha256(base64(file) + extension)`. Upload each returned bucket to
+     `POST workers/assets/upload?base64=true` as multipart form-data (field name = file hash, base64
+     body) with `Authorization: Bearer <session jwt>`; the last response returns a completion `jwt`.
+     Then add `{ "type": "assets", "name": "ASSETS" }` to `bindings` and
+     `"assets": { "jwt": "<completion jwt>", "config": { "run_worker_first": ["/v1/*"] } }` to the
+     metadata in step 3.
+   - **Inline build** (used for the first deployment, because that environment could not present
+     the session JWT): `npm run build:inline` runs the dry-run bundle and writes
+     `dist/inline/worker.js` (the bundle, unchanged) plus `dist/inline/index.js`, a generated entry
+     that re-exports `Ledger`, serves `public/` from memory when no `ASSETS` binding exists and
+     delegates everything else to the bundle. Upload both modules; skip the assets binding.
 3. Upload the script: `PUT workers/scripts/open-ledger` multipart with a `metadata` part
    ```json
    { "main_module": "index.js", "compatibility_date": "2026-10-01", "compatibility_flags": [],
-     "bindings": [{ "type": "durable_object_namespace", "name": "LEDGER", "class_name": "Ledger" },
-                  { "type": "assets", "name": "ASSETS" }],
+     "bindings": [{ "type": "durable_object_namespace", "name": "LEDGER", "class_name": "Ledger" }],
      "migrations": { "new_tag": "v1", "new_sqlite_classes": ["Ledger"] },
-     "assets": { "jwt": "<completion jwt>", "config": { "run_worker_first": ["/v1/*"] } },
      "observability": { "enabled": true } }
    ```
-   and an `index.js` part with `Content-Type: application/javascript+module`. Omit the `assets`
-   binding/config if you skipped step 2 (the API still works; only the dashboard is missing).
+   and one part per ES module with `Content-Type: application/javascript+module` (`index.js`, plus
+   `worker.js` for the inline build). Without either dashboard option the API still works; only `/`
+   is missing.
 4. Enable the workers.dev route: `POST workers/scripts/open-ledger/subdomain`
    `{ "enabled": true, "previews_enabled": false }` (`GET workers/subdomain` tells you the subdomain).
 5. Secret: `PUT workers/scripts/open-ledger/secrets` `{ "name": "INGEST_TOKEN", "text": "<random 32-byte hex>", "type": "secret_text" }`.
