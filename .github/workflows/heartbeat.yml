@@ -1,0 +1,45 @@
+name: Heartbeat
+
+on:
+  pull_request:
+    paths:
+      - "projects/heartbeat/**"
+      - ".github/workflows/heartbeat.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "projects/heartbeat/**"
+      - ".github/workflows/heartbeat.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  heartbeat:
+    name: heartbeat
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: projects/heartbeat
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .node-version
+          cache: npm
+          cache-dependency-path: projects/heartbeat/package-lock.json
+      - name: Install
+        run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Worker tests
+        run: npm test
+      - name: Python client tests
+        run: python3 -m unittest discover -s clients/python -p 'test_*.py' -v
+      - name: Shell client syntax
+        run: bash -n clients/shell/hb
