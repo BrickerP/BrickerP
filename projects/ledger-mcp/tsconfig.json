@@ -14,9 +14,9 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "noEmit": true,
-    // Runtime types come from `wrangler types` (worker-configuration.d.ts); the vitest
-    // plugin types provide the `cloudflare:test` module used by the integration tests.
-    "types": ["@cloudflare/vitest-plugin/types"]
+    // Runtime types come from `wrangler types` (worker-configuration.d.ts); @types/node covers
+    // the nodejs_compat surface; the vitest plugin types provide the `cloudflare:test` module.
+    "types": ["@types/node", "@cloudflare/vitest-plugin/types"]
   },
   "include": ["src/**/*.ts", "test/**/*.ts", "vitest.config.ts", "worker-configuration.d.ts"]
 }
