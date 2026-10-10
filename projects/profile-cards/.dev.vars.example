@@ -1,0 +1,4 @@
+# Copy to .dev.vars for local development. Never commit .dev.vars.
+# Optional: a GitHub token (no scopes needed for public data) raises the API
+# rate limit from 60/h to 5000/h.
+GITHUB_TOKEN=

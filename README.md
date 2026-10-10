@@ -28,3 +28,5 @@ An agent runs my X account, [@trashConsumer](https://x.com/trashConsumer), until
 <sub>[Resume](https://brickerp.github.io/resume.pdf) · [LinkedIn](https://www.linkedin.com/in/yupeng-lu-845a0b411) · Also: [Beijing — Endless Second Ring](https://brickerp.github.io/beijing-loop/), a deterministic 48-second WebGL film with CI performance gates.</sub>
 
 <img src="assets/human-zine-cover.svg" width="100%" alt="Yupeng Lu. Field Notes, Issue 00. Things I keep returning to.">
+
+<a href="experiments/001-a-profile-with-memory/README.md"><img src="https://profile-cards.brickerp.workers.dev/card.svg" width="100%" alt="Live status card rendered at the edge by a Cloudflare Worker: last fill, scan p95, heartbeat, and latest commit. Enter experiment 001, A Profile With Memory."></a>
