@@ -39,6 +39,10 @@ jobs:
         run: npm run typecheck
       - name: Test
         run: npm test
+      - name: Build (wrangler dry-run + inline bundle)
+        run: npm run build:inline
+      - name: Smoke (wrangler dev + publisher + HTTP checks)
+        run: npm run smoke
       - name: Publisher smoke test
         run: |
           node publisher/bin.mjs demo --dry-run --anchor 2026-10-09 >/dev/null

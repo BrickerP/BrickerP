@@ -172,6 +172,7 @@ Requirements: Node ≥ 22.5 (repo pin: `.node-version`), Wrangler 4.x (installed
 ```sh
 npm test          # vitest + @cloudflare/vitest-plugin (the Workers Vitest integration), runs in workerd
 npm run typecheck # wrangler types && tsc --noEmit (src and test)
+npm run smoke     # wrangler dev + the real publisher CLI over HTTP + every endpoint + dashboard files
 ```
 
 Covered: `canonicalJSON` determinism and `JSON.stringify` parity; hash chain against hard-coded
@@ -180,7 +181,9 @@ unchanged, in-batch duplicates, concurrent batches); pagination and symbol filte
 a tampered row (mutated directly through Durable Object storage), a rewritten hash, a broken link
 and a deleted row; auth rejection; 400 schema errors; 404 unknown ledgers; snapshots; summary
 aggregates; the exact response shapes `projects/ledger-mcp` parses; NDJSON export re-verified with
-the browser verifier; static dashboard.
+the browser verifier; static dashboard. `npm run smoke` repeats the publish → API → verify loop over
+real HTTP (demo ledger plus a SQLite `tail` with its cursor file) against a freshly booted
+`wrangler dev`; CI runs it together with the dry-run and inline builds.
 
 ## Deploy
 
