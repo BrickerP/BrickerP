@@ -66,6 +66,8 @@ Variables live in `wrangler.jsonc`:
 
 Secret (optional): `GITHUB_TOKEN` — `npx wrangler secret put GITHUB_TOKEN`. A fine-grained token with no permissions is enough for public data.
 
+Fetching sibling Workers on the same `workers.dev` subdomain (heartbeat, open-ledger) needs the `global_fetch_strictly_public` compatibility flag, which `wrangler.jsonc` sets. Without it Cloudflare answers a Worker-to-Worker `fetch()` on the same zone with `404 error code: 1042`; the tile then reports `worker fetch blocked (1042)` in `/status.json` instead of a bare `http 404`. A service binding is the alternative if you prefer not to route through the public edge.
+
 ## Develop
 
 ```sh

@@ -24,12 +24,23 @@ export async function fetchJson<T>(deps: Deps, url: string, init: RequestInit = 
       const remaining = response.headers.get("x-ratelimit-remaining");
       if (remaining === "0" || response.status === 429) throw new SourceError("rate limited", response.status);
     }
+    if (response.status === 404 && (await bodySnippet(response)).includes("error code: 1042")) {
+      throw new SourceError("worker fetch blocked (1042)", response.status);
+    }
     throw new SourceError(`http ${response.status}`, response.status);
   }
   try {
     return (await response.json()) as T;
   } catch {
     throw new SourceError("invalid json");
+  }
+}
+
+async function bodySnippet(response: Response): Promise<string> {
+  try {
+    return (await response.text()).slice(0, 80);
+  } catch {
+    return "";
   }
 }
 

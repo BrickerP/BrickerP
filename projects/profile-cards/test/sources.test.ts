@@ -156,6 +156,13 @@ describe("heartbeat source", () => {
     });
   });
 
+  it("names Cloudflare's same-zone Worker block instead of a bare 404", async () => {
+    const blocked = fakeDeps({ ["https://heartbeat.example/"]: () => new Response("error code: 1042", { status: 404 }) });
+    await expect(fetchHeartbeat(blocked, "https://heartbeat.example", "scan-batch")).rejects.toThrow("worker fetch blocked (1042)");
+    const missing = fakeDeps({ ["https://heartbeat.example/"]: () => new Response("not found", { status: 404 }) });
+    await expect(fetchHeartbeat(missing, "https://heartbeat.example", "scan-batch")).rejects.toThrow("http 404");
+  });
+
   it("surfaces timeouts", async () => {
     const deps = fakeDeps({
       ["https://hb.example/"]: (_url, init) =>

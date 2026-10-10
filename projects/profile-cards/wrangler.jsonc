@@ -4,6 +4,11 @@
   "main": "src/index.ts",
   "compatibility_date": "2026-10-01",
 
+  // heartbeat and open-ledger live on the same workers.dev subdomain as this Worker.
+  // Without this flag a fetch() to them is answered "404 error code: 1042" (same-zone
+  // Worker-to-Worker fetch); with it, fetch() takes the public route like any client.
+  "compatibility_flags": ["global_fetch_strictly_public"],
+
   // Workers Cache: Cloudflare serves cached responses without running the Worker.
   // The Worker sets Cache-Control on every response (see src/index.ts).
   "cache": { "enabled": true },
