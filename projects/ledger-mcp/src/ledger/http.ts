@@ -35,7 +35,10 @@ export class HttpLedgerSource implements LedgerSource {
   private readonly memo = new Map<string, MemoEntry>();
 
   constructor(baseUrl: string, options: HttpLedgerSourceOptions = {}) {
-    this.base = baseUrl.replace(/\/+$/, "");
+    // Avoid /\/+$/ on caller-controlled URLs (CodeQL js/polynomial-redos).
+    let base = baseUrl;
+    while (base.endsWith("/")) base = base.slice(0, -1);
+    this.base = base;
     this.label = new URL(this.base).host;
     this.fetchImpl = options.fetch ?? ((input, init) => fetch(input, init));
     this.ttlMs = options.ttlMs ?? DEFAULT_TTL_MS;
