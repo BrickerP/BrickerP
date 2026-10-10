@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "open-ledger",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+  // Public dashboard (plain HTML/JS/CSS, no build step). Requests under /v1/* always
+  // hit the Worker first; everything else is served straight from the assets directory.
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": ["/v1/*"]
+  },
+  // One SQLite-backed Durable Object per ledger id. The Workers Free plan only supports
+  // SQLite-backed classes, which is exactly what the hash chain + SQL aggregates need.
+  "durable_objects": {
+    "bindings": [{ "name": "LEDGER", "class_name": "Ledger" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["Ledger"] }],
+  "observability": { "enabled": true }
+  // Secrets (never in this file): INGEST_TOKEN -> `npx wrangler secret put INGEST_TOKEN`
+  // For local dev copy .dev.vars.example to .dev.vars.
+}
