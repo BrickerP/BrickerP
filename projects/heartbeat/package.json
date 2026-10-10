@@ -1,0 +1,25 @@
+{
+  "name": "heartbeat",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Dead-man's switch and p95 latency gate with SVG badges, on Cloudflare Workers + Durable Objects",
+  "license": "MIT",
+  "author": "Yupeng Lu <yplmicro@gmail.com>",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "vitest run",
+    "test:python": "python3 -m unittest discover -s clients/python -p 'test_*.py' -v",
+    "typecheck": "wrangler types && tsc --noEmit -p tsconfig.json && tsc --noEmit -p test/tsconfig.json"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-plugin": "^1.4.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.11",
+    "wrangler": "^4.149.0"
+  }
+}
