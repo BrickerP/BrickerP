@@ -1,0 +1,49 @@
+name: open-ledger
+
+on:
+  pull_request:
+    paths:
+      - "projects/open-ledger/**"
+      - ".github/workflows/open-ledger.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "projects/open-ledger/**"
+      - ".github/workflows/open-ledger.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  open-ledger:
+    name: open-ledger typecheck + tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: projects/open-ledger
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .node-version
+          cache: npm
+          cache-dependency-path: projects/open-ledger/package-lock.json
+      - name: Install
+        run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Test
+        run: npm test
+      - name: Build (wrangler dry-run + inline bundle)
+        run: npm run build:inline
+      - name: Smoke (wrangler dev + publisher + HTTP checks)
+        run: npm run smoke
+      - name: Publisher smoke test
+        run: |
+          node publisher/bin.mjs demo --dry-run --anchor 2026-10-09 >/dev/null
+          node publisher/bin.mjs init --out /tmp/publisher.config.json

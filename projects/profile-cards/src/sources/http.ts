@@ -1,0 +1,61 @@
+import type { Deps } from "../types.js";
+
+export class SourceError extends Error {
+  constructor(
+    message: string,
+    readonly status?: number,
+  ) {
+    super(message);
+    this.name = "SourceError";
+  }
+}
+
+/** Fetch JSON with a per-request timeout; throws SourceError with a short reason. */
+export async function fetchJson<T>(deps: Deps, url: string, init: RequestInit = {}): Promise<T> {
+  let response: Response;
+  try {
+    response = await deps.fetch(url, { ...init, signal: AbortSignal.timeout(deps.timeoutMs) });
+  } catch (error) {
+    const reason = error instanceof Error && error.name === "TimeoutError" ? "timeout" : "network error";
+    throw new SourceError(reason);
+  }
+  if (!response.ok) {
+    if (response.status === 403 || response.status === 429) {
+      const remaining = response.headers.get("x-ratelimit-remaining");
+      if (remaining === "0" || response.status === 429) throw new SourceError("rate limited", response.status);
+    }
+    if (response.status === 404 && (await bodySnippet(response)).includes("error code: 1042")) {
+      throw new SourceError("worker fetch blocked (1042)", response.status);
+    }
+    throw new SourceError(`http ${response.status}`, response.status);
+  }
+  try {
+    return (await response.json()) as T;
+  } catch {
+    throw new SourceError("invalid json");
+  }
+}
+
+async function bodySnippet(response: Response): Promise<string> {
+  try {
+    return (await response.text()).slice(0, 80);
+  } catch {
+    return "";
+  }
+}
+
+export function errorMessage(error: unknown): string {
+  if (error instanceof SourceError) return error.message;
+  if (error instanceof Error) return error.message.slice(0, 80);
+  return "unknown error";
+}
+
+export function trimBaseUrl(value: string | undefined): string | null {
+  const trimmed = (value ?? "").trim();
+  let end = trimmed.length;
+  while (end > 0 && trimmed[end - 1] === "/") end -= 1;
+  const base = trimmed.slice(0, end);
+  if (!base) return null;
+  if (!/^https?:\/\//.test(base)) return null;
+  return base;
+}

@@ -1,0 +1,30 @@
+{
+  "name": "open-ledger",
+  "version": "0.1.0",
+  "description": "Verifiable, append-only public trading ledger on Cloudflare Workers + Durable Objects (SQLite), with a hash chain anyone can re-verify in the browser.",
+  "license": "MIT",
+  "author": "Yupeng Lu",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "bin": {
+    "open-ledger-publish": "publisher/bin.mjs"
+  },
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "build:inline": "node deploy/build-inline.mjs",
+    "test": "vitest run",
+    "smoke": "node test/smoke.mjs",
+    "typecheck": "wrangler types && tsc --noEmit && tsc --noEmit -p test/tsconfig.json",
+    "publish:demo": "node publisher/bin.mjs demo"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-plugin": "^1.4.0",
+    "typescript": "^5.9.0",
+    "vitest": "^4.1.0",
+    "wrangler": "^4.149.0"
+  }
+}
