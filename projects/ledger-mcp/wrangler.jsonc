@@ -4,6 +4,8 @@
   "main": "src/index.ts",
   "compatibility_date": "2026-10-01",
   "compatibility_flags": ["nodejs_compat"],
+  // ~1.75 MB minified vs ~3.4 MB plain: smaller upload, faster isolate start on the Free plan.
+  "minify": true,
   "observability": { "enabled": true },
   // workers.dev only; no custom routes/DNS (see README "Deploy").
   "workers_dev": true,

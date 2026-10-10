@@ -25,7 +25,7 @@ MCP client ──Bearer──▶ ledger-mcp (Worker) ──HTTP──▶ open-le
 | 7 tools, 3 resources, 1 prompt | done |
 | Demo ledger, FIFO PnL, chain verification | done, unit-tested |
 | Alpaca market data | done; tools error until credentials are set (never fabricated) |
-| Deploy to `*.workers.dev` | wrangler config + REST recipe below |
+| Deploy to `*.workers.dev` | live at `https://ledger-mcp.brickerp.workers.dev` (demo mode); recipes below |
 | OAuth / Cloudflare Access | **not implemented** — see [Hardening](#hardening-oauth--access) |
 
 ## Tools, resources, prompt
@@ -250,14 +250,24 @@ PUT /accounts/{account_id}/workers/scripts/ledger-mcp     (multipart/form-data)
       "bindings": [
         { "type": "durable_object_namespace", "name": "MCP_OBJECT", "class_name": "LedgerMcp" },
         { "type": "plain_text", "name": "LEDGER_DEFAULT_ID", "text": "demo" } ],
-      "migrations": { "new_tag": "v1", "new_sqlite_classes": ["LedgerMcp"] },
+      "migrations": { "new_tag": "v1", "new_sqlite_classes": ["LedgerMcp"] },     // first upload only
+      "keep_bindings": ["secret_text"],                                            // re-uploads: keep MCP_API_KEY
       "observability": { "enabled": true } }
   index.js (application/javascript+module)
 POST /accounts/{account_id}/workers/scripts/ledger-mcp/subdomain   { "enabled": true, "previews_enabled": false }
+GET  /accounts/{account_id}/workers/subdomain                      → { "subdomain": "<account>" }  (PUT to create)
 PUT  /accounts/{account_id}/workers/scripts/ledger-mcp/secrets     { "name": "MCP_API_KEY", "text": "...", "type": "secret_text" }
 ```
 
-Subsequent uploads must omit `migrations` (the DO class already exists) unless a new migration tag is intended.
+Re-uploads must omit `migrations` (the DO class already exists) unless a new tag is intended, and should pass
+`keep_bindings: ["secret_text"]` or the secret is dropped. The upload response reports `startup_time_ms`
+(75 ms for the first deployment; the limit is 400 ms).
+
+If the API client cannot read local files or reach the internet (true for the Cloudflare MCP sandbox), stage the
+bundle through a free KV namespace: deploy a ~10-line uploader Worker with a KV binding, `curl --data-binary
+@dist/index.js` to it from a machine that has the bundle, then let the API client `GET
+/storage/kv/namespaces/{id}/values/bundle`, verify the SHA-256, and PUT the script. Delete the uploader and the
+namespace afterwards — the first deployment did exactly this.
 
 ### Free-plan budget
 
