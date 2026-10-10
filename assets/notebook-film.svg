@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400" role="img" aria-labelledby="t d">
+<title id="t">Exp. 02 — Beijing: Endless Second Ring</title>
+<desc id="d">Notebook lab entry for a 48-second deterministic WebGL night drive around an imagined Beijing Second Ring, with a hand-drawn ring-road diagram and a red marker for the car. Watch the film.</desc>
+<defs><pattern id="g-fine" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E4DCC8" stroke-width="1"/></pattern><pattern id="g-major" width="120" height="120" patternUnits="userSpaceOnUse"><path d="M120 0H0V120" fill="none" stroke="#D6CCB4" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="400" fill="#F6F1E4"/><rect width="1200" height="400" fill="url(#g-fine)"/><rect width="1200" height="400" fill="url(#g-major)"/>
+<rect x="0.5" y="0.5" width="1199" height="399" fill="none" stroke="#C9BFA6"/>
+<line x1="72" y1="0" x2="72" y2="400" stroke="#C2412D" stroke-opacity="0.45" stroke-width="1.2"/>
+<text x="96" y="64" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14" letter-spacing="2" fill="#5F6670">EXP. 02 · WEBGL FILM · THREE.JS · CI GATES</text>
+<text x="96" y="128" font-family="Georgia, 'Iowan Old Style', 'Times New Roman', serif" font-size="44" font-weight="bold" fill="#1F3A5F">Beijing — Endless Second Ring</text>
+<line x1="96" y1="156" x2="700" y2="156" stroke="#1F3A5F" stroke-width="1.5"/>
+<g font-family="Georgia, 'Iowan Old Style', 'Times New Roman', serif" font-size="20" fill="#3B4148">
+<text x="96" y="200"><tspan font-family="ui-monospace, Menlo, Consolas, monospace" fill="#5F6670">DURATION  </tspan>48 s deterministic night drive</text>
+<text x="96" y="236"><tspan font-family="ui-monospace, Menlo, Consolas, monospace" fill="#5F6670">GATES     </tspan>12 passages · performance gates</text>
+</g>
+<text x="96" y="310" font-family="Georgia, 'Iowan Old Style', 'Times New Roman', serif" font-size="24" fill="#C2412D">Watch the film →</text>
+<text x="96" y="346" font-family="Georgia, 'Iowan Old Style', 'Times New Roman', serif" font-style="italic" font-size="16" fill="#5F6670">t ∈ [0, 48 s], same frame every run — a closed loop, measured</text>
+<rect x="830" y="70" width="270" height="270" rx="44" fill="none" stroke="#1F3A5F" stroke-width="2"/>
+<rect x="852" y="92" width="226" height="226" rx="34" fill="none" stroke="#1F3A5F" stroke-opacity="0.4" stroke-dasharray="4 6"/>
+<rect x="938" y="178" width="54" height="54" fill="none" stroke="#1F3A5F" stroke-opacity="0.55"/>
+<circle cx="1100" cy="205" r="8" fill="#C2412D"/>
+<text x="965" y="58" text-anchor="middle" font-family="Georgia, 'Iowan Old Style', 'Times New Roman', serif" font-style="italic" font-size="16" fill="#5F6670">Fig. 2 — Second Ring Road (schematic)</text>
+</svg>

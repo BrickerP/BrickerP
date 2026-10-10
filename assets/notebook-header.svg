@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="t d">
+<title id="t">Yupeng Lu — lab notebook, page 1</title>
+<desc id="d">Graph-paper notebook header. Three measurements: 1,040 merged PRs at Cookiy; 600+ merged changes across 19 repos at Baidu MeDo; 41 tools across 4 MCP servers. Margin note: B.A. Physics, Ohio State, to M.S. Mathematical Finance, BU, to agents in production. A small orbit diagram labelled stable orbit equals shipped.</desc>
+<defs><pattern id="g-fine" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#E4DCC8" stroke-width="1"/></pattern><pattern id="g-major" width="120" height="120" patternUnits="userSpaceOnUse"><path d="M120 0H0V120" fill="none" stroke="#D6CCB4" stroke-width="1"/></pattern></defs>
+<rect width="1200" height="360" fill="#F6F1E4"/><rect width="1200" height="360" fill="url(#g-fine)"/><rect width="1200" height="360" fill="url(#g-major)"/>
+<rect x="0.5" y="0.5" width="1199" height="359" fill="none" stroke="#C9BFA6"/>
+<line x1="72" y1="0" x2="72" y2="360" stroke="#C2412D" stroke-opacity="0.45" stroke-width="1.2"/>
+<text x="96" y="58" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14" letter-spacing="2" fill="#5F6670">NOTEBOOK · P. 1 · AI AGENT &amp; BACKEND ENGINEER</text>
+<text x="96" y="112" font-family="Georgia, 'Iowan Old Style', 'Times New Roman', serif" font-size="48" font-weight="bold" fill="#1F3A5F">Yupeng Lu</text>
+<line x1="96" y1="150" x2="760" y2="150" stroke="#1F3A5F" stroke-width="1.5"/>
+<g font-family="Georgia, 'Iowan Old Style', 'Times New Roman', serif" fill="#1F3A5F">
+<text x="96" y="200" font-size="40" font-weight="bold">1,040</text><text x="218" y="200" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14" fill="#C2412D">PRs</text>
+<text x="96" y="228" font-size="17" fill="#3B4148">merged PRs at Cookiy</text>
+<text x="330" y="200" font-size="40" font-weight="bold">600+</text><text x="432" y="200" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14" fill="#C2412D">changes</text>
+<text x="330" y="228" font-size="17" fill="#3B4148">19 repos at Baidu MeDo</text>
+<text x="574" y="200" font-size="40" font-weight="bold">41</text><text x="626" y="200" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="14" fill="#C2412D">tools</text>
+<text x="574" y="228" font-size="17" fill="#3B4148">across 4 MCP servers</text>
+</g>
+<line x1="310" y1="168" x2="310" y2="236" stroke="#C9BFA6" stroke-dasharray="3 4"/><line x1="554" y1="168" x2="554" y2="236" stroke="#C9BFA6" stroke-dasharray="3 4"/>
+<line x1="96" y1="252" x2="760" y2="252" stroke="#C9BFA6"/>
+<g font-family="Georgia, 'Iowan Old Style', 'Times New Roman', serif" font-style="italic" font-size="17" fill="#3B4148">
+<text x="96" y="296">B.A. Physics, Ohio State</text>
+<text x="318" y="296">M.S. Math Finance, BU</text>
+<text x="528" y="296" fill="#C2412D">agents in production</text>
+</g>
+<path d="M290 291 q8 -6 18 0 m-6 -5 l6 5 l-7 3" fill="none" stroke="#1F3A5F" stroke-width="1.4" stroke-linecap="round"/>
+<path d="M496 291 q10 -6 22 0 m-7 -5 l7 5 l-8 3" fill="none" stroke="#1F3A5F" stroke-width="1.4" stroke-linecap="round"/>
+<text x="96" y="326" font-family="Georgia, 'Iowan Old Style', 'Times New Roman', serif" font-style="italic" font-size="17" fill="#5F6670">F = ma  →  dS = μS dt + σS dW  →  evals + guardrails + ledgers that reconcile</text>
+<g fill="none" stroke="#1F3A5F" stroke-opacity="0.35" stroke-dasharray="3 5">
+<path d="M820 90 C900 120 1060 120 1150 90"/><path d="M820 270 C900 240 1060 240 1150 270"/><path d="M820 135 C900 150 1060 150 1150 135"/><path d="M820 225 C900 210 1060 210 1150 225"/>
+</g>
+<ellipse cx="985" cy="180" rx="130" ry="48" transform="rotate(-12 985 180)" fill="none" stroke="#1F3A5F" stroke-width="1.4"/>
+<circle cx="985" cy="180" r="10" fill="#1F3A5F"/><circle cx="1110" cy="153" r="6" fill="#C2412D"/>
+<text x="830" y="70" font-family="Georgia, 'Iowan Old Style', 'Times New Roman', serif" font-style="italic" font-size="15" fill="#5F6670">Fig. 1 — demo → production</text>
+<text x="1150" y="300" text-anchor="end" font-family="Georgia, 'Iowan Old Style', 'Times New Roman', serif" font-style="italic" font-size="17" fill="#C2412D">stable orbit = shipped</text>
+</svg>

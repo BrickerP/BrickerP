@@ -84,15 +84,30 @@ const memoryAsset = {
 };
 const assets = [...coreAssets, memoryAsset];
 
-// The one live spread: an SVG rendered on request by projects/profile-cards.
-// It is the literal form of experiment 001, so it links to it and sits below
-// the text, right after the zine cover.
 const liveCard = {
-  href: 'experiments/001-a-profile-with-memory/README.md',
+  href: 'https://brickerp.github.io/',
   src: 'https://profile-cards.brickerp.workers.dev/card.svg',
-  alt: 'Live status card rendered at the edge by a Cloudflare Worker: last fill, scan p95, heartbeat, and latest commit. Enter experiment 001, A Profile With Memory.',
+  alt: 'Live status card rendered at the edge by a Cloudflare Worker: last fill, scan p95, heartbeat, and latest commit.',
 };
 const liveCardLine = `<a href="${liveCard.href}"><img src="${liveCard.src}" width="100%" alt="${liveCard.alt}"></a>`;
+
+const filmCard = {
+  href: 'https://brickerp.github.io/beijing-loop/',
+  src: 'assets/notebook-film.svg',
+  alt: 'Exp. 02, Beijing: Endless Second Ring, a 48-second Beijing night drive. Open the film.',
+};
+const headerCard = {
+  href: 'https://brickerp.github.io/',
+  src: 'assets/notebook-header.svg',
+  alt: 'Lab notebook page: 1,040 merged PRs at Cookiy, 600+ changes across 19 repos at Baidu MeDo, 41 tools across 4 MCP servers; physics to math finance to agents in production.',
+};
+const headerCardLine = `<a href="${headerCard.href}"><img src="${headerCard.src}" width="100%" alt="${headerCard.alt}"></a>`;
+const notebookAssets = [
+  { file: 'notebook-header.svg', width: 1200, height: 360 },
+  { file: 'notebook-film.svg', width: 1200, height: 400 },
+];
+const notebookPalette = ['#F6F1E4', '#1F3A5F', '#3B4148', '#5F6670', '#C2412D', '#E4DCC8', '#D6CCB4', '#C9BFA6'];
+const filmCardLine = `<a href="${filmCard.href}"><img src="${filmCard.src}" width="100%" alt="${filmCard.alt}"></a>`;
 
 function normalizeText(value) {
   return value.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
@@ -147,67 +162,41 @@ async function listRelativePaths(directory, prefix = '') {
 const readme = await readFile(path.join(root, 'README.md'), 'utf8');
 assert.doesNotMatch(readme, legacyFlow, 'README must not retain the superseded LOOP / LEDGER flow');
 
-// One positioning line, verbatim, shared with brickerp.github.io (/, /hire, /about) and the X bio.
 const POSITIONING = 'AI agent & backend engineer — I take agents from demo to production: MCP tools, guardrails, evals, billing, real-time systems.';
-const HIRE_URL = 'https://brickerp.github.io/hire/';
+const CONTACT_URL = 'https://brickerp.github.io/#contact';
 assert.match(readme, /^# Yupeng Lu\n\n/, 'README must open with the H1 name');
 assert.ok(readme.startsWith(`# Yupeng Lu\n\n**${POSITIONING}**\n\n`), 'the bold positioning line must follow the H1, verbatim');
 assert.doesNotMatch(readme, /^\*\*(?:Backend Engineer|AI Agent Engineer|Backend \/ AI Platform Engineer)\b/m, 'superseded role lines are forbidden');
 assert.doesNotMatch(readme, /re-measure pending|pending re-measure|\bpending\b/i, 'README must not lead with a pending measurement');
 assert.doesNotMatch(readme, /AI x Finance|markets (?:&|and) macro|especially for finance/i, 'finance is an exhibit, not the positioning');
 assert.doesNotMatch(readme, /brickerp\.github\.io\/resume(?!\.pdf)/, 'the resume link must point at the PDF that exists');
+assert.doesNotMatch(readme, /experiments\/|README\.md\)/, 'README posters must not link to GitHub commit / experiment markdown files');
 
-const sectionIndex = (heading) => {
-  const index = readme.indexOf(`\n### ${heading}\n`);
-  assert.notEqual(index, -1, `README must carry a “${heading}” section`);
-  return index;
-};
-const proofIndex = sectionIndex('Proof');
-const hireIndex = sectionIndex('Hire me');
-const nowIndex = sectionIndex('Now');
-assert.ok(proofIndex < hireIndex && hireIndex < nowIndex, 'sections must run Proof → Hire me → Now');
+assert.match(readme, /\n### Proof\n/, 'README must carry a Proof section');
+assert.ok(readme.includes(`](${CONTACT_URL})`), 'the header must link the homepage Contact section');
+assert.match(readme, /Part-time \/ contract/, 'header must state part-time / contract availability');
+assert.match(readme, /US permanent resident/, 'header must state US permanent resident');
+assert.match(readme, /\(mailto:yplmicro@gmail\.com\)/, 'header must carry the email');
 
-const header = readme.slice(0, proofIndex);
-assert.match(header, /Baidu \(MeDo/, 'the header must name the current role at Baidu (MeDo)');
-assert.match(header, /Cookiy/, 'the header must name the Cookiy agent platform work');
-assert.ok(header.includes(`](${HIRE_URL})`), 'the header must link /hire/');
-assert.doesNotMatch(header, /<[A-Za-z!/]/, 'the header must stay plain Markdown without HTML');
-
-const proofRows = readme.slice(proofIndex, hireIndex).split('\n').filter((line) => /^\| \*\*/.test(line));
-assert.equal(proofRows.length, 4, 'the proof table must hold exactly four exhibits');
-const exhibitContracts = [
-  { label: /Agent platform & revenue backend — Baidu · MeDo/, links: ['https://brickerp.github.io/resume.pdf'] },
-  {
-    label: /Public MCP\/CLI surfaces — Cookiy AI/,
-    links: [
-      'https://www.npmjs.com/package/cookiy-cli',
-      'https://www.npmjs.com/package/cookiy-mcp',
-      'https://github.com/cookiy-ai/user-research-skill',
-    ],
-  },
-  { label: /Production real-time system/, links: ['https://brickerp.github.io/work/quant/', 'https://d2c9pzwpavuktk.cloudfront.net/'] },
-  { label: /Side projects/, links: ['https://github.com/BrickerP/fed-pulse', 'https://github.com/BrickerP/auction-tape'] },
+const proofSection = readme.slice(readme.indexOf('\n### Proof\n'));
+const proofLinks = [
+  'https://brickerp.github.io/work/quant/',
+  'https://d2c9pzwpavuktk.cloudfront.net/',
+  'https://www.npmjs.com/package/cookiy-cli',
+  'https://www.npmjs.com/package/cookiy-mcp',
+  'https://brickerp.github.io/resume.pdf',
+  'https://open-ledger.brickerp.workers.dev',
 ];
-for (const [index, row] of proofRows.entries()) {
-  const contract = exhibitContracts[index];
-  assert.match(row, contract.label, `proof row ${index + 1} must be ${contract.label}`);
-  for (const link of contract.links) assert.ok(row.includes(`](${link})`), `proof row ${index + 1} must link ${link}`);
+for (const link of proofLinks) {
+  assert.ok(proofSection.includes(`](${link})`), `Proof must link ${link}`);
 }
-assert.match(proofRows[2], /Strategy and P&L stay private/, 'the real-time exhibit must keep strategy and P&L private');
+assert.match(proofSection, /Strategy and P&L stay private/, 'the real-time exhibit must keep strategy and P&L private');
 
-const hireSection = readme.slice(hireIndex, nowIndex);
-assert.ok(hireSection.includes(`](${HIRE_URL})`), 'Hire me must link /hire/');
-assert.match(hireSection, /\(mailto:yplmicro@gmail\.com\)/, 'Hire me must carry the email');
-assert.match(hireSection, /Part-time contract/, 'Hire me must state the part-time contract scope');
-assert.match(hireSection, /No overlap with my employer/, 'Hire me must state the employer boundary');
-assert.match(readme.slice(nowIndex), /\]\(https:\/\/x\.com\/trashConsumer\)/, 'Now must link the X account');
+const proseBeforeCards = readme.replace(headerCardLine, '').split('<a href=')[0];
+assert.ok(proseBeforeCards.split(/\s+/).filter(Boolean).length <= 220, 'README prose above the cards must stay short');
 
-// Every figure in the README traces to resume.html / public-profile.json on brickerp.github.io,
-// or is a stated availability or goal. Add a figure here only together with its source.
 const tracedFigures = new Set([
-  '41', '4', '1,040', '5.5K', '14', '59', '27', '40/40', '0', '600+', '19', '26', '291', // resume.html
-  '01', '48', // technical sheet № 01, the 48-second film
-  '20', '1,000', // availability (~20 h/week) and the stated X goal
+  '41', '4', '1,040', '40/40', '0', '600+', '19', '48', '01', '20',
 ]);
 const prose = readme.replace(/\]\([^)]+\)/g, ']').replace(/<img\b[^>]*>/g, '').replace(/<a\b[^>]*>/g, '');
 for (const raw of prose.match(/(?<![A-Za-z\d])\d[\d,./]*(?:\+|K)?(?![A-Za-z])/g) ?? []) {
@@ -219,25 +208,22 @@ for (const [, label, href] of readme.matchAll(/\[([^\]]+)\]\(([^)]+)\)/g)) {
   assert.match(href, /^(?:https:\/\/|mailto:)/, `link ${label} must use https or mailto: ${href}`);
 }
 
-// The zine cover may stay only below the text, where it cannot push the header or proof off the first screen.
-const coverLine = `<img src="assets/human-zine-cover.svg" width="100%" alt="${coreAssets[0].alt}">`;
-const coverIndex = readme.indexOf(coverLine);
-if (coverIndex !== -1) {
-  assert.ok(coverIndex > nowIndex, 'the zine cover must sit below the Now section');
-}
+assert.equal(readme.split(filmCardLine).length, 2, 'README must contain exactly one Beijing film card');
 assert.equal(readme.split(liveCardLine).length, 2, 'README must contain exactly one live status card');
-assert.ok(readme.indexOf(liveCardLine) > nowIndex, 'the live status card must sit below the Now section');
-if (coverIndex !== -1) {
-  assert.ok(readme.includes(`${coverLine}\n\n${liveCardLine}\n`), 'the live status card must directly follow the zine cover');
-}
+assert.ok(readme.includes(`${filmCardLine}\n\n${liveCardLine}\n`), 'the live status card must directly follow the Beijing film card');
 assert.match(liveCard.src, /^https:\/\/profile-cards\.brickerp\.workers\.dev\/card\.svg$/, 'the live status card must be served by the profile-cards Worker');
 assert.ok(countWords(liveCard.alt) >= 6, 'the live status card must provide a meaningful alt description');
 assert.match(liveCard.alt, /\blive\b/i, 'the live status card alt must say that it is live');
-assert.match(liveCard.alt, /A Profile With Memory/i, 'the live status card alt must identify experiment 001');
-await readLocalReference(root, liveCard.href);
+assert.match(filmCard.href, /beijing-loop/, 'the film card must link the live film');
 assert.equal((readme.match(/src="https?:\/\//g) ?? []).length, 1, 'the live status card must be the only remote image in the README');
-assert.equal((readme.match(/<img\b/g) ?? []).length, (coverIndex === -1 ? 0 : 1) + 1, 'the cover and the live status card are the only images the README may embed');
-assert.equal((readme.match(/<a\b/g) ?? []).length, 1, 'the live status card is the only HTML anchor the README may carry');
+assert.equal(readme.split(headerCardLine).length, 2, 'README must contain exactly one notebook header');
+assert.ok(readme.indexOf(headerCardLine) < readme.indexOf('\n### Proof\n'), 'the notebook header must sit above Proof');
+assert.equal((readme.match(/<img\b/g) ?? []).length, 3, 'the notebook header, film card and live status card are the only images the README may embed');
+assert.equal((readme.match(/<a\b/g) ?? []).length, 3, 'the notebook header, film card and live status card are the only HTML anchors the README may carry');
+for (const anchor of imageAnchors(readme)) {
+  assert.match(anchor.href, /^https:\/\//, `poster ${anchor.src} must link a real https demo/page, not a repo path`);
+}
+
 
 const experimentsIndex = await readFile(path.join(root, 'experiments', 'README.md'), 'utf8');
 assert.doesNotMatch(experimentsIndex, /PAST FIXATIONS/i, 'phase one must not fabricate an empty past');
@@ -291,7 +277,20 @@ assert.deepEqual(
 assert.doesNotMatch(experimentDetail, /PAST FIXATIONS/i, 'phase one detail must not display an empty past');
 
 const assetNames = (await readdir(assetRoot)).sort();
-assert.deepEqual(assetNames, assets.map(({ file }) => file).sort(), `assets must contain exactly the ${assets.length} approved Human Zine spreads`);
+for (const asset of notebookAssets) {
+  const svg = await readFile(path.join(assetRoot, asset.file), 'utf8');
+  const rootTag = svg.match(/^<svg\b([^>]*)>/)?.[1];
+  assert.ok(rootTag, `${asset.file}: missing root svg element`);
+  assert.equal(getAttribute(rootTag, 'viewBox'), `0 0 ${asset.width} ${asset.height}`, `${asset.file}: incorrect viewBox`);
+  assert.equal((svg.match(/<title\b/g) ?? []).length, 1, `${asset.file}: expected one title`);
+  assert.equal((svg.match(/<desc\b/g) ?? []).length, 1, `${asset.file}: expected one description`);
+  assert.deepEqual(roleValues(svg), ['img'], `${asset.file}: only the root img role is allowed`);
+  assert.doesNotMatch(svg, /<(?:a|script|style|image|foreignObject|iframe|use)\b/i, `${asset.file}: embedded or interactive elements are forbidden`);
+  assert.doesNotMatch(svg, /\b(?:href|xlink:href|on[a-z]+)\s*=/i, `${asset.file}: links and handlers are forbidden`);
+  assert.doesNotMatch(svg.replace('xmlns="http://www.w3.org/2000/svg"', ''), /https?:\/\//i, `${asset.file}: remote resources are forbidden`);
+  for (const color of svg.matchAll(/#[0-9A-Fa-f]{6}\b/g)) assert.ok(notebookPalette.includes(color[0].toUpperCase()), `${asset.file}: unapproved color ${color[0]}`);
+}
+assert.deepEqual(assetNames.filter((name) => !notebookAssets.some(({ file }) => file === name)), assets.map(({ file }) => file).sort(), `assets must contain exactly the ${assets.length} approved Human Zine spreads`);
 
 const svgs = new Map();
 const visibleCopy = [];
