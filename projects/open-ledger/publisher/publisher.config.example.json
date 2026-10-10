@@ -1,0 +1,13 @@
+{
+  "$comment": "open-ledger-publish tail config. `query` must return a monotonic `cursor` column plus LedgerEvent columns (id, ts, type, symbol, side, qty, price, orderId, broker); other columns become meta. Use :cursor and :limit placeholders.",
+  "url": "https://open-ledger.<your-subdomain>.workers.dev",
+  "ledgerId": "live",
+  "tokenEnv": "INGEST_TOKEN",
+  "sqlite": "./execution.sqlite",
+  "cursorFile": "./.open-ledger-cursor.json",
+  "initialCursor": 0,
+  "batchSize": 200,
+  "query": "SELECT rowid AS cursor, fill_id AS id, filled_at AS ts, symbol, side, qty, price, order_id AS orderId, venue, fee FROM fills WHERE rowid > :cursor ORDER BY rowid LIMIT :limit",
+  "defaults": { "type": "fill", "broker": "alpaca" },
+  "metaColumns": "rest"
+}

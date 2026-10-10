@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>open-ledger · verifiable trading ledger</title>
+    <meta
+      name="description"
+      content="An append-only, hash-chained public ledger of trading fills. Verify the chain yourself, in your browser."
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23111'/%3E%3Cpath d='M8 22V10h3v9h6v3zm11 0V10h3v12z' fill='%2363E2B7'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <header class="masthead">
+      <div class="wrap masthead-row">
+        <div>
+          <h1 class="brand">open-ledger</h1>
+          <p class="tagline">Append-only. Hash-chained. Anyone can re-verify.</p>
+        </div>
+        <form id="ledger-form" class="ledger-form" autocomplete="off">
+          <label for="ledger-input">Ledger</label>
+          <input id="ledger-input" name="ledger" pattern="[a-z0-9-]{1,64}" spellcheck="false" />
+          <button type="submit" class="btn btn-quiet">Open</button>
+        </form>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section id="notice" class="notice" hidden></section>
+
+      <section class="stats" aria-label="Ledger head">
+        <article class="stat stat-wide">
+          <h2>Head hash</h2>
+          <p class="mono hash" id="head-hash" title="SHA-256 of the latest chained event">—</p>
+        </article>
+        <article class="stat">
+          <h2>Events</h2>
+          <p class="big" id="head-count">—</p>
+        </article>
+        <article class="stat">
+          <h2>Head seq</h2>
+          <p class="big" id="head-seq">—</p>
+        </article>
+        <article class="stat">
+          <h2>Last append (UTC)</h2>
+          <p id="head-updated">—</p>
+        </article>
+      </section>
+
+      <section class="verify card">
+        <div class="verify-row">
+          <div>
+            <h2>Verify chain in your browser</h2>
+            <p class="muted">
+              Downloads <code>export.ndjson</code> and recomputes every link with WebCrypto SHA-256:
+              <code>hash = sha256(prevHash + "\n" + canonicalJSON(event))</code>, genesis = 64 zeros.
+              Nothing is trusted from the server except the raw rows.
+            </p>
+          </div>
+          <button id="verify-btn" class="btn btn-primary" type="button">Verify chain in your browser</button>
+        </div>
+        <div id="verify-progress" class="progress" hidden>
+          <div id="verify-bar" class="progress-bar"></div>
+        </div>
+        <p id="verify-status" class="verify-status" aria-live="polite"></p>
+      </section>
+
+      <section class="grid-2">
+        <article class="card">
+          <h2>Fills by day</h2>
+          <p class="muted">Bar height is traded notional (qty × price); label is the number of fills.</p>
+          <div id="by-day" class="bars" role="img" aria-label="Notional traded per day"></div>
+        </article>
+        <article class="card">
+          <h2>By symbol</h2>
+          <table class="table compact">
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th class="num">Fills</th>
+                <th class="num">Buy qty</th>
+                <th class="num">Sell qty</th>
+                <th class="num">Notional</th>
+              </tr>
+            </thead>
+            <tbody id="by-symbol"></tbody>
+          </table>
+        </article>
+      </section>
+
+      <section class="card">
+        <div class="table-head">
+          <h2>Events</h2>
+          <form id="filter-form" class="filter-form" autocomplete="off">
+            <label for="symbol-input">Symbol</label>
+            <input id="symbol-input" name="symbol" placeholder="all" spellcheck="false" />
+            <button type="submit" class="btn btn-quiet">Filter</button>
+          </form>
+        </div>
+        <div class="table-scroll">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="num">Seq</th>
+                <th>Time (UTC)</th>
+                <th>Type</th>
+                <th>Symbol</th>
+                <th>Side</th>
+                <th class="num">Qty</th>
+                <th class="num">Price</th>
+                <th>Order</th>
+                <th>Hash</th>
+              </tr>
+            </thead>
+            <tbody id="events-body"></tbody>
+          </table>
+        </div>
+        <div class="pager">
+          <button id="prev-btn" class="btn btn-quiet" type="button" disabled>← Newer page</button>
+          <span id="pager-info" class="muted"></span>
+          <button id="next-btn" class="btn btn-quiet" type="button" disabled>Older page →</button>
+        </div>
+      </section>
+
+      <section class="card api">
+        <h2>Raw API</h2>
+        <ul id="api-links" class="api-links mono"></ul>
+      </section>
+    </main>
+
+    <footer class="wrap footer muted">
+      <span>open-ledger · MIT · Cloudflare Workers + Durable Objects (SQLite)</span>
+      <a href="https://github.com/BrickerP/BrickerP/tree/main/projects/open-ledger">Source</a>
+    </footer>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
