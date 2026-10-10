@@ -14,6 +14,8 @@ I build live systems and publish the numbers: trading execution on Alpaca, agent
 
 <a href="experiments/README.md"><img src="assets/human-zine-memory.svg" width="100%" alt="Enter the Thought Experiments archive: current experiment 001, A Profile With Memory, and found experiments from before Issue 001."></a>
 
+<a href="experiments/001-a-profile-with-memory/README.md"><img src="https://profile-cards.brickerp.workers.dev/card.svg" width="100%" alt="Live status card rendered at the edge by a Cloudflare Worker: last fill, scan p95, heartbeat, and latest commit. Enter experiment 001, A Profile With Memory."></a>
+
 <a href="https://brickerp.github.io/"><img src="assets/human-zine-film.svg" width="100%" alt="Endless Second Ring, a 48-second Beijing night drive. Open the film."></a>
 
 <a href="https://brickerp.github.io/ai-usage-report/"><img src="assets/human-zine-ai-usage.svg" width="100%" alt="AI Usage, real model history made playable. Open the archive."></a>

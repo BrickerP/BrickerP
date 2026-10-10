@@ -84,6 +84,16 @@ const memoryAsset = {
 };
 const assets = [...coreAssets, memoryAsset];
 
+// The one live spread: an SVG rendered on request by projects/profile-cards.
+// It is the literal form of experiment 001, so it follows the memory portal
+// and links back to it.
+const liveCard = {
+  href: 'experiments/001-a-profile-with-memory/README.md',
+  src: 'https://profile-cards.brickerp.workers.dev/card.svg',
+  alt: 'Live status card rendered at the edge by a Cloudflare Worker: last fill, scan p95, heartbeat, and latest commit. Enter experiment 001, A Profile With Memory.',
+};
+const liveCardLine = `<a href="${liveCard.href}"><img src="${liveCard.src}" width="100%" alt="${liveCard.alt}"></a>`;
+
 const expectedCoreReadme = `<img src="assets/human-zine-cover.svg" width="100%" alt="${coreAssets[0].alt}">
 
 <a href="https://brickerp.github.io/"><img src="assets/human-zine-film.svg" width="100%" alt="${coreAssets[1].alt}"></a>
@@ -196,7 +206,21 @@ assert.ok(
   zine.indexOf(coverLine) < zine.indexOf(intrusionLine) && zine.indexOf(intrusionLine) < zine.indexOf(filmLine),
   'the current intrusion must appear between the cover and Film',
 );
-assert.equal(zine.replace(`${intrusionLine}\n\n`, ''), expectedCoreReadme, `the original ${coreAssets.length} spreads must retain their exact contract`);
+
+assert.equal(readme.split(liveCardLine).length, 2, 'README must contain exactly one live status card');
+assert.ok(zine.includes(`${intrusionLine}\n\n${liveCardLine}\n\n`), 'the live status card must directly follow the memory portal');
+assert.match(liveCard.src, /^https:\/\/profile-cards\.brickerp\.workers\.dev\/card\.svg$/, 'the live status card must be served by the profile-cards Worker');
+assert.ok(countWords(liveCard.alt) >= 6, 'the live status card must provide a meaningful alt description');
+assert.match(liveCard.alt, /\blive\b/i, 'the live status card alt must say that it is live');
+assert.match(liveCard.alt, /A Profile With Memory/i, 'the live status card alt must identify experiment 001');
+assert.equal((readme.match(/src="https?:\/\//g) ?? []).length, 1, 'the live status card must be the only remote image in the README');
+await readLocalReference(root, liveCard.href);
+
+assert.equal(
+  zine.replace(`${intrusionLine}\n\n${liveCardLine}\n\n`, ''),
+  expectedCoreReadme,
+  `the original ${coreAssets.length} spreads must retain their exact contract`,
+);
 
 const experimentsIndex = await readFile(path.join(root, 'experiments', 'README.md'), 'utf8');
 assert.doesNotMatch(experimentsIndex, /PAST FIXATIONS/i, 'phase one must not fabricate an empty past');
@@ -254,6 +278,11 @@ const expectedAnchors = [
     href: intrusionTarget,
     src: intrusionImage,
     alt: intrusionAlt,
+  },
+  {
+    href: liveCard.href,
+    src: liveCard.src,
+    alt: liveCard.alt,
   },
   {
     href: 'https://brickerp.github.io/',
