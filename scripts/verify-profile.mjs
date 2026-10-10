@@ -93,9 +93,20 @@ const liveCardLine = `<a href="${liveCard.href}"><img src="${liveCard.src}" widt
 
 const filmCard = {
   href: 'https://brickerp.github.io/beijing-loop/',
-  src: 'assets/human-zine-film.svg',
-  alt: 'Endless Second Ring, a 48-second Beijing night drive. Open the film.',
+  src: 'assets/notebook-film.svg',
+  alt: 'Exp. 02, Beijing: Endless Second Ring, a 48-second Beijing night drive. Open the film.',
 };
+const headerCard = {
+  href: 'https://brickerp.github.io/',
+  src: 'assets/notebook-header.svg',
+  alt: 'Lab notebook page: 1,040 merged PRs at Cookiy, 600+ changes across 19 repos at Baidu MeDo, 41 tools across 4 MCP servers; physics to math finance to agents in production.',
+};
+const headerCardLine = `<a href="${headerCard.href}"><img src="${headerCard.src}" width="100%" alt="${headerCard.alt}"></a>`;
+const notebookAssets = [
+  { file: 'notebook-header.svg', width: 1200, height: 360 },
+  { file: 'notebook-film.svg', width: 1200, height: 400 },
+];
+const notebookPalette = ['#F6F1E4', '#1F3A5F', '#3B4148', '#5F6670', '#C2412D', '#E4DCC8', '#D6CCB4', '#C9BFA6'];
 const filmCardLine = `<a href="${filmCard.href}"><img src="${filmCard.src}" width="100%" alt="${filmCard.alt}"></a>`;
 
 function normalizeText(value) {
@@ -181,7 +192,7 @@ for (const link of proofLinks) {
 }
 assert.match(proofSection, /Strategy and P&L stay private/, 'the real-time exhibit must keep strategy and P&L private');
 
-const proseBeforeCards = readme.split('<a href=')[0];
+const proseBeforeCards = readme.replace(headerCardLine, '').split('<a href=')[0];
 assert.ok(proseBeforeCards.split(/\s+/).filter(Boolean).length <= 220, 'README prose above the cards must stay short');
 
 const tracedFigures = new Set([
@@ -205,8 +216,10 @@ assert.ok(countWords(liveCard.alt) >= 6, 'the live status card must provide a me
 assert.match(liveCard.alt, /\blive\b/i, 'the live status card alt must say that it is live');
 assert.match(filmCard.href, /beijing-loop/, 'the film card must link the live film');
 assert.equal((readme.match(/src="https?:\/\//g) ?? []).length, 1, 'the live status card must be the only remote image in the README');
-assert.equal((readme.match(/<img\b/g) ?? []).length, 2, 'the film card and the live status card are the only images the README may embed');
-assert.equal((readme.match(/<a\b/g) ?? []).length, 2, 'the film card and live status card are the only HTML anchors the README may carry');
+assert.equal(readme.split(headerCardLine).length, 2, 'README must contain exactly one notebook header');
+assert.ok(readme.indexOf(headerCardLine) < readme.indexOf('\n### Proof\n'), 'the notebook header must sit above Proof');
+assert.equal((readme.match(/<img\b/g) ?? []).length, 3, 'the notebook header, film card and live status card are the only images the README may embed');
+assert.equal((readme.match(/<a\b/g) ?? []).length, 3, 'the notebook header, film card and live status card are the only HTML anchors the README may carry');
 for (const anchor of imageAnchors(readme)) {
   assert.match(anchor.href, /^https:\/\//, `poster ${anchor.src} must link a real https demo/page, not a repo path`);
 }
@@ -264,7 +277,20 @@ assert.deepEqual(
 assert.doesNotMatch(experimentDetail, /PAST FIXATIONS/i, 'phase one detail must not display an empty past');
 
 const assetNames = (await readdir(assetRoot)).sort();
-assert.deepEqual(assetNames, assets.map(({ file }) => file).sort(), `assets must contain exactly the ${assets.length} approved Human Zine spreads`);
+for (const asset of notebookAssets) {
+  const svg = await readFile(path.join(assetRoot, asset.file), 'utf8');
+  const rootTag = svg.match(/^<svg\b([^>]*)>/)?.[1];
+  assert.ok(rootTag, `${asset.file}: missing root svg element`);
+  assert.equal(getAttribute(rootTag, 'viewBox'), `0 0 ${asset.width} ${asset.height}`, `${asset.file}: incorrect viewBox`);
+  assert.equal((svg.match(/<title\b/g) ?? []).length, 1, `${asset.file}: expected one title`);
+  assert.equal((svg.match(/<desc\b/g) ?? []).length, 1, `${asset.file}: expected one description`);
+  assert.deepEqual(roleValues(svg), ['img'], `${asset.file}: only the root img role is allowed`);
+  assert.doesNotMatch(svg, /<(?:a|script|style|image|foreignObject|iframe|use)\b/i, `${asset.file}: embedded or interactive elements are forbidden`);
+  assert.doesNotMatch(svg, /\b(?:href|xlink:href|on[a-z]+)\s*=/i, `${asset.file}: links and handlers are forbidden`);
+  assert.doesNotMatch(svg.replace('xmlns="http://www.w3.org/2000/svg"', ''), /https?:\/\//i, `${asset.file}: remote resources are forbidden`);
+  for (const color of svg.matchAll(/#[0-9A-Fa-f]{6}\b/g)) assert.ok(notebookPalette.includes(color[0].toUpperCase()), `${asset.file}: unapproved color ${color[0]}`);
+}
+assert.deepEqual(assetNames.filter((name) => !notebookAssets.some(({ file }) => file === name)), assets.map(({ file }) => file).sort(), `assets must contain exactly the ${assets.length} approved Human Zine spreads`);
 
 const svgs = new Map();
 const visibleCopy = [];
