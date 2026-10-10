@@ -1,0 +1,3 @@
+# Copy to .dev.vars for `wrangler dev`. Never commit the real file.
+# Generate a value with: openssl rand -hex 32
+ADMIN_TOKEN=replace-with-32-random-bytes-hex
