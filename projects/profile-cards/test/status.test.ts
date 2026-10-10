@@ -62,7 +62,7 @@ describe("collectStatus", () => {
     const stored = await collectStatus({ ...config, ledgerBaseUrl: null, heartbeatBaseUrl: null }, deps, null);
     expect(stored.status.fill).toEqual({ state: "unconfigured" });
     expect(stored.status.heartbeat).toEqual({ state: "unconfigured" });
-    expect(deps.calls.every((url) => url.startsWith("https://api.github.com"))).toBe(true);
+    expect(deps.calls.every((url) => new URL(url).hostname === "api.github.com")).toBe(true);
   });
 
   it("falls back to remembered values when a source fails", async () => {

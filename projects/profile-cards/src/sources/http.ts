@@ -40,8 +40,11 @@ export function errorMessage(error: unknown): string {
 }
 
 export function trimBaseUrl(value: string | undefined): string | null {
-  const trimmed = (value ?? "").trim().replace(/\/+$/, "");
-  if (!trimmed) return null;
-  if (!/^https?:\/\//.test(trimmed)) return null;
-  return trimmed;
+  const trimmed = (value ?? "").trim();
+  let end = trimmed.length;
+  while (end > 0 && trimmed[end - 1] === "/") end -= 1;
+  const base = trimmed.slice(0, end);
+  if (!base) return null;
+  if (!/^https?:\/\//.test(base)) return null;
+  return base;
 }

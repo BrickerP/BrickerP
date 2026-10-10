@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { fetchLatestCommit } from "../src/sources/github.js";
 import { fetchHeartbeat } from "../src/sources/heartbeat.js";
 import { fetchLatestFill } from "../src/sources/ledger.js";
+import { trimBaseUrl } from "../src/sources/http.js";
 import { fakeDeps, json } from "./helpers.js";
 
 const GH = "https://api.github.com";
@@ -122,6 +123,39 @@ describe("heartbeat source", () => {
     expect(hb.p95Ms).toBeNull();
   });
 
+  it("parses the payload served by the deployed heartbeat Worker", async () => {
+    const deps = fakeDeps({
+      ["https://heartbeat.example/v1/monitors/scan-batch"]: () =>
+        json({
+          id: "scan-batch",
+          name: "scan-batch",
+          state: "down",
+          public: true,
+          expectEverySec: 300,
+          graceSec: 120,
+          p95ThresholdMs: 5000,
+          windowSize: 200,
+          createdAt: "2026-10-10T08:28:57.954Z",
+          lastBeatAt: "2026-10-10T08:37:10.326Z",
+          nextDeadline: "2026-10-10T08:44:10.326Z",
+          stats: { count: 31, p50Ms: 2402, p95Ms: 2504, p99Ms: 2512, failRate: 0 },
+          incidents: [{ id: 3, kind: "missed", openedAt: "2026-10-10T08:44:10.353Z", closedAt: null, detail: "No beat for 7m (expected every 5m, grace 2m)" }],
+        }),
+    });
+    const hb = await fetchHeartbeat(deps, "https://heartbeat.example", "scan-batch");
+    expect(hb).toEqual({
+      monitorId: "scan-batch",
+      name: "scan-batch",
+      state: "down",
+      lastBeatAt: "2026-10-10T08:37:10.326Z",
+      nextDeadline: "2026-10-10T08:44:10.326Z",
+      count: 31,
+      p50Ms: 2402,
+      p95Ms: 2504,
+      p95ThresholdMs: 5000,
+    });
+  });
+
   it("surfaces timeouts", async () => {
     const deps = fakeDeps({
       ["https://hb.example/"]: (_url, init) =>
@@ -131,5 +165,28 @@ describe("heartbeat source", () => {
     });
     deps.timeoutMs = 20;
     await expect(fetchHeartbeat(deps, "https://hb.example", "m")).rejects.toThrow("timeout");
+  });
+});
+
+describe("trimBaseUrl", () => {
+  it("strips whitespace and trailing slashes", () => {
+    expect(trimBaseUrl(" https://heartbeat.brickerp.workers.dev/ ")).toBe("https://heartbeat.brickerp.workers.dev");
+    expect(trimBaseUrl("https://open-ledger.example/base///")).toBe("https://open-ledger.example/base");
+    expect(trimBaseUrl("http://127.0.0.1:8787")).toBe("http://127.0.0.1:8787");
+  });
+
+  it("treats empty and non-http values as not wired", () => {
+    expect(trimBaseUrl(undefined)).toBeNull();
+    expect(trimBaseUrl("")).toBeNull();
+    expect(trimBaseUrl("   ")).toBeNull();
+    expect(trimBaseUrl("///")).toBeNull();
+    expect(trimBaseUrl("ftp://ledger.example")).toBeNull();
+    expect(trimBaseUrl("heartbeat.brickerp.workers.dev")).toBeNull();
+  });
+
+  it("handles long runs of slashes in linear time", () => {
+    const hostile = `https://ledger.example${"/".repeat(100_000)}a`;
+    expect(trimBaseUrl(hostile)).toBe(hostile);
+    expect(trimBaseUrl(`${hostile}${"/".repeat(100_000)}`)).toBe(hostile);
   });
 });
