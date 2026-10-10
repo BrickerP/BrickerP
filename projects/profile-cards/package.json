@@ -1,0 +1,23 @@
+{
+  "name": "profile-cards",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Live SVG status cards for a GitHub profile README, rendered at the edge by a Cloudflare Worker.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Yupeng Lu <yplmicro@gmail.com>",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "build": "wrangler deploy --dry-run --outdir=dist",
+    "types": "wrangler types",
+    "typecheck": "npm run types && tsc --noEmit -p tsconfig.json && tsc --noEmit -p test/tsconfig.json",
+    "test": "npm run types && vitest run"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-plugin": "^1.4.0",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.3",
+    "wrangler": "^4.149.0"
+  }
+}

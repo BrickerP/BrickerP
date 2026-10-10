@@ -8,3 +8,5 @@ How many past selves should a profile remember?
 - [35AA305](https://github.com/BrickerP/BrickerP/commit/35aa3052a2765879a5c0973260f11042b81ca55e) · 2026-07-31 — Reframed it as `LOOP / LEDGER`: strange loops, open ledgers.
 - [B130094](https://github.com/BrickerP/BrickerP/commit/b130094cb5f273bbb20cec5cff163eafb511f638) · 2026-08-09 — Replaced the text-heavy profile with a Human Zine of independent works.
 - [D71F9F3](https://github.com/BrickerP/BrickerP/commit/d71f9f3c92a1c615d6b49a59da9bf1f40ddfffb1) · 2026-08-09 — Turned Film, AI Usage, and Open Line into visual portals.
+
+Since 2026-10-10 the profile also remembers the present: a [live status card](https://profile-cards.brickerp.workers.dev/) rendered on request by a Cloudflare Worker — last fill, scan p95, heartbeat, latest commit — with a memory of the last good value for each. Source: [projects/profile-cards](../../projects/profile-cards/README.md).

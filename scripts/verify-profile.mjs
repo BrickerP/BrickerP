@@ -84,6 +84,16 @@ const memoryAsset = {
 };
 const assets = [...coreAssets, memoryAsset];
 
+// The one live spread: an SVG rendered on request by projects/profile-cards.
+// It is the literal form of experiment 001, so it links to it and sits below
+// the text, right after the zine cover.
+const liveCard = {
+  href: 'experiments/001-a-profile-with-memory/README.md',
+  src: 'https://profile-cards.brickerp.workers.dev/card.svg',
+  alt: 'Live status card rendered at the edge by a Cloudflare Worker: last fill, scan p95, heartbeat, and latest commit. Enter experiment 001, A Profile With Memory.',
+};
+const liveCardLine = `<a href="${liveCard.href}"><img src="${liveCard.src}" width="100%" alt="${liveCard.alt}"></a>`;
+
 function normalizeText(value) {
   return value.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 }
@@ -199,7 +209,7 @@ const tracedFigures = new Set([
   '01', '48', // technical sheet № 01, the 48-second film
   '20', '1,000', // availability (~20 h/week) and the stated X goal
 ]);
-const prose = readme.replace(/\]\([^)]+\)/g, ']').replace(/<img\b[^>]*>/g, '');
+const prose = readme.replace(/\]\([^)]+\)/g, ']').replace(/<img\b[^>]*>/g, '').replace(/<a\b[^>]*>/g, '');
 for (const raw of prose.match(/(?<![A-Za-z\d])\d[\d,./]*(?:\+|K)?(?![A-Za-z])/g) ?? []) {
   const figure = raw.replace(/[.,/]+$/, '');
   assert.ok(tracedFigures.has(figure), `README figure “${figure}” has no traced source; add the source before the figure`);
@@ -215,8 +225,19 @@ const coverIndex = readme.indexOf(coverLine);
 if (coverIndex !== -1) {
   assert.ok(coverIndex > nowIndex, 'the zine cover must sit below the Now section');
 }
-assert.equal((readme.match(/<img\b/g) ?? []).length, coverIndex === -1 ? 0 : 1, 'the cover is the only image the README may embed');
-assert.equal((readme.match(/<a\b/g) ?? []).length, 0, 'README links must be plain Markdown, not HTML anchors');
+assert.equal(readme.split(liveCardLine).length, 2, 'README must contain exactly one live status card');
+assert.ok(readme.indexOf(liveCardLine) > nowIndex, 'the live status card must sit below the Now section');
+if (coverIndex !== -1) {
+  assert.ok(readme.includes(`${coverLine}\n\n${liveCardLine}\n`), 'the live status card must directly follow the zine cover');
+}
+assert.match(liveCard.src, /^https:\/\/profile-cards\.brickerp\.workers\.dev\/card\.svg$/, 'the live status card must be served by the profile-cards Worker');
+assert.ok(countWords(liveCard.alt) >= 6, 'the live status card must provide a meaningful alt description');
+assert.match(liveCard.alt, /\blive\b/i, 'the live status card alt must say that it is live');
+assert.match(liveCard.alt, /A Profile With Memory/i, 'the live status card alt must identify experiment 001');
+await readLocalReference(root, liveCard.href);
+assert.equal((readme.match(/src="https?:\/\//g) ?? []).length, 1, 'the live status card must be the only remote image in the README');
+assert.equal((readme.match(/<img\b/g) ?? []).length, (coverIndex === -1 ? 0 : 1) + 1, 'the cover and the live status card are the only images the README may embed');
+assert.equal((readme.match(/<a\b/g) ?? []).length, 1, 'the live status card is the only HTML anchor the README may carry');
 
 const experimentsIndex = await readFile(path.join(root, 'experiments', 'README.md'), 'utf8');
 assert.doesNotMatch(experimentsIndex, /PAST FIXATIONS/i, 'phase one must not fabricate an empty past');

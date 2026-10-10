@@ -1,0 +1,45 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "profile-cards",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-10-01",
+
+  // heartbeat and open-ledger live on the same workers.dev subdomain as this Worker.
+  // Without this flag a fetch() to them is answered "404 error code: 1042" (same-zone
+  // Worker-to-Worker fetch); with it, fetch() takes the public route like any client.
+  "compatibility_flags": ["global_fetch_strictly_public"],
+
+  // Workers Cache: Cloudflare serves cached responses without running the Worker.
+  // The Worker sets Cache-Control on every response (see src/index.ts).
+  "cache": { "enabled": true },
+
+  "observability": {
+    "enabled": true,
+    "logs": { "enabled": true, "head_sampling_rate": 1 },
+    "traces": { "enabled": true, "head_sampling_rate": 0.05 }
+  },
+
+  // Last-known-good memory for every source, so the card degrades to "stale"
+  // instead of "offline" when an upstream is down or rate-limited.
+  "kv_namespaces": [{ "binding": "MEMORY", "id": "80d5d9bb22f1470ab563d34f7418dbac" }],
+
+  "vars": {
+    // GitHub user whose public events feed provides the latest commit.
+    "GITHUB_USER": "BrickerP",
+    // Repository used when the events feed has no PushEvent or is unavailable.
+    "GITHUB_FALLBACK_REPO": "BrickerP/BrickerP",
+    // open-ledger public API (projects/open-ledger). Empty = tile shows "not wired".
+    "LEDGER_BASE_URL": "",
+    "LEDGER_ID": "demo",
+    // heartbeat public API (projects/heartbeat). Empty = tile shows "not wired".
+    "HEARTBEAT_BASE_URL": "",
+    "HEARTBEAT_MONITOR_ID": "scan-batch",
+    // How long a rendered status is considered fresh, in seconds.
+    "CACHE_TTL_SECONDS": "300",
+    // Shown in the card header.
+    "CARD_TITLE": "FIELD NOTES · LIVE STATUS"
+  }
+  // Optional secret (not in this file): GITHUB_TOKEN — raises the GitHub API
+  // rate limit from 60/h (shared Workers egress IPs) to 5000/h.
+  //   npx wrangler secret put GITHUB_TOKEN
+}
