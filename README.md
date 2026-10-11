@@ -3,9 +3,7 @@
 **AI agent & backend engineer — I take agents from demo to production: MCP tools, guardrails, evals, billing, real-time systems.**
 
 1. [Site](https://brickerp.github.io/)
-2. [Live dashboard](https://quant.oakrelay.dpdns.org/)
-3. [Contact](https://brickerp.github.io/#contact)
-4. [Architecture](https://brickerp.github.io/work/quant/architecture/)
+2. [Contact](https://brickerp.github.io/#contact)
 
 1,040 PRs · Cookiy · 600+ changes / 19 repos · Baidu MeDo · 41 MCP tools
 
