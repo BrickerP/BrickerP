@@ -96,12 +96,6 @@ const filmCard = {
   src: 'assets/notebook-film.svg',
   alt: 'Exp. 02, Beijing: Endless Second Ring, a 48-second Beijing night drive. Open the film.',
 };
-const headerCard = {
-  href: 'https://brickerp.github.io/',
-  src: 'assets/notebook-header.svg',
-  alt: 'Lab notebook page: 1,040 merged PRs at Cookiy, 600+ changes across 19 repos at Baidu MeDo, 41 tools across 4 MCP servers; physics to math finance to agents in production.',
-};
-const headerCardLine = `<a href="${headerCard.href}"><img src="${headerCard.src}" width="100%" alt="${headerCard.alt}"></a>`;
 const notebookAssets = [
   { file: 'notebook-header.svg', width: 1200, height: 360 },
   { file: 'notebook-film.svg', width: 1200, height: 400 },
@@ -163,40 +157,43 @@ const readme = await readFile(path.join(root, 'README.md'), 'utf8');
 assert.doesNotMatch(readme, legacyFlow, 'README must not retain the superseded LOOP / LEDGER flow');
 
 const POSITIONING = 'AI agent & backend engineer — I take agents from demo to production: MCP tools, guardrails, evals, billing, real-time systems.';
+const SITE_URL = 'https://brickerp.github.io/';
+const DASHBOARD_URL = 'https://quant.oakrelay.dpdns.org/';
+const CLASSIC_DASHBOARD_URL = 'https://d2c9pzwpavuktk.cloudfront.net/';
+// The Pages hub (https://brickerp.github.io/work/quant/architecture/) is not published.
+// Architecture stays on the quant-trading doc until that page exists.
+const ARCHITECTURE_URL = 'https://github.com/BrickerP/quant-trading/blob/develop/docs/architecture/README.md';
 const CONTACT_URL = 'https://brickerp.github.io/#contact';
-assert.match(readme, /^# Yupeng Lu\n\n/, 'README must open with the H1 name');
-assert.ok(readme.startsWith(`# Yupeng Lu\n\n**${POSITIONING}**\n\n`), 'the bold positioning line must follow the H1, verbatim');
+const doorLines = [
+  `[Site](${SITE_URL})`,
+  `[Live dashboard](${DASHBOARD_URL}) · [classic CloudFront](${CLASSIC_DASHBOARD_URL}). Strategy and P&L stay private.`,
+  `[Architecture](${ARCHITECTURE_URL})`,
+  `[Contact / Hire](${CONTACT_URL})`,
+];
+const doorBlock = doorLines.map((line, index) => `${index + 1}. ${line}`).join('\n');
+const availabilityLine = 'Part-time / contract · ~20 h/week · Diamond Bar, California (PT) · US permanent resident · [yplmicro@gmail.com](mailto:yplmicro@gmail.com)\n';
+const expectedReadme = `# Yupeng Lu\n\n**${POSITIONING}**\n\n${doorBlock}\n\n${filmCardLine}\n\n${liveCardLine}\n\n${availabilityLine}`;
+
+assert.equal(readme, expectedReadme, 'README must be the positioning line, four doors, Beijing film, live card, then one availability line');
+assert.ok(readme.startsWith(`# Yupeng Lu\n\n**${POSITIONING}**\n\n1. `), 'the bold positioning line must follow the H1, then the doors');
 assert.doesNotMatch(readme, /^\*\*(?:Backend Engineer|AI Agent Engineer|Backend \/ AI Platform Engineer)\b/m, 'superseded role lines are forbidden');
 assert.doesNotMatch(readme, /re-measure pending|pending re-measure|\bpending\b/i, 'README must not lead with a pending measurement');
 assert.doesNotMatch(readme, /AI x Finance|markets (?:&|and) macro|especially for finance/i, 'finance is an exhibit, not the positioning');
 assert.doesNotMatch(readme, /brickerp\.github\.io\/resume(?!\.pdf)/, 'the resume link must point at the PDF that exists');
-assert.doesNotMatch(readme, /experiments\/|README\.md\)/, 'README posters must not link to GitHub commit / experiment markdown files');
+assert.doesNotMatch(readme, /github\.io\/work\/quant\/architecture/, 'do not link the architecture Pages URL until that page exists');
+assert.doesNotMatch(readme.replaceAll(ARCHITECTURE_URL, ''), /experiments\/|README\.md\)/, 'README must not link experiment markdown or any README other than the architecture doc');
+assert.doesNotMatch(readme, /\n### Proof\n/, 'the four doors replace the Proof list; proofs live on the site');
+assert.ok(readme.indexOf(filmCardLine) < readme.indexOf(availabilityLine), 'the Beijing film must stay above the availability line');
+assert.match(readme, /Part-time \/ contract/, 'availability line must state part-time / contract');
+assert.match(readme, /US permanent resident/, 'availability line must state US permanent resident');
+assert.match(readme, /\(mailto:yplmicro@gmail\.com\)/, 'availability line must carry the email');
+assert.match(readme, /Strategy and P&L stay private/, 'the live dashboard door must keep strategy and P&L private');
 
-assert.match(readme, /\n### Proof\n/, 'README must carry a Proof section');
-assert.ok(readme.includes(`](${CONTACT_URL})`), 'the header must link the homepage Contact section');
-assert.match(readme, /Part-time \/ contract/, 'header must state part-time / contract availability');
-assert.match(readme, /US permanent resident/, 'header must state US permanent resident');
-assert.match(readme, /\(mailto:yplmicro@gmail\.com\)/, 'header must carry the email');
-
-const proofSection = readme.slice(readme.indexOf('\n### Proof\n'));
-const proofLinks = [
-  'https://brickerp.github.io/work/quant/',
-  'https://d2c9pzwpavuktk.cloudfront.net/',
-  'https://www.npmjs.com/package/cookiy-cli',
-  'https://www.npmjs.com/package/cookiy-mcp',
-  'https://brickerp.github.io/resume.pdf',
-  'https://open-ledger.brickerp.workers.dev',
-];
-for (const link of proofLinks) {
-  assert.ok(proofSection.includes(`](${link})`), `Proof must link ${link}`);
-}
-assert.match(proofSection, /Strategy and P&L stay private/, 'the real-time exhibit must keep strategy and P&L private');
-
-const proseBeforeCards = readme.replace(headerCardLine, '').split('<a href=')[0];
-assert.ok(proseBeforeCards.split(/\s+/).filter(Boolean).length <= 220, 'README prose above the cards must stay short');
+const proseBeforeCards = readme.split('<a href=')[0];
+assert.ok(proseBeforeCards.split(/\s+/).filter(Boolean).length <= 80, 'prose above the Beijing film must stay a positioning line plus four doors');
 
 const tracedFigures = new Set([
-  '41', '4', '1,040', '40/40', '0', '600+', '19', '48', '01', '20',
+  '1', '2', '3', '4', '20',
 ]);
 const prose = readme.replace(/\]\([^)]+\)/g, ']').replace(/<img\b[^>]*>/g, '').replace(/<a\b[^>]*>/g, '');
 for (const raw of prose.match(/(?<![A-Za-z\d])\d[\d,./]*(?:\+|K)?(?![A-Za-z])/g) ?? []) {
@@ -210,16 +207,15 @@ for (const [, label, href] of readme.matchAll(/\[([^\]]+)\]\(([^)]+)\)/g)) {
 
 assert.equal(readme.split(filmCardLine).length, 2, 'README must contain exactly one Beijing film card');
 assert.equal(readme.split(liveCardLine).length, 2, 'README must contain exactly one live status card');
-assert.ok(readme.includes(`${filmCardLine}\n\n${liveCardLine}\n`), 'the live status card must directly follow the Beijing film card');
+assert.ok(readme.includes(`${doorBlock}\n\n${filmCardLine}\n\n${liveCardLine}\n`), 'the Beijing film must directly follow the four doors, and the live card must directly follow the film');
 assert.match(liveCard.src, /^https:\/\/profile-cards\.brickerp\.workers\.dev\/card\.svg$/, 'the live status card must be served by the profile-cards Worker');
 assert.ok(countWords(liveCard.alt) >= 6, 'the live status card must provide a meaningful alt description');
 assert.match(liveCard.alt, /\blive\b/i, 'the live status card alt must say that it is live');
 assert.match(filmCard.href, /beijing-loop/, 'the film card must link the live film');
 assert.equal((readme.match(/src="https?:\/\//g) ?? []).length, 1, 'the live status card must be the only remote image in the README');
-assert.equal(readme.split(headerCardLine).length, 2, 'README must contain exactly one notebook header');
-assert.ok(readme.indexOf(headerCardLine) < readme.indexOf('\n### Proof\n'), 'the notebook header must sit above Proof');
-assert.equal((readme.match(/<img\b/g) ?? []).length, 3, 'the notebook header, film card and live status card are the only images the README may embed');
-assert.equal((readme.match(/<a\b/g) ?? []).length, 3, 'the notebook header, film card and live status card are the only HTML anchors the README may carry');
+assert.equal((readme.match(/<img\b/g) ?? []).length, 2, 'the Beijing film and the live status card are the only images the README may embed');
+assert.equal((readme.match(/<a\b/g) ?? []).length, 2, 'the Beijing film and the live status card are the only HTML anchors the README may carry');
+assert.deepEqual(imageAnchors(readme).map(({ src }) => src), [filmCard.src, liveCard.src], 'the Beijing film is the first image so it is not buried under the doors');
 for (const anchor of imageAnchors(readme)) {
   assert.match(anchor.href, /^https:\/\//, `poster ${anchor.src} must link a real https demo/page, not a repo path`);
 }
@@ -555,4 +551,4 @@ for (const relative of experimentPaths.filter((entry) => /\.(?:md|svg)$/i.test(e
   assert.doesNotMatch(await readFile(path.join(root, 'experiments', relative), 'utf8'), /PAST FIXATIONS/i, `${relative}: phase one must not fabricate a past-fixations section`);
 }
 
-console.log('Profile README contract verified: positioning line, four exhibits, hire section, traced figures, archived spreads.');
+console.log('Profile README contract verified: positioning line, four doors, Beijing film, live card, traced figures, archived spreads.');
