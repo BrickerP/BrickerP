@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="168" viewBox="0 0 1200 168" role="img" aria-labelledby="t d">
+<title id="t">AI agent to production</title>
+<desc id="d">Dark gate to the site. One line: AI agent to production. Cues: MCP, guardrails, evals, billing.</desc>
+<rect width="1200" height="168" fill="#12161C"/>
+<rect width="8" height="168" fill="#C2412D"/>
+<rect x="2" y="2" width="1196" height="164" fill="none" stroke="#C9B8A2" stroke-width="2"/>
+<text x="40" y="48" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" letter-spacing="2" fill="#C9B8A2">SITE</text>
+<text x="40" y="106" font-family="Georgia, 'Iowan Old Style', 'Times New Roman', serif" font-size="52" fill="#F6F1E4">AI agent → production</text>
+<text x="40" y="144" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="22" fill="#C9B8A2">MCP · guardrails · evals · billing</text>
+</svg>

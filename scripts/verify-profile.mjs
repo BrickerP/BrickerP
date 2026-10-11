@@ -103,6 +103,45 @@ const notebookAssets = [
 const notebookPalette = ['#F6F1E4', '#1F3A5F', '#3B4148', '#5F6670', '#C2412D', '#E4DCC8', '#D6CCB4', '#C9BFA6'];
 const filmCardLine = `<a href="${filmCard.href}"><img src="${filmCard.src}" width="100%" alt="${filmCard.alt}"></a>`;
 
+// Dark-first gates. GitHub's theme is not the OS prefers-color-scheme, so a paper
+// card greys out on the dark theme; a static dark field stays readable on both.
+const gatePalette = ['#12161C', '#F6F1E4', '#C9B8A2', '#C2412D'];
+const gateAssets = [
+  {
+    file: 'gate-hero.svg',
+    width: 1200,
+    height: 168,
+    href: 'https://brickerp.github.io/',
+    src: 'assets/gate-hero.svg?v=1',
+    alt: 'AI agent to production: MCP, guardrails, evals, and billing. Open the site.',
+    text: ['SITE', 'AI agent → production', 'MCP · guardrails · evals · billing'],
+    bigText: ['AI agent → production'],
+  },
+  {
+    file: 'gate-proof.svg',
+    width: 1200,
+    height: 208,
+    href: 'https://brickerp.github.io/#work',
+    src: 'assets/gate-proof.svg?v=1',
+    alt: 'Selected work in the public count: 1,040 PRs at Cookiy, 600+ changes across 19 repos at Baidu MeDo, and 41 MCP tools.',
+    // The proof door is the locked three-figure count. Hero and contact carry no stats.
+    text: ['SELECTED WORK', '1,040', 'PRs', 'Cookiy', '600+', 'changes', '19 repos · Baidu MeDo', '41', 'tools', 'MCP'],
+    bigText: ['1,040', '600+', '41'],
+  },
+  {
+    file: 'gate-contact.svg',
+    width: 1200,
+    height: 148,
+    href: 'https://brickerp.github.io/#contact',
+    src: 'assets/gate-contact.svg?v=1',
+    alt: 'Contact by mail, on X, or on the site. Open the contact section.',
+    text: ['CONTACT', 'Mail · X · Site'],
+    bigText: ['Mail · X · Site'],
+  },
+];
+const gateLines = gateAssets.map((card) => `<a href="${card.href}"><img src="${card.src}" width="100%" alt="${card.alt}"></a>`);
+const camoNote = '<!-- GitHub Camo caches README images. After a card SVG changes, bump ?v= on that img src so the profile refreshes. -->';
+
 function normalizeText(value) {
   return value.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
 }
@@ -158,46 +197,49 @@ assert.doesNotMatch(readme, legacyFlow, 'README must not retain the superseded L
 
 const POSITIONING = 'AI agent & backend engineer — I take agents from demo to production: MCP tools, guardrails, evals, billing, real-time systems.';
 const SITE_URL = 'https://brickerp.github.io/';
+const WORK_URL = 'https://brickerp.github.io/#work';
+const DASHBOARD_URL = 'https://quant.oakrelay.dpdns.org/';
 const FILM_URL = 'https://brickerp.github.io/beijing-loop/';
+const ARCHITECTURE_URL = 'https://brickerp.github.io/work/quant/architecture/';
 const CONTACT_URL = 'https://brickerp.github.io/#contact';
-const doorLines = [
-  `[Site](${SITE_URL})`,
-  `[Contact](${CONTACT_URL})`,
-];
-const doorBlock = doorLines.map((line, index) => `${index + 1}. ${line}`).join('\n');
-const proofLine = '1,040 PRs · Cookiy · 600+ changes / 19 repos · Baidu MeDo · 41 MCP tools';
 const availabilityLine = 'Part-time / contract · ~20 h/wk · US permanent resident · Diamond Bar, California';
-const expectedReadme = `# Yupeng Lu\n\n**${POSITIONING}**\n\n${doorBlock}\n\n${proofLine}\n\n${availabilityLine}\n\n${filmCardLine}\n\n${liveCardLine}\n`;
+const expectedReadme = `# Yupeng Lu\n\n**${POSITIONING}**\n\n${camoNote}\n\n${gateLines.join('\n\n')}\n\n${availabilityLine}\n\n${filmCardLine}\n\n${liveCardLine}\n`;
 
-assert.equal(readme, expectedReadme, 'README must be the positioning line, two doors, site proof numbers, one status line, Beijing film, then the live card');
-assert.ok(readme.startsWith(`# Yupeng Lu\n\n**${POSITIONING}**\n\n1. `), 'the bold positioning line must follow the H1, then the doors');
+assert.equal(readme, expectedReadme, 'README must be the positioning line, three static gate cards, one status line, Beijing film, then the live card');
+assert.ok(readme.startsWith(`# Yupeng Lu\n\n**${POSITIONING}**\n\n`), 'the bold positioning line must follow the H1');
+assert.equal(readme.split(camoNote).length, 2, 'README must document the Camo ?v= cache-bust once');
+assert.doesNotMatch(readme, /<svg\b/i, 'README must not inline SVG; GitHub strips it');
 assert.equal(filmCard.href, FILM_URL, 'the Beijing film poster must link the Pages film, never a GitHub commit or blob');
 assert.doesNotMatch(readme, /^\*\*(?:Backend Engineer|AI Agent Engineer|Backend \/ AI Platform Engineer)\b/m, 'superseded role lines are forbidden');
 assert.doesNotMatch(readme, /re-measure pending|pending re-measure|\bpending\b/i, 'README must not lead with a pending measurement');
 assert.doesNotMatch(readme, /AI x Finance|markets (?:&|and) macro|especially for finance/i, 'finance is an exhibit, not the positioning');
 assert.doesNotMatch(readme, /brickerp\.github\.io\/resume(?!\.pdf)/, 'the resume link must point at the PDF that exists');
-assert.deepEqual(doorLines, [`[Site](${SITE_URL})`, `[Contact](${CONTACT_URL})`], 'L0 doors are Site and Contact only');
+assert.doesNotMatch(readme, /\[(?:Site|Live dashboard|Contact|Architecture|Proof)\]\(/, 'L0 doors are the three gate cards, not text links');
+assert.equal(readme.split(ARCHITECTURE_URL).length, 1, 'Architecture is not an L0 door');
+assert.equal(readme.split(DASHBOARD_URL).length, 1, 'the live dashboard is not an L0 door');
 assert.doesNotMatch(readme, /Live dashboard|quant\.oakrelay|\[Architecture\]|\/work\/quant\/architecture/i, 'Live dashboard and Architecture are not L0 doors; quant proof stays on the site');
 assert.doesNotMatch(readme, /Fig\.0|Workers details|MCP key/i, 'README stays L0: no figure captions, Workers internals, or MCP keys');
 assert.doesNotMatch(readme, /quant-trading|github\.com|\/blob\/|\/commit\/|cloudfront\.net|\/hire\b|human-zine|incident report/i, 'README must not link the quant-trading repo, CloudFront, /hire, a GitHub blob, or the zine');
 assert.doesNotMatch(readme, /experiments\/|README\.md\)/, 'README posters must not link to GitHub commit or experiment markdown files');
-assert.doesNotMatch(readme, /\n### Proof\n/, 'proof numbers sit under the doors; do not bring back the Proof list');
-assert.equal((doorBlock.match(/^\d+\. /gm) ?? []).length, 2, 'the README has two doors: Site and Contact');
-assert.match(readme, /1,040 PRs · Cookiy/, 'proof numbers must include 1,040 PRs at Cookiy');
-assert.match(readme, /600\+ changes \/ 19 repos · Baidu MeDo/, 'proof numbers must include 600+ changes across 19 repos at Baidu MeDo');
-assert.match(readme, /41 MCP tools/, 'proof numbers must include 41 MCP tools');
+assert.doesNotMatch(readme, /\n### Proof\n/, 'proof numbers live on the proof card; do not bring back the Proof list');
+assert.match(readme, /1,040 PRs at Cookiy/, 'proof alt must include 1,040 PRs at Cookiy');
+assert.match(readme, /600\+ changes across 19 repos at Baidu MeDo/, 'proof alt must include 600+ changes across 19 repos at Baidu MeDo');
+assert.match(readme, /41 MCP tools/, 'proof alt must include 41 MCP tools');
 assert.ok(readme.includes(availabilityLine), 'status line must state part-time hours, residency, and Diamond Bar');
 assert.match(readme, /~20 h\/wk/, 'status line must use ~20 h/wk');
-assert.ok(readme.indexOf(`](${SITE_URL})`) < readme.indexOf(`](${CONTACT_URL})`), 'Site is the first door; Contact is the second');
-assert.ok(readme.indexOf(`](${CONTACT_URL})`) < readme.indexOf(filmCardLine), 'Contact stays above the Beijing film');
-assert.ok(readme.indexOf(filmCardLine) < readme.indexOf(liveCardLine), 'the worker status card must not outrank the Beijing film or the doors');
+assert.ok(readme.indexOf(gateLines[0]) < readme.indexOf(gateLines[1]), 'the hero gate is the first card');
+assert.ok(readme.indexOf(gateLines[1]) < readme.indexOf(gateLines[2]), 'the proof gate sits between hero and contact');
+assert.ok(readme.indexOf(gateLines[2]) < readme.indexOf(availabilityLine), 'the status line sits under the three gates');
+assert.ok(readme.indexOf(availabilityLine) < readme.indexOf(filmCardLine), 'the Beijing film follows the status line so it does not bury the gates');
+assert.ok(readme.indexOf(filmCardLine) < readme.indexOf(liveCardLine), 'the worker status card follows the Beijing film');
+assert.equal(gateAssets[0].href, SITE_URL, 'the hero gate opens the site');
+assert.equal(gateAssets[1].href, WORK_URL, 'the proof gate opens Selected Work');
+assert.equal(gateAssets[2].href, CONTACT_URL, 'the contact gate opens #contact');
 
 const proseBeforeCards = readme.split('<a href=')[0];
-assert.ok(proseBeforeCards.split(/\s+/).filter(Boolean).length <= 80, 'prose above the Beijing film must stay a positioning line, two doors, proof numbers, and one status line');
+assert.ok(proseBeforeCards.split(/\s+/).filter(Boolean).length <= 80, 'prose above the gates must stay the positioning line and the Camo note');
 
-const tracedFigures = new Set([
-  '1', '2', '1,040', '600+', '19', '41', '20',
-]);
+const tracedFigures = new Set(['20']);
 const prose = readme.replace(/\]\([^)]+\)/g, ']').replace(/<img\b[^>]*>/g, '').replace(/<a\b[^>]*>/g, '');
 for (const raw of prose.match(/(?<![A-Za-z\d])\d[\d,./]*(?:\+|K)?(?![A-Za-z])/g) ?? []) {
   const figure = raw.replace(/[.,/]+$/, '');
@@ -216,11 +258,21 @@ assert.ok(countWords(liveCard.alt) >= 6, 'the live status card must provide a me
 assert.match(liveCard.alt, /\blive\b/i, 'the live status card alt must say that it is live');
 assert.equal(filmCard.href, FILM_URL, 'the film card must link https://brickerp.github.io/beijing-loop/');
 assert.equal((readme.match(/src="https?:\/\//g) ?? []).length, 1, 'the live status card must be the only remote image in the README');
-assert.equal((readme.match(/<img\b/g) ?? []).length, 2, 'the Beijing film and the live status card are the only images the README may embed');
-assert.equal((readme.match(/<a\b/g) ?? []).length, 2, 'the Beijing film and the live status card are the only HTML anchors the README may carry');
-assert.deepEqual(imageAnchors(readme).map(({ src }) => src), [filmCard.src, liveCard.src], 'the Beijing film is the first image so it is not buried under the doors');
+assert.equal((readme.match(/<img\b/g) ?? []).length, 5, 'README images are the three gates, the Beijing film, and the live status card');
+assert.equal((readme.match(/<a\b/g) ?? []).length, 5, 'README anchors are the three gates, the Beijing film, and the live status card');
+assert.deepEqual(
+  imageAnchors(readme).map(({ src }) => src),
+  [...gateAssets.map(({ src }) => src), filmCard.src, liveCard.src],
+  'the three gates lead, then the Beijing film, then the live card',
+);
 for (const anchor of imageAnchors(readme)) {
   assert.match(anchor.href, /^https:\/\//, `poster ${anchor.src} must link a real https demo/page, not a repo path`);
+  assert.ok(anchor.alt.trim().length > 0, `image ${anchor.src} requires alt text`);
+  assert.ok(countWords(anchor.alt) >= 6, `image ${anchor.src} must provide a meaningful alt description`);
+}
+for (const card of gateAssets) {
+  assert.match(card.src, /^assets\/gate-[a-z]+\.svg\?v=\d+$/, `${card.file} must be a self-hosted SVG with a Camo ?v= bust`);
+  assert.doesNotMatch(card.alt, /\/hire\b|Live dashboard|Architecture/i, `${card.file} alt must stay on the L0 door`);
 }
 
 
@@ -289,7 +341,36 @@ for (const asset of notebookAssets) {
   assert.doesNotMatch(svg.replace('xmlns="http://www.w3.org/2000/svg"', ''), /https?:\/\//i, `${asset.file}: remote resources are forbidden`);
   for (const color of svg.matchAll(/#[0-9A-Fa-f]{6}\b/g)) assert.ok(notebookPalette.includes(color[0].toUpperCase()), `${asset.file}: unapproved color ${color[0]}`);
 }
-assert.deepEqual(assetNames.filter((name) => !notebookAssets.some(({ file }) => file === name)), assets.map(({ file }) => file).sort(), `assets must contain exactly the ${assets.length} approved Human Zine spreads`);
+for (const asset of gateAssets) {
+  const svg = await readFile(path.join(assetRoot, asset.file), 'utf8');
+  assert.ok(Buffer.byteLength(svg) <= 2500, `${asset.file}: gate SVGs stay small`);
+  const rootTag = svg.match(/^<svg\b([^>]*)>/)?.[1];
+  assert.ok(rootTag, `${asset.file}: missing root svg element`);
+  assert.equal(getAttribute(rootTag, 'width'), String(asset.width), `${asset.file}: incorrect width`);
+  assert.equal(getAttribute(rootTag, 'height'), String(asset.height), `${asset.file}: incorrect height`);
+  assert.equal(getAttribute(rootTag, 'viewBox'), `0 0 ${asset.width} ${asset.height}`, `${asset.file}: incorrect viewBox`);
+  assert.equal((svg.match(/<title\b/g) ?? []).length, 1, `${asset.file}: expected one title`);
+  assert.equal((svg.match(/<desc\b/g) ?? []).length, 1, `${asset.file}: expected one description`);
+  assert.deepEqual(roleValues(svg), ['img'], `${asset.file}: only the root img role is allowed`);
+  assert.deepEqual(textRecords(svg).map(({ text }) => text), asset.text, `${asset.file}: visible copy must stay a skim, not a paragraph`);
+  for (const record of textRecords(svg)) {
+    const fontSize = Number(getAttribute(record.attributes, 'font-size'));
+    const minimum = asset.bigText.includes(record.text) ? 48 : 20;
+    assert.ok(Number.isFinite(fontSize) && fontSize >= minimum, `${asset.file}: ${record.text} must use at least ${minimum}px source text`);
+  }
+  assert.doesNotMatch(svg, /<(?:a|script|style|image|foreignObject|iframe|use|pattern|animate)\b/i, `${asset.file}: links, paper texture, and motion are forbidden`);
+  assert.doesNotMatch(svg, /\b(?:href|xlink:href|on[a-z]+)\s*=/i, `${asset.file}: links and handlers are forbidden`);
+  assert.doesNotMatch(svg, /\/hire\b|dashboard|architecture|finance|quant/i, `${asset.file}: L0 copy stays on this door`);
+  assert.doesNotMatch(svg.replace('xmlns="http://www.w3.org/2000/svg"', ''), /https?:\/\//i, `${asset.file}: remote resources are forbidden`);
+  assert.match(
+    svg,
+    new RegExp(`^<svg\\b[^>]*>\\s*<title\\b[^>]*>[\\s\\S]*</title>\\s*<desc\\b[^>]*>[\\s\\S]*</desc>\\s*<rect width="${asset.width}" height="${asset.height}" fill="#12161C"/>`),
+    `${asset.file}: first paint must be an opaque dark field`,
+  );
+  for (const color of svg.matchAll(/#[0-9A-Fa-f]{6}\b/g)) assert.ok(gatePalette.includes(color[0].toUpperCase()), `${asset.file}: unapproved color ${color[0]}`);
+}
+const reservedAssets = new Set([...notebookAssets, ...gateAssets].map(({ file }) => file));
+assert.deepEqual(assetNames.filter((name) => !reservedAssets.has(name)), assets.map(({ file }) => file).sort(), `assets must contain exactly the ${assets.length} approved Human Zine spreads plus the notebook and gate cards`);
 
 const svgs = new Map();
 const visibleCopy = [];
@@ -554,4 +635,4 @@ for (const relative of experimentPaths.filter((entry) => /\.(?:md|svg)$/i.test(e
   assert.doesNotMatch(await readFile(path.join(root, 'experiments', relative), 'utf8'), /PAST FIXATIONS/i, `${relative}: phase one must not fabricate a past-fixations section`);
 }
 
-console.log('Profile README contract verified: positioning line, two doors, site proof numbers, status line, Beijing film, live card, traced figures, archived spreads.');
+console.log('Profile README contract verified: positioning line, three dark gate cards, status line, Beijing film, live card, traced figures, archived spreads.');
