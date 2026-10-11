@@ -10,8 +10,6 @@
 
 <a href="https://brickerp.github.io/#contact"><img src="assets/gate-contact.svg?v=1" width="100%" alt="Contact by mail, on X, or on the site. Open the contact section."></a>
 
+[Mail](mailto:yplmicro@gmail.com) · [X](https://x.com/trashConsumer) · [Site](https://brickerp.github.io/#contact)
+
 Part-time / contract · ~20 h/wk · US permanent resident · Diamond Bar, California
-
-<a href="https://brickerp.github.io/beijing-loop/"><img src="assets/notebook-film.svg" width="100%" alt="Exp. 02, Beijing: Endless Second Ring, a 48-second Beijing night drive. Open the film."></a>
-
-<a href="https://brickerp.github.io/"><img src="https://profile-cards.brickerp.workers.dev/card.svg" width="100%" alt="Live status card rendered at the edge by a Cloudflare Worker: last fill, scan p95, heartbeat, and latest commit."></a>

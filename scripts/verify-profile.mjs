@@ -84,24 +84,11 @@ const memoryAsset = {
 };
 const assets = [...coreAssets, memoryAsset];
 
-const liveCard = {
-  href: 'https://brickerp.github.io/',
-  src: 'https://profile-cards.brickerp.workers.dev/card.svg',
-  alt: 'Live status card rendered at the edge by a Cloudflare Worker: last fill, scan p95, heartbeat, and latest commit.',
-};
-const liveCardLine = `<a href="${liveCard.href}"><img src="${liveCard.src}" width="100%" alt="${liveCard.alt}"></a>`;
-
-const filmCard = {
-  href: 'https://brickerp.github.io/beijing-loop/',
-  src: 'assets/notebook-film.svg',
-  alt: 'Exp. 02, Beijing: Endless Second Ring, a 48-second Beijing night drive. Open the film.',
-};
 const notebookAssets = [
   { file: 'notebook-header.svg', width: 1200, height: 360 },
   { file: 'notebook-film.svg', width: 1200, height: 400 },
 ];
 const notebookPalette = ['#F6F1E4', '#1F3A5F', '#3B4148', '#5F6670', '#C2412D', '#E4DCC8', '#D6CCB4', '#C9BFA6'];
-const filmCardLine = `<a href="${filmCard.href}"><img src="${filmCard.src}" width="100%" alt="${filmCard.alt}"></a>`;
 
 // Dark-first gates. GitHub's theme is not the OS prefers-color-scheme, so a paper
 // card greys out on the dark theme; a static dark field stays readable on both.
@@ -199,22 +186,22 @@ const POSITIONING = 'AI agent & backend engineer — I take agents from demo to 
 const SITE_URL = 'https://brickerp.github.io/';
 const WORK_URL = 'https://brickerp.github.io/#work';
 const DASHBOARD_URL = 'https://quant.oakrelay.dpdns.org/';
-const FILM_URL = 'https://brickerp.github.io/beijing-loop/';
 const ARCHITECTURE_URL = 'https://brickerp.github.io/work/quant/architecture/';
 const CONTACT_URL = 'https://brickerp.github.io/#contact';
 const availabilityLine = 'Part-time / contract · ~20 h/wk · US permanent resident · Diamond Bar, California';
-const expectedReadme = `# Yupeng Lu\n\n**${POSITIONING}**\n\n${camoNote}\n\n${gateLines.join('\n\n')}\n\n${availabilityLine}\n\n${filmCardLine}\n\n${liveCardLine}\n`;
+// Camo serves each gate SVG as one image, so Mail / X / Site drawn in the card are not hits.
+const contactLine = `[Mail](mailto:yplmicro@gmail.com) · [X](https://x.com/trashConsumer) · [Site](${CONTACT_URL})`;
+const expectedReadme = `# Yupeng Lu\n\n**${POSITIONING}**\n\n${camoNote}\n\n${gateLines.join('\n\n')}\n\n${contactLine}\n\n${availabilityLine}\n`;
 
-assert.equal(readme, expectedReadme, 'README must be the positioning line, three static gate cards, one status line, Beijing film, then the live card');
+assert.equal(readme, expectedReadme, 'README must be the positioning line, three static gate cards, the contact link line, then one status line');
 assert.ok(readme.startsWith(`# Yupeng Lu\n\n**${POSITIONING}**\n\n`), 'the bold positioning line must follow the H1');
 assert.equal(readme.split(camoNote).length, 2, 'README must document the Camo ?v= cache-bust once');
 assert.doesNotMatch(readme, /<svg\b/i, 'README must not inline SVG; GitHub strips it');
-assert.equal(filmCard.href, FILM_URL, 'the Beijing film poster must link the Pages film, never a GitHub commit or blob');
 assert.doesNotMatch(readme, /^\*\*(?:Backend Engineer|AI Agent Engineer|Backend \/ AI Platform Engineer)\b/m, 'superseded role lines are forbidden');
 assert.doesNotMatch(readme, /re-measure pending|pending re-measure|\bpending\b/i, 'README must not lead with a pending measurement');
 assert.doesNotMatch(readme, /AI x Finance|markets (?:&|and) macro|especially for finance/i, 'finance is an exhibit, not the positioning');
 assert.doesNotMatch(readme, /brickerp\.github\.io\/resume(?!\.pdf)/, 'the resume link must point at the PDF that exists');
-assert.doesNotMatch(readme, /\[(?:Site|Live dashboard|Contact|Architecture|Proof)\]\(/, 'L0 doors are the three gate cards, not text links');
+assert.doesNotMatch(readme, /\[(?:Live dashboard|Contact|Architecture|Proof)\]\(/, 'L0 doors stay the three gate cards');
 assert.equal(readme.split(ARCHITECTURE_URL).length, 1, 'Architecture is not an L0 door');
 assert.equal(readme.split(DASHBOARD_URL).length, 1, 'the live dashboard is not an L0 door');
 assert.doesNotMatch(readme, /Live dashboard|quant\.oakrelay|\[Architecture\]|\/work\/quant\/architecture/i, 'Live dashboard and Architecture are not L0 doors; quant proof stays on the site');
@@ -229,9 +216,8 @@ assert.ok(readme.includes(availabilityLine), 'status line must state part-time h
 assert.match(readme, /~20 h\/wk/, 'status line must use ~20 h/wk');
 assert.ok(readme.indexOf(gateLines[0]) < readme.indexOf(gateLines[1]), 'the hero gate is the first card');
 assert.ok(readme.indexOf(gateLines[1]) < readme.indexOf(gateLines[2]), 'the proof gate sits between hero and contact');
-assert.ok(readme.indexOf(gateLines[2]) < readme.indexOf(availabilityLine), 'the status line sits under the three gates');
-assert.ok(readme.indexOf(availabilityLine) < readme.indexOf(filmCardLine), 'the Beijing film follows the status line so it does not bury the gates');
-assert.ok(readme.indexOf(filmCardLine) < readme.indexOf(liveCardLine), 'the worker status card follows the Beijing film');
+assert.ok(readme.indexOf(gateLines[2]) < readme.indexOf(contactLine), 'the contact links sit under the contact card');
+assert.ok(readme.indexOf(contactLine) < readme.indexOf(availabilityLine), 'the status line follows the contact links');
 assert.equal(gateAssets[0].href, SITE_URL, 'the hero gate opens the site');
 assert.equal(gateAssets[1].href, WORK_URL, 'the proof gate opens Selected Work');
 assert.equal(gateAssets[2].href, CONTACT_URL, 'the contact gate opens #contact');
@@ -250,20 +236,24 @@ for (const [, label, href] of readme.matchAll(/\[([^\]]+)\]\(([^)]+)\)/g)) {
   assert.match(href, /^(?:https:\/\/|mailto:)/, `link ${label} must use https or mailto: ${href}`);
 }
 
-assert.equal(readme.split(filmCardLine).length, 2, 'README must contain exactly one Beijing film card');
-assert.equal(readme.split(liveCardLine).length, 2, 'README must contain exactly one live status card');
-assert.ok(readme.includes(`${availabilityLine}\n\n${filmCardLine}\n\n${liveCardLine}\n`), 'the Beijing film follows the status line, and the live card follows the film');
-assert.match(liveCard.src, /^https:\/\/profile-cards\.brickerp\.workers\.dev\/card\.svg$/, 'the live status card must be served by the profile-cards Worker');
-assert.ok(countWords(liveCard.alt) >= 6, 'the live status card must provide a meaningful alt description');
-assert.match(liveCard.alt, /\blive\b/i, 'the live status card alt must say that it is live');
-assert.equal(filmCard.href, FILM_URL, 'the film card must link https://brickerp.github.io/beijing-loop/');
-assert.equal((readme.match(/src="https?:\/\//g) ?? []).length, 1, 'the live status card must be the only remote image in the README');
-assert.equal((readme.match(/<img\b/g) ?? []).length, 5, 'README images are the three gates, the Beijing film, and the live status card');
-assert.equal((readme.match(/<a\b/g) ?? []).length, 5, 'README anchors are the three gates, the Beijing film, and the live status card');
+assert.equal(readme.split(contactLine).length, 2, 'README must contain exactly one contact link line');
+assert.deepEqual(
+  [...readme.matchAll(/\[([^\]]+)\]\(([^)]+)\)/g)].map((match) => [match[1], match[2]]),
+  [
+    ['Mail', 'mailto:yplmicro@gmail.com'],
+    ['X', 'https://x.com/trashConsumer'],
+    ['Site', CONTACT_URL],
+  ],
+  'Camo flattens the contact SVG, so Mail, X, and Site are markdown links under that card',
+);
+assert.doesNotMatch(readme, /beijing-loop|notebook-film|profile-cards|workers\.dev/, 'L0 visuals are the three gates; the Beijing film and Worker card stay off the profile face');
+assert.equal((readme.match(/src="https?:\/\//g) ?? []).length, 0, 'README images are self-hosted gate SVGs');
+assert.equal((readme.match(/<img\b/g) ?? []).length, 3, 'README images are the three gates');
+assert.equal((readme.match(/<a\b/g) ?? []).length, 3, 'README image anchors are the three gates');
 assert.deepEqual(
   imageAnchors(readme).map(({ src }) => src),
-  [...gateAssets.map(({ src }) => src), filmCard.src, liveCard.src],
-  'the three gates lead, then the Beijing film, then the live card',
+  gateAssets.map(({ src }) => src),
+  'README images are the three gates',
 );
 for (const anchor of imageAnchors(readme)) {
   assert.match(anchor.href, /^https:\/\//, `poster ${anchor.src} must link a real https demo/page, not a repo path`);
@@ -635,4 +625,4 @@ for (const relative of experimentPaths.filter((entry) => /\.(?:md|svg)$/i.test(e
   assert.doesNotMatch(await readFile(path.join(root, 'experiments', relative), 'utf8'), /PAST FIXATIONS/i, `${relative}: phase one must not fabricate a past-fixations section`);
 }
 
-console.log('Profile README contract verified: positioning line, three dark gate cards, status line, Beijing film, live card, traced figures, archived spreads.');
+console.log('Profile README contract verified: positioning line, three dark gate cards, contact links, status line, traced figures, archived spreads.');
