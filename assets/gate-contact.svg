@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="148" viewBox="0 0 1200 148" role="img" aria-labelledby="t d">
-<title id="t">Mail, X, and the site</title>
-<desc id="d">Dark gate to the contact section. Cues: mail, X, and the site.</desc>
+<title id="t">Write me</title>
+<desc id="d">One CTA door.</desc>
 <rect width="1200" height="148" fill="#12161C"/>
 <rect width="8" height="148" fill="#C2412D"/>
-<rect x="2" y="2" width="1196" height="144" fill="none" stroke="#C9B8A2" stroke-width="2"/>
-<text x="40" y="48" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" letter-spacing="2" fill="#C9B8A2">CONTACT</text>
-<text x="40" y="108" font-family="Georgia, 'Iowan Old Style', 'Times New Roman', serif" font-size="52" fill="#F6F1E4">Mail · X · Site</text>
+<text x="40" y="42" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="18" letter-spacing="3" fill="#C9B8A2">CONTACT</text>
+<text x="40" y="98" font-family="Georgia, 'Iowan Old Style', 'Times New Roman', serif" font-size="52" fill="#F6F1E4">Write me →</text>
+<text x="40" y="128" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="18" fill="#8A7F72">mail · x · site</text>
 </svg>
