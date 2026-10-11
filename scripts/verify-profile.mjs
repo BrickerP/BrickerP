@@ -189,9 +189,10 @@ const DASHBOARD_URL = 'https://quant.oakrelay.dpdns.org/';
 const ARCHITECTURE_URL = 'https://brickerp.github.io/work/quant/architecture/';
 const CONTACT_URL = 'https://brickerp.github.io/#contact';
 const availabilityLine = 'Part-time / contract · ~20 h/wk · US permanent resident · Diamond Bar, California';
-const expectedReadme = `# Yupeng Lu\n\n**${POSITIONING}**\n\n${camoNote}\n\n${gateLines.join('\n\n')}\n\n${availabilityLine}\n`;
+const contactLinks = '[Mail](mailto:yplmicro@gmail.com) · [X](https://x.com/trashConsumer) · [Site](https://brickerp.github.io/#contact)';
+const expectedReadme = `# Yupeng Lu\n\n**${POSITIONING}**\n\n${camoNote}\n\n${gateLines.join('\n\n')}\n\n${contactLinks}\n\n${availabilityLine}\n`;
 
-assert.equal(readme, expectedReadme, 'README must be the positioning line, three static gate cards, and one status line');
+assert.equal(readme, expectedReadme, 'README must be the positioning line, three static gate cards, clickable contact links, and one status line');
 assert.ok(readme.startsWith(`# Yupeng Lu\n\n**${POSITIONING}**\n\n`), 'the bold positioning line must follow the H1');
 assert.equal(readme.split(camoNote).length, 2, 'README must document the Camo ?v= cache-bust once');
 assert.doesNotMatch(readme, /<svg\b/i, 'README must not inline SVG; GitHub strips it');
@@ -199,7 +200,8 @@ assert.doesNotMatch(readme, /^\*\*(?:Backend Engineer|AI Agent Engineer|Backend 
 assert.doesNotMatch(readme, /re-measure pending|pending re-measure|\bpending\b/i, 'README must not lead with a pending measurement');
 assert.doesNotMatch(readme, /AI x Finance|markets (?:&|and) macro|especially for finance/i, 'finance is an exhibit, not the positioning');
 assert.doesNotMatch(readme, /brickerp\.github\.io\/resume(?!\.pdf)/, 'the resume link must point at the PDF that exists');
-assert.doesNotMatch(readme, /\[(?:Site|Live dashboard|Contact|Architecture|Proof)\]\(/, 'L0 doors are the three gate cards, not text links');
+assert.doesNotMatch(readme, /\[(?:Live dashboard|Contact|Architecture|Proof)\]\(/, 'L0 doors are the three gate cards, not a text door list');
+assert.equal(readme.split(contactLinks).length, 2, 'clickable Mail, X, and Site links sit once under the contact gate');
 assert.equal(readme.split(ARCHITECTURE_URL).length, 1, 'Architecture is not an L0 door');
 assert.equal(readme.split(DASHBOARD_URL).length, 1, 'the live dashboard is not an L0 door');
 assert.doesNotMatch(readme, /Live dashboard|quant\.oakrelay|\[Architecture\]|\/work\/quant\/architecture/i, 'Live dashboard and Architecture are not L0 doors; quant proof stays on the site');
@@ -214,7 +216,8 @@ assert.ok(readme.includes(availabilityLine), 'status line must state part-time h
 assert.match(readme, /~20 h\/wk/, 'status line must use ~20 h/wk');
 assert.ok(readme.indexOf(gateLines[0]) < readme.indexOf(gateLines[1]), 'the hero gate is the first card');
 assert.ok(readme.indexOf(gateLines[1]) < readme.indexOf(gateLines[2]), 'the proof gate sits between hero and contact');
-assert.ok(readme.indexOf(gateLines[2]) < readme.indexOf(availabilityLine), 'the status line sits under the three gates');
+assert.ok(readme.indexOf(gateLines[2]) < readme.indexOf(contactLinks), 'clickable contact links sit under the contact gate');
+assert.ok(readme.indexOf(contactLinks) < readme.indexOf(availabilityLine), 'the status line follows the contact links');
 assert.ok(readme.endsWith(`${availabilityLine}\n`), 'the status line is the last line on the profile face');
 assert.equal(gateAssets[0].href, SITE_URL, 'the hero gate opens the site');
 assert.equal(gateAssets[1].href, WORK_URL, 'the proof gate opens Selected Work');
