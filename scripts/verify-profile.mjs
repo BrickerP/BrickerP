@@ -189,11 +189,9 @@ const DASHBOARD_URL = 'https://quant.oakrelay.dpdns.org/';
 const ARCHITECTURE_URL = 'https://brickerp.github.io/work/quant/architecture/';
 const CONTACT_URL = 'https://brickerp.github.io/#contact';
 const availabilityLine = 'Part-time / contract · ~20 h/wk · US permanent resident · Diamond Bar, California';
-// Camo serves each gate SVG as one image, so Mail / X / Site drawn in the card are not hits.
-const contactLine = `[Mail](mailto:yplmicro@gmail.com) · [X](https://x.com/trashConsumer) · [Site](${CONTACT_URL})`;
-const expectedReadme = `# Yupeng Lu\n\n**${POSITIONING}**\n\n${camoNote}\n\n${gateLines.join('\n\n')}\n\n${contactLine}\n\n${availabilityLine}\n`;
+const expectedReadme = `# Yupeng Lu\n\n**${POSITIONING}**\n\n${camoNote}\n\n${gateLines.join('\n\n')}\n\n${availabilityLine}\n`;
 
-assert.equal(readme, expectedReadme, 'README must be the positioning line, three static gate cards, the contact link line, then one status line');
+assert.equal(readme, expectedReadme, 'README must be the positioning line, three static gate cards, then one status line');
 assert.ok(readme.startsWith(`# Yupeng Lu\n\n**${POSITIONING}**\n\n`), 'the bold positioning line must follow the H1');
 assert.equal(readme.split(camoNote).length, 2, 'README must document the Camo ?v= cache-bust once');
 assert.doesNotMatch(readme, /<svg\b/i, 'README must not inline SVG; GitHub strips it');
@@ -216,8 +214,7 @@ assert.ok(readme.includes(availabilityLine), 'status line must state part-time h
 assert.match(readme, /~20 h\/wk/, 'status line must use ~20 h/wk');
 assert.ok(readme.indexOf(gateLines[0]) < readme.indexOf(gateLines[1]), 'the hero gate is the first card');
 assert.ok(readme.indexOf(gateLines[1]) < readme.indexOf(gateLines[2]), 'the proof gate sits between hero and contact');
-assert.ok(readme.indexOf(gateLines[2]) < readme.indexOf(contactLine), 'the contact links sit under the contact card');
-assert.ok(readme.indexOf(contactLine) < readme.indexOf(availabilityLine), 'the status line follows the contact links');
+assert.ok(readme.indexOf(gateLines[2]) < readme.indexOf(availabilityLine), 'the status line sits under the three gates');
 assert.equal(gateAssets[0].href, SITE_URL, 'the hero gate opens the site');
 assert.equal(gateAssets[1].href, WORK_URL, 'the proof gate opens Selected Work');
 assert.equal(gateAssets[2].href, CONTACT_URL, 'the contact gate opens #contact');
@@ -232,19 +229,10 @@ for (const raw of prose.match(/(?<![A-Za-z\d])\d[\d,./]*(?:\+|K)?(?![A-Za-z])/g)
   assert.ok(tracedFigures.has(figure), `README figure “${figure}” has no traced source; add the source before the figure`);
 }
 
-for (const [, label, href] of readme.matchAll(/\[([^\]]+)\]\(([^)]+)\)/g)) {
-  assert.match(href, /^(?:https:\/\/|mailto:)/, `link ${label} must use https or mailto: ${href}`);
-}
-
-assert.equal(readme.split(contactLine).length, 2, 'README must contain exactly one contact link line');
 assert.deepEqual(
   [...readme.matchAll(/\[([^\]]+)\]\(([^)]+)\)/g)].map((match) => [match[1], match[2]]),
-  [
-    ['Mail', 'mailto:yplmicro@gmail.com'],
-    ['X', 'https://x.com/trashConsumer'],
-    ['Site', CONTACT_URL],
-  ],
-  'Camo flattens the contact SVG, so Mail, X, and Site are markdown links under that card',
+  [],
+  'the profile face has no markdown links; the three gate cards are the doors',
 );
 assert.doesNotMatch(readme, /beijing-loop|notebook-film|profile-cards|workers\.dev/, 'L0 visuals are the three gates; the Beijing film and Worker card stay off the profile face');
 assert.equal((readme.match(/src="https?:\/\//g) ?? []).length, 0, 'README images are self-hosted gate SVGs');
@@ -625,4 +613,4 @@ for (const relative of experimentPaths.filter((entry) => /\.(?:md|svg)$/i.test(e
   assert.doesNotMatch(await readFile(path.join(root, 'experiments', relative), 'utf8'), /PAST FIXATIONS/i, `${relative}: phase one must not fabricate a past-fixations section`);
 }
 
-console.log('Profile README contract verified: positioning line, three dark gate cards, contact links, status line, traced figures, archived spreads.');
+console.log('Profile README contract verified: positioning line, three dark gate cards, status line, traced figures, archived spreads.');

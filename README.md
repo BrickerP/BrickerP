@@ -10,6 +10,4 @@
 
 <a href="https://brickerp.github.io/#contact"><img src="assets/gate-contact.svg?v=1" width="100%" alt="Contact by mail, on X, or on the site. Open the contact section."></a>
 
-[Mail](mailto:yplmicro@gmail.com) · [X](https://x.com/trashConsumer) · [Site](https://brickerp.github.io/#contact)
-
 Part-time / contract · ~20 h/wk · US permanent resident · Diamond Bar, California
