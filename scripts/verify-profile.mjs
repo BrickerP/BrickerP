@@ -160,45 +160,49 @@ const POSITIONING = 'AI agent & backend engineer — I take agents from demo to 
 const SITE_URL = 'https://brickerp.github.io/';
 const DASHBOARD_URL = 'https://quant.oakrelay.dpdns.org/';
 const FILM_URL = 'https://brickerp.github.io/beijing-loop/';
-// Architecture returns only when https://brickerp.github.io/work/quant/architecture/ is live.
-// Until then the README has three doors and no quant-trading develop doc.
+// Public Pages hub (Fig.01–06). The README door is the link only.
+const ARCHITECTURE_URL = 'https://brickerp.github.io/work/quant/architecture/';
 const CONTACT_URL = 'https://brickerp.github.io/#contact';
 const doorLines = [
   `[Site](${SITE_URL})`,
   `[Live dashboard](${DASHBOARD_URL})`,
   `[Contact](${CONTACT_URL})`,
+  `[Architecture](${ARCHITECTURE_URL})`,
 ];
 const doorBlock = doorLines.map((line, index) => `${index + 1}. ${line}`).join('\n');
 const proofLine = '1,040 PRs · Cookiy · 600+ changes / 19 repos · Baidu MeDo · 41 MCP tools';
 const availabilityLine = 'Part-time / contract · ~20 h/wk · US permanent resident · Diamond Bar, California';
 const expectedReadme = `# Yupeng Lu\n\n**${POSITIONING}**\n\n${doorBlock}\n\n${proofLine}\n\n${availabilityLine}\n\n${filmCardLine}\n\n${liveCardLine}\n`;
 
-assert.equal(readme, expectedReadme, 'README must be the positioning line, three doors, site proof numbers, one status line, Beijing film, then the live card');
+assert.equal(readme, expectedReadme, 'README must be the positioning line, four doors, site proof numbers, one status line, Beijing film, then the live card');
 assert.ok(readme.startsWith(`# Yupeng Lu\n\n**${POSITIONING}**\n\n1. `), 'the bold positioning line must follow the H1, then the doors');
 assert.equal(filmCard.href, FILM_URL, 'the Beijing film poster must link the Pages film, never a GitHub commit or blob');
 assert.doesNotMatch(readme, /^\*\*(?:Backend Engineer|AI Agent Engineer|Backend \/ AI Platform Engineer)\b/m, 'superseded role lines are forbidden');
 assert.doesNotMatch(readme, /re-measure pending|pending re-measure|\bpending\b/i, 'README must not lead with a pending measurement');
 assert.doesNotMatch(readme, /AI x Finance|markets (?:&|and) macro|especially for finance/i, 'finance is an exhibit, not the positioning');
 assert.doesNotMatch(readme, /brickerp\.github\.io\/resume(?!\.pdf)/, 'the resume link must point at the PDF that exists');
-assert.doesNotMatch(readme, /github\.io\/work\/quant\/architecture/, 'do not link the architecture Pages URL until that page exists');
-assert.doesNotMatch(readme, /quant-trading|github\.com|\/blob\/|\/commit\/|cloudfront\.net|\/hire\b|human-zine|incident report/i, 'README must not link architecture docs, CloudFront, /hire, a GitHub blob, or the zine');
+assert.equal(doorLines[3], `[Architecture](${ARCHITECTURE_URL})`, 'Architecture is the fourth door and points at the public Pages hub');
+assert.equal(readme.split(ARCHITECTURE_URL).length, 2, 'the architecture hub is linked once, with no figure captions on the profile');
+assert.doesNotMatch(readme, /Fig\.0|Workers details|MCP key/i, 'README stays L0: no figure captions, Workers internals, or MCP keys');
+assert.doesNotMatch(readme, /quant-trading|github\.com|\/blob\/|\/commit\/|cloudfront\.net|\/hire\b|human-zine|incident report/i, 'README must not link the quant-trading repo, CloudFront, /hire, a GitHub blob, or the zine');
 assert.doesNotMatch(readme, /experiments\/|README\.md\)/, 'README posters must not link to GitHub commit or experiment markdown files');
 assert.doesNotMatch(readme, /\n### Proof\n/, 'proof numbers sit under the doors; do not bring back the Proof list');
-assert.equal((doorBlock.match(/^\d+\. /gm) ?? []).length, 3, 'the README has three doors: Site, Live dashboard, Contact');
+assert.equal((doorBlock.match(/^\d+\. /gm) ?? []).length, 4, 'the README has four doors: Site, Live dashboard, Contact, Architecture');
 assert.equal(readme.split(DASHBOARD_URL).length, 2, 'the live dashboard door is the only oakrelay URL');
 assert.match(readme, /1,040 PRs · Cookiy/, 'proof numbers must include 1,040 PRs at Cookiy');
 assert.match(readme, /600\+ changes \/ 19 repos · Baidu MeDo/, 'proof numbers must include 600+ changes across 19 repos at Baidu MeDo');
 assert.match(readme, /41 MCP tools/, 'proof numbers must include 41 MCP tools');
 assert.ok(readme.includes(availabilityLine), 'status line must state part-time hours, residency, and Diamond Bar');
 assert.match(readme, /~20 h\/wk/, 'status line must use ~20 h/wk');
-assert.ok(readme.indexOf(`](${CONTACT_URL})`) < readme.indexOf(filmCardLine), 'Contact stays above the Beijing film');
-assert.ok(readme.indexOf(filmCardLine) < readme.indexOf(liveCardLine), 'the worker status card must not outrank the Beijing film or Contact');
+assert.ok(readme.indexOf(`](${CONTACT_URL})`) < readme.indexOf(`](${ARCHITECTURE_URL})`), 'Contact stays the third door; Architecture is fourth');
+assert.ok(readme.indexOf(`](${ARCHITECTURE_URL})`) < readme.indexOf(filmCardLine), 'Architecture stays above the Beijing film');
+assert.ok(readme.indexOf(filmCardLine) < readme.indexOf(liveCardLine), 'the worker status card must not outrank the Beijing film or the doors');
 
 const proseBeforeCards = readme.split('<a href=')[0];
-assert.ok(proseBeforeCards.split(/\s+/).filter(Boolean).length <= 80, 'prose above the Beijing film must stay a positioning line, three doors, proof numbers, and one status line');
+assert.ok(proseBeforeCards.split(/\s+/).filter(Boolean).length <= 80, 'prose above the Beijing film must stay a positioning line, four doors, proof numbers, and one status line');
 
 const tracedFigures = new Set([
-  '1', '2', '3', '1,040', '600+', '19', '41', '20',
+  '1', '2', '3', '4', '1,040', '600+', '19', '41', '20',
 ]);
 const prose = readme.replace(/\]\([^)]+\)/g, ']').replace(/<img\b[^>]*>/g, '').replace(/<a\b[^>]*>/g, '');
 for (const raw of prose.match(/(?<![A-Za-z\d])\d[\d,./]*(?:\+|K)?(?![A-Za-z])/g) ?? []) {
@@ -556,4 +560,4 @@ for (const relative of experimentPaths.filter((entry) => /\.(?:md|svg)$/i.test(e
   assert.doesNotMatch(await readFile(path.join(root, 'experiments', relative), 'utf8'), /PAST FIXATIONS/i, `${relative}: phase one must not fabricate a past-fixations section`);
 }
 
-console.log('Profile README contract verified: positioning line, three doors, site proof numbers, status line, Beijing film, live card, traced figures, archived spreads.');
+console.log('Profile README contract verified: positioning line, four doors, site proof numbers, status line, Beijing film, live card, traced figures, archived spreads.');
