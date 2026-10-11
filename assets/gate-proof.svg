@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="208" viewBox="0 0 1200 208" role="img" aria-labelledby="t d">
+<title id="t">Selected work, public count</title>
+<desc id="d">Dark gate to selected work. Three public figures, same count: 1,040 PRs at Cookiy; 600+ changes across 19 repos at Baidu MeDo; 41 MCP tools.</desc>
+<rect width="1200" height="208" fill="#12161C"/>
+<rect width="8" height="208" fill="#C2412D"/>
+<rect x="2" y="2" width="1196" height="204" fill="none" stroke="#C9B8A2" stroke-width="2"/>
+<text x="40" y="46" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="20" letter-spacing="2" fill="#C9B8A2">SELECTED WORK</text>
+<text x="40" y="122" font-family="Georgia, 'Iowan Old Style', 'Times New Roman', serif" font-size="60" fill="#F6F1E4">1,040</text>
+<text x="228" y="122" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="22" fill="#C2412D">PRs</text>
+<text x="40" y="164" font-family="Georgia, 'Iowan Old Style', 'Times New Roman', serif" font-size="22" fill="#C9B8A2">Cookiy</text>
+<text x="440" y="122" font-family="Georgia, 'Iowan Old Style', 'Times New Roman', serif" font-size="60" fill="#F6F1E4">600+</text>
+<text x="620" y="122" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="22" fill="#C2412D">changes</text>
+<text x="440" y="164" font-family="Georgia, 'Iowan Old Style', 'Times New Roman', serif" font-size="22" fill="#C9B8A2">19 repos · Baidu MeDo</text>
+<text x="860" y="122" font-family="Georgia, 'Iowan Old Style', 'Times New Roman', serif" font-size="60" fill="#F6F1E4">41</text>
+<text x="960" y="122" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="22" fill="#C2412D">tools</text>
+<text x="860" y="164" font-family="Georgia, 'Iowan Old Style', 'Times New Roman', serif" font-size="22" fill="#C9B8A2">MCP</text>
+</svg>
