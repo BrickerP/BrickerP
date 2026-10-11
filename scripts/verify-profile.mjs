@@ -92,7 +92,7 @@ const notebookPalette = ['#F6F1E4', '#1F3A5F', '#3B4148', '#5F6670', '#C2412D', 
 
 // Dark-first gates. GitHub's theme is not the OS prefers-color-scheme, so a paper
 // card greys out on the dark theme; a static dark field stays readable on both.
-const gatePalette = ['#12161C', '#F6F1E4', '#C9B8A2', '#C2412D'];
+const gatePalette = ['#12161C', '#F6F1E4', '#C9B8A2', '#8A7F72', '#C2412D'];
 const gateAssets = [
   {
     file: 'gate-hero.svg',
@@ -120,10 +120,11 @@ const gateAssets = [
     width: 1200,
     height: 148,
     href: 'https://brickerp.github.io/#contact',
-    src: 'assets/gate-contact.svg?v=1',
+    src: 'assets/gate-contact.svg?v=2',
     alt: 'Contact by mail, on X, or on the site. Open the contact section.',
-    text: ['CONTACT', 'Mail · X · Site'],
-    bigText: ['Mail · X · Site'],
+    text: ['CONTACT', 'Write me →', 'mail · x · site'],
+    bigText: ['Write me →'],
+    labelMin: 18,
   },
 ];
 const gateLines = gateAssets.map((card) => `<a href="${card.href}"><img src="${card.src}" width="100%" alt="${card.alt}"></a>`);
@@ -234,6 +235,7 @@ assert.deepEqual(
   [],
   'the profile face has no markdown links; the three gate cards are the doors',
 );
+assert.doesNotMatch(readme, /\[Mail\]|\[X\]|\[Site\]|mailto:/, 'no Mail, X, or Site markdown row under the contact card');
 assert.doesNotMatch(readme, /beijing-loop|notebook-film|profile-cards|workers\.dev/, 'L0 visuals are the three gates; the Beijing film and Worker card stay off the profile face');
 assert.equal((readme.match(/src="https?:\/\//g) ?? []).length, 0, 'README images are self-hosted gate SVGs');
 assert.equal((readme.match(/<img\b/g) ?? []).length, 3, 'README images are the three gates');
@@ -333,8 +335,15 @@ for (const asset of gateAssets) {
   assert.deepEqual(textRecords(svg).map(({ text }) => text), asset.text, `${asset.file}: visible copy must stay a skim, not a paragraph`);
   for (const record of textRecords(svg)) {
     const fontSize = Number(getAttribute(record.attributes, 'font-size'));
-    const minimum = asset.bigText.includes(record.text) ? 48 : 20;
+    const minimum = asset.bigText.includes(record.text) ? 48 : (asset.labelMin ?? 20);
     assert.ok(Number.isFinite(fontSize) && fontSize >= minimum, `${asset.file}: ${record.text} must use at least ${minimum}px source text`);
+  }
+  if (asset.file === 'gate-contact.svg') {
+    assert.match(svg, /<title\b[^>]*>Write me<\/title>/, `${asset.file}: title is Write me`);
+    assert.match(svg, /<desc\b[^>]*>One CTA door\.<\/desc>/, `${asset.file}: description is one CTA door`);
+    assert.doesNotMatch(svg, /\bstroke\b|\brx\b|<(?:circle|ellipse|path|polygon|polyline)\b/i, `${asset.file}: oxide rail only, sharp corners, no icon chrome`);
+    assert.equal((svg.match(/#C2412D/g) ?? []).length, 1, `${asset.file}: brand red is the rail only`);
+    assert.match(svg, /<rect width="8" height="148" fill="#C2412D"\/>/, `${asset.file}: left oxide rail is 8px full height`);
   }
   assert.doesNotMatch(svg, /<(?:a|script|style|image|foreignObject|iframe|use|pattern|animate)\b/i, `${asset.file}: links, paper texture, and motion are forbidden`);
   assert.doesNotMatch(svg, /\b(?:href|xlink:href|on[a-z]+)\s*=/i, `${asset.file}: links and handlers are forbidden`);
