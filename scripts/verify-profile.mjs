@@ -185,7 +185,7 @@ assert.doesNotMatch(readme, /quant-trading|github\.com|\/blob\/|\/commit\/|cloud
 assert.doesNotMatch(readme, /experiments\/|README\.md\)/, 'README posters must not link to GitHub commit or experiment markdown files');
 assert.doesNotMatch(readme, /\n### Proof\n/, 'proof numbers sit under the doors; do not bring back the Proof list');
 assert.equal((doorBlock.match(/^\d+\. /gm) ?? []).length, 3, 'the README has three doors: Site, Live dashboard, Contact');
-assert.equal((readme.match(new RegExp(`\\(${DASHBOARD_URL.replaceAll('/', '\\/')}\\)`, 'g')) ?? []).length, 1, 'the live dashboard door is the only oakrelay URL');
+assert.equal(readme.split(DASHBOARD_URL).length, 2, 'the live dashboard door is the only oakrelay URL');
 assert.match(readme, /1,040 PRs · Cookiy/, 'proof numbers must include 1,040 PRs at Cookiy');
 assert.match(readme, /600\+ changes \/ 19 repos · Baidu MeDo/, 'proof numbers must include 600+ changes across 19 repos at Baidu MeDo');
 assert.match(readme, /41 MCP tools/, 'proof numbers must include 41 MCP tools');
