@@ -1,18 +1,5 @@
 export type SourceState = "ok" | "stale" | "unconfigured" | "error";
 
-export interface FillInfo {
-  ledgerId: string;
-  seq: number;
-  count: number;
-  headHash: string;
-  type: string;
-  symbol: string | null;
-  side: "buy" | "sell" | null;
-  qty: number | null;
-  price: number | null;
-  ts: string;
-}
-
 export type HeartbeatState = "up" | "late" | "down" | "degraded" | "unknown";
 
 export interface HeartbeatInfo {
@@ -44,7 +31,6 @@ export type SourceResult<T> =
 
 export interface Status {
   renderedAt: string;
-  fill: SourceResult<FillInfo>;
   heartbeat: SourceResult<HeartbeatInfo>;
   commit: SourceResult<CommitInfo>;
 }
@@ -52,7 +38,6 @@ export interface Status {
 /** What is persisted in KV: the last successful payload per source. */
 export interface Memory {
   updatedAt: string;
-  fill?: { data: FillInfo; fetchedAt: string };
   heartbeat?: { data: HeartbeatInfo; fetchedAt: string };
   commit?: { data: CommitInfo; fetchedAt: string };
 }

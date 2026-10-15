@@ -4,8 +4,8 @@
   "main": "src/index.ts",
   "compatibility_date": "2026-10-01",
 
-  // heartbeat and open-ledger live on the same workers.dev subdomain as this Worker.
-  // Without this flag a fetch() to them is answered "404 error code: 1042" (same-zone
+  // heartbeat lives on the same workers.dev subdomain as this Worker.
+  // Without this flag a fetch() to it is answered "404 error code: 1042" (same-zone
   // Worker-to-Worker fetch); with it, fetch() takes the public route like any client.
   "compatibility_flags": ["global_fetch_strictly_public"],
 
@@ -28,9 +28,6 @@
     "GITHUB_USER": "BrickerP",
     // Repository used when the events feed has no PushEvent or is unavailable.
     "GITHUB_FALLBACK_REPO": "BrickerP/BrickerP",
-    // open-ledger public API (projects/open-ledger). Empty = tile shows "not wired".
-    "LEDGER_BASE_URL": "",
-    "LEDGER_ID": "demo",
     // heartbeat public API (projects/heartbeat). Empty = tile shows "not wired".
     "HEARTBEAT_BASE_URL": "",
     "HEARTBEAT_MONITOR_ID": "scan-batch",

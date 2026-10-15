@@ -3,8 +3,6 @@ import {
   escapeXml,
   fitFontSize,
   fmtDuration,
-  fmtPrice,
-  fmtQty,
   fnv1a,
   shortRepo,
   timeAgo,
@@ -46,11 +44,6 @@ describe("number formatting", () => {
     expect(fmtDuration(12_400)).toBe("12 s");
     expect(fmtDuration(65_000)).toBe("1m 05s");
     expect(fmtDuration(null)).toBe("—");
-    expect(fmtPrice(187.42)).toBe("187.42");
-    expect(fmtPrice(0.1234)).toBe("0.1234");
-    expect(fmtPrice(1234.5)).toBe("1,234.50");
-    expect(fmtQty(12)).toBe("12");
-    expect(fmtQty(0.5)).toBe("0.5");
   });
 
   it("prints UTC clocks and shortens repos", () => {
