@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { fetchLatestCommit } from "../src/sources/github.js";
 import { fetchHeartbeat } from "../src/sources/heartbeat.js";
-import { fetchLatestFill } from "../src/sources/ledger.js";
 import { trimBaseUrl } from "../src/sources/http.js";
 import { fakeDeps, json } from "./helpers.js";
 
@@ -65,34 +64,6 @@ describe("github source", () => {
       [`${GH}/`]: () => new Response("{}", { status: 403, headers: { "x-ratelimit-remaining": "0" } }),
     });
     await expect(fetchLatestCommit(deps, { user: "BrickerP", fallbackRepo: "BrickerP/BrickerP" })).rejects.toThrow("rate limited");
-  });
-});
-
-describe("ledger source", () => {
-  const BASE = "https://ledger.example";
-
-  it("returns the newest fill within the lookback window", async () => {
-    const deps = fakeDeps({
-      [`${BASE}/v1/ledgers/demo/head`]: () => json({ ledgerId: "demo", seq: 30, count: 30, headHash: "ff".repeat(32), updatedAt: "2026-10-10T07:38:00Z" }),
-      [`${BASE}/v1/ledgers/demo/events`]: (url) => {
-        expect(url.searchParams.get("since")).toBe("5");
-        return json({
-          events: [
-            { id: "e29", ts: "2026-10-10T07:37:00Z", type: "fill", symbol: "MSFT", side: "sell", qty: 3, price: 410.1, seq: 29, hash: "x" },
-            { id: "e30", ts: "2026-10-10T07:38:00Z", type: "note", seq: 30, hash: "y" },
-            { id: "e28", ts: "2026-10-10T07:36:00Z", type: "fill", symbol: "AAPL", side: "buy", qty: 12, price: 187.42, seq: 28, hash: "z" },
-          ],
-          nextSince: 30,
-        });
-      },
-    });
-    const fill = await fetchLatestFill(deps, BASE, "demo");
-    expect(fill).toMatchObject({ ledgerId: "demo", seq: 30, count: 30, symbol: "MSFT", side: "sell", qty: 3, price: 410.1, ts: "2026-10-10T07:37:00Z" });
-  });
-
-  it("rejects an empty ledger", async () => {
-    const deps = fakeDeps({ [`${BASE}/v1/ledgers/demo/head`]: () => json({ ledgerId: "demo", seq: 0, count: 0, headHash: "0".repeat(64), updatedAt: null }) });
-    await expect(fetchLatestFill(deps, BASE, "demo")).rejects.toThrow("empty ledger");
   });
 });
 
@@ -178,7 +149,7 @@ describe("heartbeat source", () => {
 describe("trimBaseUrl", () => {
   it("strips whitespace and trailing slashes", () => {
     expect(trimBaseUrl(" https://heartbeat.brickerp.workers.dev/ ")).toBe("https://heartbeat.brickerp.workers.dev");
-    expect(trimBaseUrl("https://open-ledger.example/base///")).toBe("https://open-ledger.example/base");
+    expect(trimBaseUrl("https://api.example/base///")).toBe("https://api.example/base");
     expect(trimBaseUrl("http://127.0.0.1:8787")).toBe("http://127.0.0.1:8787");
   });
 
@@ -187,12 +158,12 @@ describe("trimBaseUrl", () => {
     expect(trimBaseUrl("")).toBeNull();
     expect(trimBaseUrl("   ")).toBeNull();
     expect(trimBaseUrl("///")).toBeNull();
-    expect(trimBaseUrl("ftp://ledger.example")).toBeNull();
+    expect(trimBaseUrl("ftp://api.example")).toBeNull();
     expect(trimBaseUrl("heartbeat.brickerp.workers.dev")).toBeNull();
   });
 
   it("handles long runs of slashes in linear time", () => {
-    const hostile = `https://ledger.example${"/".repeat(100_000)}a`;
+    const hostile = `https://api.example${"/".repeat(100_000)}a`;
     expect(trimBaseUrl(hostile)).toBe(hostile);
     expect(trimBaseUrl(`${hostile}${"/".repeat(100_000)}`)).toBe(hostile);
   });

@@ -1,27 +1,22 @@
 import { describe, expect, it } from "vitest";
 import { HEIGHT, renderCard, WIDTH } from "../src/render/card.js";
 import type { Status } from "../src/types.js";
-import { NOW, sampleCommit, sampleFill, sampleHeartbeat } from "./helpers.js";
+import { NOW, sampleCommit, sampleHeartbeat } from "./helpers.js";
 
 const opts = { title: "Field Notes · Live Status", now: NOW, ttlSeconds: 300, githubUser: "BrickerP" };
 
 const healthy: Status = {
   renderedAt: "2026-10-10T07:41:00Z",
-  fill: { state: "ok", data: sampleFill, fetchedAt: "2026-10-10T07:41:00Z" },
   heartbeat: { state: "ok", data: sampleHeartbeat, fetchedAt: "2026-10-10T07:41:00Z" },
   commit: { state: "ok", data: sampleCommit, fetchedAt: "2026-10-10T07:41:00Z" },
 };
 
 describe("renderCard", () => {
-  it("renders a well-formed SVG with all four tiles", () => {
+  it("renders a well-formed SVG with all three tiles", () => {
     const svg = renderCard(healthy, opts);
     expect(svg.startsWith(`<svg xmlns="http://www.w3.org/2000/svg" width="${WIDTH}" height="${HEIGHT}"`)).toBe(true);
     expect(svg.trimEnd().endsWith("</svg>")).toBe(true);
-    expect((svg.match(/<g data-tile=/g) ?? []).length).toBe(4);
-    expect(svg).toContain(">AAPL<");
-    expect(svg).toContain("BUY 12 @ 187.42");
-    expect(svg).toContain("3 min ago · seq 1,204");
-    expect(svg).toContain("chain a1b2c3d4e5f6");
+    expect((svg.match(/<g data-tile=/g) ?? []).length).toBe(3);
     expect(svg).toContain(">2.4 s<");
     expect(svg).toContain("threshold 5.0 s");
     expect(svg).toContain(">UP<");
@@ -55,16 +50,14 @@ describe("renderCard", () => {
   it("shows not-wired and offline states explicitly", () => {
     const status: Status = {
       renderedAt: "2026-10-10T07:41:00Z",
-      fill: { state: "unconfigured" },
       heartbeat: { state: "error", error: "timeout" },
-      commit: { state: "error", error: "rate limited" },
+      commit: { state: "unconfigured" },
     };
     const svg = renderCard(status, opts);
-    expect(svg).toContain("ledger not wired");
-    expect(svg).toContain("projects/open-ledger");
-    expect((svg.match(/>OFFLINE</g) ?? []).length).toBe(3);
+    expect(svg).toContain("GitHub not wired");
+    expect(svg).toContain("set GITHUB_USER");
+    expect((svg.match(/>OFFLINE</g) ?? []).length).toBe(2);
     expect(svg).toContain(">timeout<");
-    expect(svg).toContain(">rate limited<");
   });
 
   it("marks stale tiles and flags p95 over threshold", () => {

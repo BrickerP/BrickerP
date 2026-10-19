@@ -40,7 +40,6 @@ describe("worker routes", () => {
     const svg = await response.text();
     expect(svg).toContain("<svg");
     expect(svg).toContain(">1b04034<");
-    expect(svg).toContain("ledger not wired");
     expect(svg).toContain("heartbeat not wired");
   });
 
@@ -62,10 +61,9 @@ describe("worker routes", () => {
     expect(response.headers.get("Content-Type")).toBe("application/json; charset=utf-8");
     const body = (await response.json()) as Record<string, unknown>;
     expect(body).toMatchObject({
-      fill: { state: "unconfigured" },
       heartbeat: { state: "unconfigured" },
       commit: { state: "ok", data: { sha: sampleCommit.sha } },
-      sources: { github: "configured", ledger: "unconfigured", heartbeat: "unconfigured" },
+      sources: { github: "configured", heartbeat: "unconfigured" },
       cache: { ttlSeconds: 300, servedFrom: "live" },
     });
   });
@@ -84,7 +82,7 @@ describe("worker routes", () => {
   it("falls back to remembered data when GitHub fails later", async () => {
     const remembered: Stored = {
       version: 1,
-      status: { renderedAt: "2026-01-01T00:00:00Z", fill: { state: "unconfigured" }, heartbeat: { state: "unconfigured" }, commit: { state: "unconfigured" } },
+      status: { renderedAt: "2026-01-01T00:00:00Z", heartbeat: { state: "unconfigured" }, commit: { state: "unconfigured" } },
       memory: { updatedAt: "2026-01-01T00:00:00Z", commit: { data: sampleCommit, fetchedAt: "2026-01-01T00:00:00Z" } },
     };
     await env.MEMORY.put(MEMORY_KEY, JSON.stringify(remembered));

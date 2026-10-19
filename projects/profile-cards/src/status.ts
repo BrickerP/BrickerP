@@ -1,8 +1,7 @@
 import { fetchLatestCommit } from "./sources/github.js";
 import { fetchHeartbeat } from "./sources/heartbeat.js";
 import { errorMessage, trimBaseUrl } from "./sources/http.js";
-import { fetchLatestFill } from "./sources/ledger.js";
-import type { CommitInfo, Deps, FillInfo, HeartbeatInfo, Memory, SourceResult, Status } from "./types.js";
+import type { CommitInfo, Deps, HeartbeatInfo, Memory, SourceResult, Status } from "./types.js";
 
 export const MEMORY_KEY = "memory:v1";
 
@@ -17,8 +16,6 @@ export interface StatusConfig {
   githubUser: string;
   githubFallbackRepo: string;
   githubToken: string | undefined;
-  ledgerBaseUrl: string | null;
-  ledgerId: string;
   heartbeatBaseUrl: string | null;
   heartbeatMonitorId: string;
   ttlSeconds: number;
@@ -29,8 +26,6 @@ export function configFromEnv(env: Env): StatusConfig {
     githubUser: env.GITHUB_USER,
     githubFallbackRepo: env.GITHUB_FALLBACK_REPO,
     githubToken: env.GITHUB_TOKEN?.trim() || undefined,
-    ledgerBaseUrl: trimBaseUrl(env.LEDGER_BASE_URL),
-    ledgerId: env.LEDGER_ID,
     heartbeatBaseUrl: trimBaseUrl(env.HEARTBEAT_BASE_URL),
     heartbeatMonitorId: env.HEARTBEAT_MONITOR_ID,
     ttlSeconds: parseTtl(env.CACHE_TTL_SECONDS),
@@ -77,16 +72,7 @@ export async function collectStatus(config: StatusConfig, deps: Deps, previous: 
   const now = deps.now();
   const memory: Memory = { ...(previous ?? {}), updatedAt: now.toISOString() };
 
-  const [fill, heartbeat, commit] = await Promise.all([
-    resolve<FillInfo>(
-      config.ledgerBaseUrl !== null,
-      () => fetchLatestFill(deps, config.ledgerBaseUrl as string, config.ledgerId),
-      memory.fill,
-      (value) => {
-        memory.fill = value;
-      },
-      now,
-    ),
+  const [heartbeat, commit] = await Promise.all([
     resolve<HeartbeatInfo>(
       config.heartbeatBaseUrl !== null,
       () => fetchHeartbeat(deps, config.heartbeatBaseUrl as string, config.heartbeatMonitorId),
@@ -107,7 +93,7 @@ export async function collectStatus(config: StatusConfig, deps: Deps, previous: 
     ),
   ]);
 
-  return { version: 1, status: { renderedAt: now.toISOString(), fill, heartbeat, commit }, memory };
+  return { version: 1, status: { renderedAt: now.toISOString(), heartbeat, commit }, memory };
 }
 
 export async function readStored(kv: KVNamespace): Promise<Stored | null> {
@@ -152,5 +138,5 @@ export async function getStatus(env: Env, ctx: ExecutionContext, deps: Deps, con
 
 /** True when at least one tile is missing data it is supposed to have. */
 export function isDegraded(status: Status): boolean {
-  return [status.fill, status.heartbeat, status.commit].some((s) => s.state === "error" || s.state === "stale");
+  return [status.heartbeat, status.commit].some((s) => s.state === "error" || s.state === "stale");
 }

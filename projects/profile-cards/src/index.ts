@@ -29,7 +29,6 @@ function withEtag(request: Request, body: string, init: ResponseInit & { headers
 function emptyStatus(now: Date, error: string): Status {
   return {
     renderedAt: now.toISOString(),
-    fill: { state: "error", error },
     heartbeat: { state: "error", error },
     commit: { state: "error", error },
   };
@@ -70,7 +69,6 @@ function statusResponse(request: Request, env: Env, status: Status, cached: bool
       cache: { ttlSeconds: config.ttlSeconds, servedFrom: cached ? "memory" : "live" },
       sources: {
         github: config.githubUser ? "configured" : "unconfigured",
-        ledger: config.ledgerBaseUrl ? "configured" : "unconfigured",
         heartbeat: config.heartbeatBaseUrl ? "configured" : "unconfigured",
       },
     },

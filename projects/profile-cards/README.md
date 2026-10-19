@@ -2,18 +2,18 @@
 
 Live SVG status cards for a GitHub profile README, rendered at the edge by a Cloudflare Worker.
 
-A README image is static by nature. This Worker turns one `<img>` into a status strip that is re-rendered from live sources every few minutes: the latest fill from a trading ledger, the scan-batch p95 and heartbeat state of the bot, and the latest public commit. It is the literal version of the "A Profile With Memory" experiment in this repository: the profile has state.
+A README image is static by nature. This Worker turns one `<img>` into a status strip that is re-rendered from live sources every few minutes: the scan-batch p95 and heartbeat state of the bot, and the latest public commit. It is the literal version of the "A Profile With Memory" experiment in this repository: the profile has state.
 
 ```
 GitHub README ──<img src=…/card.svg>──▶ camo ──▶ Cloudflare edge cache (Workers Cache)
                                                         │ miss / expired
                                                         ▼
                                                  profile-cards Worker
-                                        ┌───────────────┼────────────────┐
-                                        ▼               ▼                ▼
-                                  GitHub events    open-ledger       heartbeat
-                                  (last commit)    (last fill)    (p95 + state)
-                                        └───────────────┼────────────────┘
+                                        ┌───────────────┴────────────────┐
+                                        ▼                                ▼
+                                  GitHub events                      heartbeat
+                                  (last commit)                   (p95 + state)
+                                        └───────────────┬────────────────┘
                                                         ▼
                                               KV "MEMORY": last status +
                                               last-known-good per source
@@ -23,7 +23,6 @@ GitHub README ──<img src=…/card.svg>──▶ camo ──▶ Cloudflare ed
 
 | Tile | Source | Notes |
 | --- | --- | --- |
-| Last fill | [`projects/open-ledger`](../open-ledger) `GET /v1/ledgers/:id/head` + `/events` | symbol, side, qty @ price, age, ledger seq, head hash prefix |
 | Scan p95 | [`projects/heartbeat`](../heartbeat) `GET /v1/monitors/:id` | p95, p50, beat count, threshold; red when over threshold |
 | Heartbeat | same monitor | `UP` / `LATE` / `DOWN` / `DEGRADED`, last beat, next deadline |
 | Last commit | GitHub public events (`PushEvent`) + commit detail | repo, branch, short SHA, first line of the message, age |
@@ -57,8 +56,6 @@ Variables live in `wrangler.jsonc`:
 | --- | --- | --- |
 | `GITHUB_USER` | `BrickerP` | Whose public events feed to read. |
 | `GITHUB_FALLBACK_REPO` | `BrickerP/BrickerP` | Used when the feed has no push or is unavailable. |
-| `LEDGER_BASE_URL` | *(empty)* | open-ledger origin, e.g. `https://open-ledger.brickerp.workers.dev`. Empty = tile not wired. |
-| `LEDGER_ID` | `demo` | Ledger to read. |
 | `HEARTBEAT_BASE_URL` | *(empty)* | heartbeat origin. Empty = tiles not wired. |
 | `HEARTBEAT_MONITOR_ID` | `scan-batch` | Monitor to read. |
 | `CACHE_TTL_SECONDS` | `300` | Freshness window, clamped to 30–3600. |
@@ -66,7 +63,7 @@ Variables live in `wrangler.jsonc`:
 
 Secret (optional): `GITHUB_TOKEN` — `npx wrangler secret put GITHUB_TOKEN`. A fine-grained token with no permissions is enough for public data.
 
-Fetching sibling Workers on the same `workers.dev` subdomain (heartbeat, open-ledger) needs the `global_fetch_strictly_public` compatibility flag, which `wrangler.jsonc` sets. Without it Cloudflare answers a Worker-to-Worker `fetch()` on the same zone with `404 error code: 1042`; the tile then reports `worker fetch blocked (1042)` in `/status.json` instead of a bare `http 404`. A service binding is the alternative if you prefer not to route through the public edge.
+Fetching sibling Workers on the same `workers.dev` subdomain (heartbeat) needs the `global_fetch_strictly_public` compatibility flag, which `wrangler.jsonc` sets. Without it Cloudflare answers a Worker-to-Worker `fetch()` on the same zone with `404 error code: 1042`; the tile then reports `worker fetch blocked (1042)` in `/status.json` instead of a bare `http 404`. A service binding is the alternative if you prefer not to route through the public edge.
 
 ## Develop
 

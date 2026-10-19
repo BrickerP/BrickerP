@@ -67,18 +67,6 @@ export function fmtDuration(ms: number | null | undefined): string {
   return `${m}m ${String(rest).padStart(2, "0")}s`;
 }
 
-export function fmtPrice(value: number | null | undefined): string {
-  if (value === null || value === undefined || !Number.isFinite(value)) return "—";
-  const abs = Math.abs(value);
-  const digits = abs >= 1000 ? 2 : abs >= 1 ? 2 : 4;
-  return value.toLocaleString("en-US", { minimumFractionDigits: digits, maximumFractionDigits: digits });
-}
-
-export function fmtQty(value: number | null | undefined): string {
-  if (value === null || value === undefined || !Number.isFinite(value)) return "—";
-  return value.toLocaleString("en-US", { maximumFractionDigits: 4 });
-}
-
 export function fmtInt(value: number | null | undefined): string {
   if (value === null || value === undefined || !Number.isFinite(value)) return "—";
   return Math.round(value).toLocaleString("en-US");

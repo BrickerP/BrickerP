@@ -1,4 +1,4 @@
-import type { CommitInfo, Deps, FillInfo, HeartbeatInfo } from "../src/types.js";
+import type { CommitInfo, Deps, HeartbeatInfo } from "../src/types.js";
 
 export const NOW = new Date("2026-10-10T07:41:00Z");
 
@@ -26,19 +26,6 @@ export function fakeDeps(routes: Record<string, Route>, now: Date = NOW): Deps &
 
 export const json = (body: unknown, init: ResponseInit = {}): Response =>
   new Response(JSON.stringify(body), { ...init, headers: { "Content-Type": "application/json", ...(init.headers ?? {}) } });
-
-export const sampleFill: FillInfo = {
-  ledgerId: "demo",
-  seq: 1204,
-  count: 1204,
-  headHash: "a1b2c3d4e5f60718293a4b5c6d7e8f9012345678901234567890abcdefabcdef",
-  type: "fill",
-  symbol: "AAPL",
-  side: "buy",
-  qty: 12,
-  price: 187.42,
-  ts: "2026-10-10T07:38:00Z",
-};
 
 export const sampleHeartbeat: HeartbeatInfo = {
   monitorId: "scan-batch",

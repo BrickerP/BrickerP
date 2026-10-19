@@ -4,8 +4,6 @@ import {
   fitFontSize,
   fmtDuration,
   fmtInt,
-  fmtPrice,
-  fmtQty,
   shortRepo,
   shortSha,
   timeAgo,
@@ -13,7 +11,7 @@ import {
   utcClock,
   utcClockOf,
 } from "../format.js";
-import type { CommitInfo, FillInfo, HeartbeatInfo, SourceResult, Status } from "../types.js";
+import type { CommitInfo, HeartbeatInfo, SourceResult, Status } from "../types.js";
 
 export const WIDTH = 1200;
 export const HEIGHT = 400;
@@ -29,10 +27,10 @@ export const MINT = "#63E2B7";
 const SANS = "Arial, Helvetica, sans-serif";
 const MONO = "ui-monospace, Menlo, Consolas, monospace";
 
-const TILE_W = 270;
+const TILE_W = 360;
 const TILE_H = 230;
 const TILE_Y = 100;
-const TILE_X = [40, 330, 620, 910] as const;
+const TILE_X = [40, 420, 800] as const;
 const TEXT_W = TILE_W - 40;
 
 export interface RenderOptions {
@@ -63,8 +61,7 @@ function tile(x: number, t: Tile): string {
   const labelAttrs = `font-family="${SANS}" font-size="20" font-weight="700" letter-spacing="2" fill="${INK}" fill-opacity=".72"`;
   const valueSize = fitFontSize(t.value, TEXT_W, 60, 28);
   const valueAttrs = `font-family="${t.mono ? MONO : SANS}" font-size="${valueSize}" font-weight="700" fill="${INK}"`;
-  const lineAttrs = (opacity: number, mono = false) =>
-    `font-family="${mono ? MONO : SANS}" font-size="21" fill="${INK}" fill-opacity="${opacity}"`;
+  const lineAttrs = (opacity: number) => `font-family="${SANS}" font-size="21" fill="${INK}" fill-opacity="${opacity}"`;
   const y = TILE_Y;
   const staleTag = t.stale
     ? `<g transform="translate(${x + TILE_W - 86} ${y + 24})"><rect width="70" height="26" fill="${YELLOW}"/>${text(35, 19, "STALE", `font-family="${SANS}" font-size="16" font-weight="700" letter-spacing="2" fill="${INK}" text-anchor="middle"`)}</g>`
@@ -78,7 +75,7 @@ function tile(x: number, t: Tile): string {
     text(x + 20, y + 118, t.value, valueAttrs),
     text(x + 20, y + 158, truncate(t.lines[0], LINE_CHARS), lineAttrs(0.92)),
     text(x + 20, y + 188, truncate(t.lines[1], LINE_CHARS), lineAttrs(0.72)),
-    text(x + 20, y + 216, truncate(t.lines[2], LINE_CHARS), lineAttrs(0.6, t.mono === true && t.lines[2].startsWith("chain "))),
+    text(x + 20, y + 216, truncate(t.lines[2], LINE_CHARS), lineAttrs(0.6)),
     `</g>`,
   ].join("");
 }
@@ -93,23 +90,6 @@ function errorTile(label: string, error: string): Tile {
 
 function staleLine(fetchedAt: string, now: Date): string {
   return `last good ${timeAgo(fetchedAt, now)}`;
-}
-
-function fillTile(result: SourceResult<FillInfo>, now: Date): Tile {
-  const label = "Last fill";
-  if (result.state === "unconfigured") return unconfiguredTile(label, "ledger", "projects/open-ledger");
-  if (result.state === "error") return errorTile(label, result.error);
-  const f = result.data;
-  const stale = result.state === "stale";
-  const side = f.side ? f.side.toUpperCase() : f.type.toUpperCase();
-  const trade = f.qty !== null || f.price !== null ? `${side} ${fmtQty(f.qty)} @ ${fmtPrice(f.price)}` : side;
-  const lines: [string, string, string] = [
-    trade,
-    `${timeAgo(f.ts, now)} · seq ${fmtInt(f.seq)}`,
-    stale ? staleLine(result.fetchedAt, now) : `chain ${f.headHash.slice(0, 12)}`,
-  ];
-  const bar = stale ? YELLOW : f.side === "sell" ? COBALT : MINT;
-  return { label, value: f.symbol ?? f.type.toUpperCase(), lines, bar, mono: true, stale };
 }
 
 function p95Tile(result: SourceResult<HeartbeatInfo>, now: Date): Tile {
@@ -177,10 +157,6 @@ function cropMarks(): string {
 
 function summarize(status: Status, now: Date): string {
   const parts: string[] = [];
-  if (status.fill.state === "ok" || status.fill.state === "stale") {
-    const f = status.fill.data;
-    parts.push(`last fill ${f.symbol ?? f.type} ${f.side ?? ""} ${fmtQty(f.qty)} at ${fmtPrice(f.price)} (${timeAgo(f.ts, now)})`);
-  }
   if (status.heartbeat.state === "ok" || status.heartbeat.state === "stale") {
     const h = status.heartbeat.data;
     parts.push(`heartbeat ${h.state}, p95 ${fmtDuration(h.p95Ms)}`);
@@ -198,7 +174,6 @@ export function renderCard(status: Status, opts: RenderOptions): string {
   const updated = Date.parse(status.renderedAt);
   const updatedLabel = Number.isNaN(updated) ? utcClock(now) : utcClock(new Date(updated));
   const tiles = [
-    fillTile(status.fill, now),
     p95Tile(status.heartbeat, now),
     heartbeatTile(status.heartbeat, now),
     commitTile(status.commit, now, opts.githubUser),
@@ -221,7 +196,7 @@ export function renderCard(status: Status, opts: RenderOptions): string {
     text(WIDTH - 40, 58, `UPDATED ${updatedLabel} · REFRESHES EVERY ${refreshMin} MIN`, metaAttrs),
     ...tiles.map((t, i) => tile(TILE_X[i] ?? 40, t)),
     `<rect x="40" y="356" width="48" height="6" fill="${COBALT}"/>`,
-    text(100, 364, "SOURCES · GITHUB · OPEN-LEDGER · HEARTBEAT", footAttrs),
+    text(100, 364, "SOURCES · GITHUB · HEARTBEAT", footAttrs),
     text(WIDTH - 40, 364, "A PROFILE WITH MEMORY · 001", `${footAttrs} text-anchor="end"`),
     `</svg>`,
   ].join("\n");
