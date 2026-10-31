@@ -111,9 +111,19 @@ const gateAssets = [
     href: 'https://brickerp.github.io/#work',
     src: 'assets/gate-proof.svg?v=1',
     alt: 'Selected work in the public count: 1,040 PRs at Cookiy, 600+ changes across 19 repos at Baidu MeDo, and 41 MCP tools.',
-    // The proof door is the locked three-figure count. Hero and contact carry no stats.
+    // The proof door is the locked three-figure count. Other gates carry no stats.
     text: ['SELECTED WORK', '1,040', 'PRs', 'Cookiy', '600+', 'changes', '19 repos · Baidu MeDo', '41', 'tools', 'MCP'],
     bigText: ['1,040', '600+', '41'],
+  },
+  {
+    file: 'gate-ledger.svg',
+    width: 1200,
+    height: 168,
+    href: 'https://brickerp.github.io/ai-usage-report/',
+    src: 'assets/gate-ledger.svg?v=1',
+    alt: 'AI Usage, The Compute Ledger: a live archive of recorded model traffic. Open the ledger.',
+    text: ['AI USAGE', 'The Compute Ledger', 'LIVE ARCHIVE · OPEN LEDGER →'],
+    bigText: ['The Compute Ledger'],
   },
   {
     file: 'gate-contact.svg',
@@ -186,13 +196,14 @@ assert.doesNotMatch(readme, legacyFlow, 'README must not retain the superseded L
 const POSITIONING = 'AI agent & backend engineer — I take agents from demo to production: MCP tools, guardrails, evals, billing, real-time systems.';
 const SITE_URL = 'https://brickerp.github.io/';
 const WORK_URL = 'https://brickerp.github.io/#work';
+const LEDGER_URL = 'https://brickerp.github.io/ai-usage-report/';
 const DASHBOARD_URL = 'https://quant.oakrelay.dpdns.org/';
 const ARCHITECTURE_URL = 'https://brickerp.github.io/work/quant/architecture/';
 const CONTACT_URL = 'https://brickerp.github.io/#contact';
 const availabilityLine = 'Part-time / contract · ~20 h/wk · US permanent resident · Diamond Bar, California';
 const expectedReadme = `# Yupeng Lu\n\n**${POSITIONING}**\n\n${camoNote}\n\n${gateLines.join('\n\n')}\n\n${availabilityLine}\n`;
 
-assert.equal(readme, expectedReadme, 'README must be the positioning line, three static gate cards, then one status line');
+assert.equal(readme, expectedReadme, 'README must be the positioning line, four static gate cards, then one status line');
 assert.ok(readme.startsWith(`# Yupeng Lu\n\n**${POSITIONING}**\n\n`), 'the bold positioning line must follow the H1');
 assert.equal(readme.split(camoNote).length, 2, 'README must document the Camo ?v= cache-bust once');
 assert.doesNotMatch(readme, /<svg\b/i, 'README must not inline SVG; GitHub strips it');
@@ -200,7 +211,7 @@ assert.doesNotMatch(readme, /^\*\*(?:Backend Engineer|AI Agent Engineer|Backend 
 assert.doesNotMatch(readme, /re-measure pending|pending re-measure|\bpending\b/i, 'README must not lead with a pending measurement');
 assert.doesNotMatch(readme, /AI x Finance|markets (?:&|and) macro|especially for finance/i, 'finance is an exhibit, not the positioning');
 assert.doesNotMatch(readme, /brickerp\.github\.io\/resume(?!\.pdf)/, 'the resume link must point at the PDF that exists');
-assert.doesNotMatch(readme, /\[(?:Live dashboard|Contact|Architecture|Proof)\]\(/, 'L0 doors stay the three gate cards');
+assert.doesNotMatch(readme, /\[(?:Live dashboard|Contact|Architecture|Proof)\]\(/, 'L0 doors stay the four gate cards');
 assert.equal(readme.split(ARCHITECTURE_URL).length, 1, 'Architecture is not an L0 door');
 assert.equal(readme.split(DASHBOARD_URL).length, 1, 'the live dashboard is not an L0 door');
 assert.doesNotMatch(readme, /Live dashboard|quant\.oakrelay|\[Architecture\]|\/work\/quant\/architecture/i, 'Live dashboard and Architecture are not L0 doors; quant proof stays on the site');
@@ -214,11 +225,13 @@ assert.match(readme, /41 MCP tools/, 'proof alt must include 41 MCP tools');
 assert.ok(readme.includes(availabilityLine), 'status line must state part-time hours, residency, and Diamond Bar');
 assert.match(readme, /~20 h\/wk/, 'status line must use ~20 h/wk');
 assert.ok(readme.indexOf(gateLines[0]) < readme.indexOf(gateLines[1]), 'the hero gate is the first card');
-assert.ok(readme.indexOf(gateLines[1]) < readme.indexOf(gateLines[2]), 'the proof gate sits between hero and contact');
-assert.ok(readme.indexOf(gateLines[2]) < readme.indexOf(availabilityLine), 'the status line sits under the three gates');
+assert.ok(readme.indexOf(gateLines[1]) < readme.indexOf(gateLines[2]), 'the proof gate sits before the ledger');
+assert.ok(readme.indexOf(gateLines[2]) < readme.indexOf(gateLines[3]), 'the ledger gate sits between proof and contact');
+assert.ok(readme.indexOf(gateLines[3]) < readme.indexOf(availabilityLine), 'the status line sits under the four gates');
 assert.equal(gateAssets[0].href, SITE_URL, 'the hero gate opens the site');
 assert.equal(gateAssets[1].href, WORK_URL, 'the proof gate opens Selected Work');
-assert.equal(gateAssets[2].href, CONTACT_URL, 'the contact gate opens #contact');
+assert.equal(gateAssets[2].href, LEDGER_URL, 'the ledger gate opens The Compute Ledger');
+assert.equal(gateAssets[3].href, CONTACT_URL, 'the contact gate opens #contact');
 
 const proseBeforeCards = readme.split('<a href=')[0];
 assert.ok(proseBeforeCards.split(/\s+/).filter(Boolean).length <= 80, 'prose above the gates must stay the positioning line and the Camo note');
@@ -233,17 +246,17 @@ for (const raw of prose.match(/(?<![A-Za-z\d])\d[\d,./]*(?:\+|K)?(?![A-Za-z])/g)
 assert.deepEqual(
   [...readme.matchAll(/\[([^\]]+)\]\(([^)]+)\)/g)].map((match) => [match[1], match[2]]),
   [],
-  'the profile face has no markdown links; the three gate cards are the doors',
+  'the profile face has no markdown links; the four gate cards are the doors',
 );
 assert.doesNotMatch(readme, /\[Mail\]|\[X\]|\[Site\]|mailto:/, 'no Mail, X, or Site markdown row under the contact card');
-assert.doesNotMatch(readme, /beijing-loop|notebook-film|profile-cards|workers\.dev/, 'L0 visuals are the three gates; the Beijing film and Worker card stay off the profile face');
+assert.doesNotMatch(readme, /beijing-loop|notebook-film|profile-cards|workers\.dev/, 'L0 visuals are the four gates; the Beijing film and Worker card stay off the profile face');
 assert.equal((readme.match(/src="https?:\/\//g) ?? []).length, 0, 'README images are self-hosted gate SVGs');
-assert.equal((readme.match(/<img\b/g) ?? []).length, 3, 'README images are the three gates');
-assert.equal((readme.match(/<a\b/g) ?? []).length, 3, 'README image anchors are the three gates');
+assert.equal((readme.match(/<img\b/g) ?? []).length, 4, 'README images are the four gates');
+assert.equal((readme.match(/<a\b/g) ?? []).length, 4, 'README image anchors are the four gates');
 assert.deepEqual(
   imageAnchors(readme).map(({ src }) => src),
   gateAssets.map(({ src }) => src),
-  'README images are the three gates',
+  'README images are the four gates',
 );
 for (const anchor of imageAnchors(readme)) {
   assert.match(anchor.href, /^https:\/\//, `poster ${anchor.src} must link a real https demo/page, not a repo path`);

@@ -8,6 +8,8 @@
 
 <a href="https://brickerp.github.io/#work"><img src="assets/gate-proof.svg?v=1" width="100%" alt="Selected work in the public count: 1,040 PRs at Cookiy, 600+ changes across 19 repos at Baidu MeDo, and 41 MCP tools."></a>
 
+<a href="https://brickerp.github.io/ai-usage-report/"><img src="assets/gate-ledger.svg?v=1" width="100%" alt="AI Usage, The Compute Ledger: a live archive of recorded model traffic. Open the ledger."></a>
+
 <a href="https://brickerp.github.io/#contact"><img src="assets/gate-contact.svg?v=2" width="100%" alt="Contact by mail, on X, or on the site. Open the contact section."></a>
 
 Part-time / contract · ~20 h/wk · US permanent resident · Diamond Bar, California
